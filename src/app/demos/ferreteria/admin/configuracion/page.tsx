@@ -54,7 +54,7 @@ export default function ConfiguracionPage() {
 
         {/* Panel principal */}
         <div className="md:col-span-8">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6">
             
             {activeTab === "empresa" && (
               <div className="space-y-6">

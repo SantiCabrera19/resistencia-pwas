@@ -27,9 +27,9 @@ export function HomeHero() {
       
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl space-y-8">
-        <div className="inline-flex items-center gap-2 rounded-full bg-emerald-800/60 px-4 py-2 text-sm font-medium text-emerald-100 ring-1 ring-inset ring-emerald-500/40 backdrop-blur-md">
+        <div className="inline-flex flex-wrap justify-center items-center gap-2 rounded-2xl sm:rounded-full bg-emerald-800/60 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-emerald-100 ring-1 ring-inset ring-emerald-500/40 backdrop-blur-md max-w-full text-center">
           <span>Agencia de Desarrollo de Software</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+          <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse shrink-0"></span>
           <span>Resistencia, Chaco</span>
         </div>
 

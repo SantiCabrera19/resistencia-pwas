@@ -5,10 +5,12 @@ import { HomeAbout } from "@/components/features/home/HomeAbout";
 import { HomePortfolio } from "@/components/features/home/HomePortfolio";
 import { HomeContact } from "@/components/features/home/HomeContact";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { PWALaunchDirector } from "@/components/layout/PWALaunchDirector";
 
 export default function HomePage() {
   return (
     <SmoothScroll>
+      <PWALaunchDirector />
       <div className="flex min-h-screen flex-col bg-white dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-300 transition-colors duration-200" id="top">
         <HomeHeader />
 

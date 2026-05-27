@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Bell, Search, User, LogOut, Settings as SettingsIcon, ShieldCheck } from "lucide-react";
@@ -56,6 +56,13 @@ export function AdminLayout({
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [notifications, setNotifications] = useState(initialNotifications);
+
+  // Registrar reactivamente la última ruta de administración visitada para la PWA
+  useEffect(() => {
+    if (pathname && pathname.startsWith("/demos/")) {
+      localStorage.setItem("last_visited_demo", pathname);
+    }
+  }, [pathname]);
 
   const markAllRead = () => {
     setNotifications(notifications.map(n => ({ ...n, unread: false })));

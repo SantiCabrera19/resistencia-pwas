@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "resis-pwa-crm",
-    short_name: "resis-crm",
+    name: "Santi Soluciones",
+    short_name: "Santi",
     description:
       "PWAs + Mini-CRMs para negocios locales de Resistencia, Chaco.",
     start_url: "/",
@@ -12,12 +12,12 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0f766e",
     icons: [
       {
-        src: "/icons/icon-192.png",
+        src: "/icons/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
       },
       {
-        src: "/icons/icon-512.png",
+        src: "/icons/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
       },

@@ -54,7 +54,7 @@ export default function ConfiguracionPage() {
 
         {/* Panel principal */}
         <div className="md:col-span-8">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6">
             
             {activeTab === "perfil" && (
               <div className="space-y-6">
@@ -87,17 +87,41 @@ export default function ConfiguracionPage() {
                 </div>
                 <div className="space-y-3">
                   {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"].map((dia) => (
-                    <div key={dia} className="flex items-center justify-between p-3 border border-slate-100 rounded-xl bg-slate-50">
-                      <span className="font-bold text-sm text-slate-700 w-24">{dia}</span>
-                      <div className="flex items-center gap-2">
-                        <input type="time" defaultValue="09:00" className="px-2 py-1 border border-slate-200 rounded-md text-xs font-bold bg-white" />
-                        <span className="text-slate-400 font-bold">-</span>
-                        <input type="time" defaultValue="18:00" className="px-2 py-1 border border-slate-200 rounded-md text-xs font-bold bg-white" />
+                    <div 
+                      key={dia} 
+                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-3 border border-slate-100 rounded-xl bg-slate-50"
+                    >
+                      {/* Día y Toggle switch en la misma línea en móvil */}
+                      <div className="flex items-center justify-between sm:justify-start gap-4">
+                        <span className="font-bold text-sm text-slate-700 w-20 sm:w-24">{dia}</span>
+                        {/* Toggle switch visible solo en mobile */}
+                        <label className="flex sm:hidden items-center cursor-pointer relative">
+                          <input type="checkbox" defaultChecked className="sr-only peer" />
+                          <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500 relative"></div>
+                        </label>
                       </div>
-                      <label className="flex items-center cursor-pointer">
-                        <input type="checkbox" defaultChecked className="sr-only peer" />
-                        <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500 relative"></div>
-                      </label>
+
+                      {/* Inputs de Horas y Toggle switch en desktop */}
+                      <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+                        <div className="flex items-center gap-2">
+                          <input 
+                            type="time" 
+                            defaultValue="09:00" 
+                            className="px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs font-bold bg-white text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 w-[90px] text-center" 
+                          />
+                          <span className="text-slate-400 font-bold">-</span>
+                          <input 
+                            type="time" 
+                            defaultValue="18:00" 
+                            className="px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs font-bold bg-white text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 w-[90px] text-center" 
+                          />
+                        </div>
+                        {/* Toggle switch visible en desktop */}
+                        <label className="hidden sm:flex items-center cursor-pointer relative">
+                          <input type="checkbox" defaultChecked className="sr-only peer" />
+                          <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500 relative"></div>
+                        </label>
+                      </div>
                     </div>
                   ))}
                 </div>
