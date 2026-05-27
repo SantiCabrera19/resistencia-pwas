@@ -9,7 +9,7 @@ export function HomeHero() {
   };
 
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 py-24 text-center overflow-hidden">
+    <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 pt-32 pb-20 sm:pt-40 sm:pb-24 text-center overflow-hidden">
       {/* Background Image of Resistencia */}
       <div className="absolute inset-0 z-0">
         <Image

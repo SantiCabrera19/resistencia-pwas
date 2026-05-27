@@ -192,7 +192,7 @@ export function AdminLayout({
               {isNotificationsOpen && (
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setIsNotificationsOpen(false)} />
-                  <div className="absolute right-0 mt-2.5 w-80 rounded-xl border border-slate-200 bg-white shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="fixed inset-x-4 top-[72px] sm:absolute sm:inset-x-auto sm:right-0 sm:w-80 sm:mt-2.5 rounded-xl border border-slate-200 bg-white shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="flex items-center justify-between px-4 py-2 border-b border-slate-100">
                       <span className="font-bold text-slate-900 text-sm">Notificaciones</span>
                       {unreadCount > 0 && (
@@ -248,7 +248,7 @@ export function AdminLayout({
               {isProfileOpen && (
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setIsProfileOpen(false)} />
-                  <div className="absolute right-0 mt-2.5 w-60 rounded-xl border border-slate-200 bg-white shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="fixed inset-x-4 top-[72px] sm:absolute sm:inset-x-auto sm:right-0 sm:w-60 sm:mt-2.5 rounded-xl border border-slate-200 bg-white shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="px-4 py-3 border-b border-slate-100 text-left">
                       <p className="text-sm font-bold text-slate-900 leading-tight">{user.name}</p>
                       <p className="text-xs text-slate-400 font-semibold mt-0.5">{user.role}</p>
