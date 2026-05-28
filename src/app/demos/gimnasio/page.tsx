@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Dumbbell, Clock, Flame, ChevronRight, CheckCircle2, Moon, Sun, ArrowLeft, Users } from "lucide-react";
+import { Dumbbell, Clock, Flame, CheckCircle2, ArrowLeft, Users, Calendar } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 interface Exercise {
@@ -11,7 +11,6 @@ interface Exercise {
   sets: string;
   reps: string;
   rest: string;
-  weight: string;
   notes: string;
   loopType: "bench" | "squat" | "fly" | "curl" | "pull";
 }
@@ -25,216 +24,272 @@ interface Routine {
   exercises: Exercise[];
 }
 
-const mockRoutines: Routine[] = [
-  {
-    id: "pierna-v1",
-    title: "Pierna - Variación 1",
-    subtitle: "Enfoque en Máquinas (Musculación)",
-    description: "Rutina enfocada en fuerza e hipertrofia usando prensa de 45° y camillas. Cuidado con los tiempos de descanso.",
-    duration: "45 min",
-    exercises: [
-      {
-        name: "Sentadillas con Barra Libre",
-        muscle: "Cuádriceps / Glúteos",
-        sets: "4",
-        reps: "10 reps",
-        rest: "90s",
-        weight: "60-80 kg",
-        notes: "Técnica profunda. Controlar la bajada sin rebotar.",
-        loopType: "squat"
-      },
-      {
-        name: "Prensa de Piernas a 45°",
-        muscle: "Cuádriceps",
-        sets: "4",
-        reps: "12 reps",
-        rest: "90s",
-        weight: "120-160 kg",
-        notes: "Apoyo completo de espalda. No bloquear rodillas arriba.",
-        loopType: "bench"
-      },
-      {
-        name: "Camilla de Extensión",
-        muscle: "Cuádriceps aislados",
-        sets: "3",
-        reps: "15 reps",
-        rest: "60s",
-        weight: "40 kg",
-        notes: "Sostener 1 segundo en la máxima contracción arriba.",
-        loopType: "curl"
-      },
-      {
-        name: "Curl Femoral Tumbado",
-        muscle: "Isquiotibiales",
-        sets: "4",
-        reps: "12 reps",
-        rest: "60s",
-        weight: "35 kg",
-        notes: "Mantener la cadera pegada al banco durante la flexión.",
-        loopType: "curl"
-      }
-    ]
-  },
-  {
-    id: "pierna-v2",
-    title: "Pierna - Variación 2",
-    subtitle: "Peso Libre (Descongestiva)",
-    description: "Alternativa inteligente de peso libre para evitar colas en la jaula o la prensa. Trabaja el mismo grupo muscular.",
-    duration: "40 min",
-    exercises: [
-      {
-        name: "Sentadilla Búlgara con Mancuernas",
-        muscle: "Cuádriceps / Glúteos",
-        sets: "4",
-        reps: "10 reps por pierna",
-        rest: "90s",
-        weight: "15-25 kg c/u",
-        notes: "Foco en mantener el equilibrio y empujar con el talón delantero.",
-        loopType: "squat"
-      },
-      {
-        name: "Estocadas Caminando con Mancuernas",
-        muscle: "Piernas / Core",
-        sets: "4",
-        reps: "20 pasos totales",
-        rest: "90s",
-        weight: "12-20 kg c/u",
-        notes: "Paso amplio para enfatizar el trabajo de glúteo.",
-        loopType: "squat"
-      },
-      {
-        name: "Peso Muerto Rumano con Mancuernas",
-        muscle: "Isquiotibiales / Lumbar",
-        sets: "4",
-        reps: "12 reps",
-        rest: "60s",
-        weight: "20-30 kg c/u",
-        notes: "Espalda recta, cadera hacia atrás hasta sentir el estiramiento.",
-        loopType: "pull"
-      },
-      {
-        name: "Hip Thrust con Barra en Colchoneta",
-        muscle: "Glúteos",
-        sets: "4",
-        reps: "12 reps",
-        rest: "90s",
-        weight: "50-70 kg",
-        notes: "Contracción de 2 segundos arriba. Empujar con la cadera.",
-        loopType: "squat"
-      }
-    ]
-  },
-  {
-    id: "pecho-hombros",
-    title: "Pecho & Hombros",
-    subtitle: "Fuerza y Empuje General",
-    description: "Rutina clásica de empuje (Push day) para desarrollo pectoral y deltoides. Carga de forma progresiva.",
-    duration: "45 min",
-    exercises: [
-      {
-        name: "Press de Banca Plano con Barra",
-        muscle: "Pectoral Mayor",
-        sets: "4",
-        reps: "10 reps",
-        rest: "90s",
-        weight: "50-70 kg",
-        notes: "Retracción escapular. Bajar controlado hasta rozar el pecho.",
-        loopType: "bench"
-      },
-      {
-        name: "Press de Hombro con Mancuernas Sentado",
-        muscle: "Deltoides anterior",
-        sets: "4",
-        reps: "10 reps",
-        rest: "90s",
-        weight: "18-24 kg c/u",
-        notes: "Espalda bien apoyada en el banco a 75°.",
-        loopType: "squat"
-      },
-      {
-        name: "Aperturas en Poleas Altas (Cruces)",
-        muscle: "Pectoral Inferior",
-        sets: "3",
-        reps: "12 reps",
-        rest: "60s",
-        weight: "15 kg por polea",
-        notes: "Cruzar las manos levemente al final para máxima contracción.",
-        loopType: "fly"
-      },
-      {
-        name: "Vuelos Laterales con Mancuernas",
-        muscle: "Deltoides lateral",
-        sets: "4",
-        reps: "15 reps",
-        rest: "60s",
-        weight: "8-12 kg c/u",
-        notes: "Elevar los codos sin forzar las muñecas. No balancear el torso.",
-        loopType: "fly"
-      }
-    ]
-  },
-  {
-    id: "tren-superior",
-    title: "Tren Superior",
-    subtitle: "Tracción e Hipertrofia general",
-    description: "Excelente para balancear y compensar los días de empuje. Trabaja dorsales, bíceps y espalda media.",
-    duration: "40 min",
-    exercises: [
-      {
-        name: "Jalón al Pecho en Polea Alta",
-        muscle: "Dorsal Ancho",
-        sets: "4",
-        reps: "12 reps",
-        rest: "90s",
-        weight: "45-60 kg",
-        notes: "Tracción con los codos hacia abajo, pecho levantado.",
-        loopType: "pull"
-      },
-      {
-        name: "Remo a una Mano con Mancuerna",
-        muscle: "Dorsal / Trapecios",
-        sets: "4",
-        reps: "10 reps por brazo",
-        rest: "60s",
-        weight: "20-28 kg",
-        notes: "Llevar la mancuerna hacia la cadera, codo pegado.",
-        loopType: "pull"
-      },
-      {
-        name: "Curl de Bíceps con Barra W",
-        muscle: "Bíceps braquial",
-        sets: "3",
-        reps: "12 reps",
-        rest: "60s",
-        weight: "20-30 kg",
-        notes: "Codos fijos a los costados. Evitar la inercia del cuerpo.",
-        loopType: "curl"
-      },
-      {
-        name: "Extensiones de Tríceps con Soga",
-        muscle: "Tríceps",
-        sets: "3",
-        reps: "12 reps",
-        rest: "60s",
-        weight: "20-25 kg",
-        notes: "Abrir la soga al final del movimiento abajo. Codos quietos.",
-        loopType: "curl"
-      }
-    ]
-  }
-];
+const mockRoutinesWeekly: Record<string, Routine[]> = {
+  Lunes: [
+    {
+      id: "lun-pierna-v1",
+      title: "Pierna - V1 (Máquinas)",
+      subtitle: "Fuerza en Jaula y Prensa",
+      description: "Foco en sentadilla libre y prensa de 45°.",
+      duration: "45 min",
+      exercises: [
+        { name: "Sentadillas con Barra Libre", muscle: "Cuádriceps / Glúteos", sets: "4", reps: "10", rest: "90s", notes: "Técnica profunda. Controlar la bajada sin rebotar.", loopType: "squat" },
+        { name: "Prensa de Piernas a 45°", muscle: "Cuádriceps", sets: "4", reps: "12", rest: "90s", notes: "Apoyo completo de espalda. No bloquear rodillas arriba.", loopType: "bench" },
+        { name: "Camilla de Extensión", muscle: "Cuádriceps aislados", sets: "3", reps: "15", rest: "60s", notes: "Sostener 1 segundo en la máxima contracción arriba.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "lun-pecho-triceps",
+      title: "Pecho & Tríceps",
+      subtitle: "Empuje Plano y Aislado",
+      description: "Desarrollo de empuje plano y tríceps.",
+      duration: "40 min",
+      exercises: [
+        { name: "Press de Banca Plano con Barra", muscle: "Pectoral Mayor", sets: "4", reps: "10", rest: "90s", notes: "Codos a 45 grados. Controlar el descenso.", loopType: "bench" },
+        { name: "Aperturas Planas con Mancuernas", muscle: "Pectorales", sets: "3", reps: "12", rest: "60s", notes: "Movimiento semicircular controlado.", loopType: "fly" },
+        { name: "Extensiones de Tríceps en Polea", muscle: "Tríceps", sets: "3", reps: "12", rest: "60s", notes: "Mantener los codos fijos a los costados.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "lun-espalda-biceps",
+      title: "Espalda & Bíceps",
+      subtitle: "Tracción y Flexión",
+      description: "Amplitud dorsal y bíceps.",
+      duration: "45 min",
+      exercises: [
+        { name: "Jalón al Pecho Polea Alta", muscle: "Dorsal Ancho", sets: "4", reps: "12", rest: "90s", notes: "Tracción con los codos hacia abajo, pecho arriba.", loopType: "pull" },
+        { name: "Remo con Mancuerna a una Mano", muscle: "Dorsal / Espalda Media", sets: "4", reps: "10", rest: "60s", notes: "Llevar la mancuerna hacia la cadera.", loopType: "pull" },
+        { name: "Curl de Bíceps con Barra W", muscle: "Bíceps", sets: "3", reps: "12", rest: "60s", notes: "Codos pegados al cuerpo, recorrido completo.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "lun-cardio-core",
+      title: "Cardio & Core",
+      subtitle: "Resistencia e Intervalos",
+      description: "Mejorar fondo físico y estabilidad del core.",
+      duration: "30 min",
+      exercises: [
+        { name: "Sentadillas con Salto", muscle: "Cardio / Piernas", sets: "4", reps: "45s", rest: "30s", notes: "Amortiguar la caída flexionando rodillas.", loopType: "squat" },
+        { name: "Plancha Abdominal Isométrica", muscle: "Core / Abdomen", sets: "4", reps: "60s", rest: "30s", notes: "Apretar glúteos y abdomen.", loopType: "bench" },
+        { name: "Escaladores (Mountain Climbers)", muscle: "Cardio / Core", sets: "4", reps: "45s", rest: "30s", notes: "Mantener ritmo constante sin levantar cadera.", loopType: "squat" }
+      ]
+    }
+  ],
+  Martes: [
+    {
+      id: "mar-pierna-v2",
+      title: "Pierna - V2 (Peso Libre)",
+      subtitle: "Mancuernas y Barra Libre",
+      description: "Descongestiva de máquinas. Evita filas en prensa/jaulas.",
+      duration: "40 min",
+      exercises: [
+        { name: "Sentadilla Búlgara con Mancuernas", muscle: "Cuádriceps / Glúteos", sets: "4", reps: "10 p/lado", rest: "90s", notes: "Empujar con el talón de la pierna delantera.", loopType: "squat" },
+        { name: "Estocadas Caminando con Mancuernas", muscle: "Piernas / Glúteos", sets: "4", reps: "20 pasos", rest: "90s", notes: "Mantener el torso erguido.", loopType: "squat" },
+        { name: "Peso Muerto Rumano con Mancuernas", muscle: "Isquiotibiales", sets: "4", reps: "12", rest: "60s", notes: "Llevar cadera hacia atrás con espalda recta.", loopType: "pull" }
+      ]
+    },
+    {
+      id: "mar-hombros-brazos",
+      title: "Hombros & Brazos",
+      subtitle: "Hipertrofia de Deltoides y Brazos",
+      description: "Rutina para hombros redondos y brazos.",
+      duration: "45 min",
+      exercises: [
+        { name: "Press de Hombro con Mancuerna", muscle: "Hombros", sets: "4", reps: "10", rest: "90s", notes: "Bajar mancuernas hasta la altura de las orejas.", loopType: "squat" },
+        { name: "Vuelos Laterales con Mancuerna", muscle: "Hombro Lateral", sets: "4", reps: "15", rest: "60s", notes: "Subir codos alineados con los hombros.", loopType: "fly" },
+        { name: "Curl Alternado tipo Martillo", muscle: "Bíceps / Antebrazo", sets: "3", reps: "12", rest: "60s", notes: "Mancuernas paralelas, codo fijo.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "mar-espalda-espesor",
+      title: "Espalda - Espesor",
+      subtitle: "Fuerza en Espalda Media",
+      description: "Remos e hipertrofia de espalda media.",
+      duration: "40 min",
+      exercises: [
+        { name: "Remo con Barra Prono", muscle: "Espalda Media / Dorsal", sets: "4", reps: "10", rest: "90s", notes: "Tracción hacia el ombligo, espalda recta a 45°.", loopType: "pull" },
+        { name: "Remo Bajo en Polea", muscle: "Espalda Media", sets: "4", reps: "12", rest: "60s", notes: "Llevar hombros atrás al contraer.", loopType: "pull" },
+        { name: "Pullover en Polea Alta con Soga", muscle: "Dorsales", sets: "3", reps: "15", rest: "60s", notes: "Mantener codos rígidos y semiflexionados.", loopType: "pull" }
+      ]
+    },
+    {
+      id: "mar-funcional-hiit",
+      title: "Funcional Express",
+      subtitle: "Quemador Metabólico",
+      description: "HIIT rápido para terminar el día.",
+      duration: "25 min",
+      exercises: [
+        { name: "Kettlebell Swings", muscle: "Full Body / Cadena Post.", sets: "4", reps: "45s", rest: "30s", notes: "Empuje explosivo de cadera, no de brazos.", loopType: "pull" },
+        { name: "Saltos de Soga", muscle: "Cardio", sets: "4", reps: "60s", rest: "30s", notes: "Mantener el salto bajo sobre puntas de pie.", loopType: "squat" },
+        { name: "Burpees", muscle: "Cardio / Full Body", sets: "4", reps: "10", rest: "45s", notes: "Amortiguar caídas.", loopType: "squat" }
+      ]
+    }
+  ],
+  Miércoles: [
+    {
+      id: "mie-pierna-v1",
+      title: "Pierna - V1 (Máquinas)",
+      subtitle: "Enfoque en Cuádriceps e Isquios",
+      description: "Variación clásica de empuje de piernas.",
+      duration: "45 min",
+      exercises: [
+        { name: "Sentadillas con Barra Libre", muscle: "Cuádriceps / Glúteos", sets: "4", reps: "10", rest: "90s", notes: "Técnica profunda. Controlar la bajada sin rebotar.", loopType: "squat" },
+        { name: "Prensa de Piernas a 45°", muscle: "Cuádriceps", sets: "4", reps: "12", rest: "90s", notes: "Apoyo completo de espalda. No bloquear rodillas arriba.", loopType: "bench" },
+        { name: "Camilla de Extensión", muscle: "Cuádriceps aislados", sets: "3", reps: "15", rest: "60s", notes: "Sostener 1 segundo en la máxima contracción arriba.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "mie-pecho-hombro",
+      title: "Pecho & Hombros",
+      subtitle: "Fuerza General de Empuje",
+      description: "Push day clásico enfocado en pecho y deltoides.",
+      duration: "45 min",
+      exercises: [
+        { name: "Press de Banca Plano con Barra", muscle: "Pectoral Mayor", sets: "4", reps: "10", rest: "90s", notes: "Retracción escapular. Bajar controlado hasta rozar el pecho.", loopType: "bench" },
+        { name: "Press de Hombro con Mancuerna", muscle: "Deltoides", sets: "4", reps: "10", rest: "90s", notes: "Espalda bien apoyada a 75 grados.", loopType: "squat" },
+        { name: "Aperturas en Poleas Altas (Cruces)", muscle: "Pectoral Inferior", sets: "3", reps: "12", rest: "60s", notes: "Cruzar las manos levemente al final.", loopType: "fly" }
+      ]
+    },
+    {
+      id: "mie-espalda-biceps",
+      title: "Espalda & Bíceps",
+      subtitle: "Tracción y Flexión",
+      description: "Dorsales y brazos.",
+      duration: "45 min",
+      exercises: [
+        { name: "Jalón al Pecho Polea Alta", muscle: "Dorsal Ancho", sets: "4", reps: "12", rest: "90s", notes: "Tracción con los codos hacia abajo, pecho arriba.", loopType: "pull" },
+        { name: "Remo con Mancuerna a una Mano", muscle: "Dorsal", sets: "4", reps: "10", rest: "60s", notes: "Llevar la mancuerna hacia la cadera.", loopType: "pull" },
+        { name: "Curl de Bíceps con Barra W", muscle: "Bíceps", sets: "3", reps: "12", rest: "60s", notes: "Codos pegados al cuerpo, recorrido completo.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "mie-cardio-express",
+      title: "Cardio Express",
+      subtitle: "Resistencia Cardiovascular",
+      description: "Rutina rápida e intensa para el corazón.",
+      duration: "25 min",
+      exercises: [
+        { name: "Saltos de Soga", muscle: "Cardio", sets: "4", reps: "60s", rest: "30s", notes: "Coordinación y agilidad.", loopType: "squat" },
+        { name: "Burpees", muscle: "Full Body / Cardio", sets: "4", reps: "12", rest: "45s", notes: "Mantener ritmo constante.", loopType: "squat" },
+        { name: "Elevaciones de Rodillas (High Knees)", muscle: "Cardio", sets: "4", reps: "45s", rest: "30s", notes: "Llevar rodillas a la altura de la cadera.", loopType: "squat" }
+      ]
+    }
+  ],
+  Jueves: [
+    {
+      id: "jue-pierna-v2",
+      title: "Pierna - V2 (Peso Libre)",
+      subtitle: "Glúteos e Isquios",
+      description: "Peso libre para descongestionar el salón.",
+      duration: "40 min",
+      exercises: [
+        { name: "Sentadilla Búlgara con Mancuernas", muscle: "Cuádriceps / Glúteos", sets: "4", reps: "10 p/lado", rest: "90s", notes: "Empujar con el talón de la pierna delantera.", loopType: "squat" },
+        { name: "Estocadas Caminando con Mancuernas", muscle: "Piernas / Glúteos", sets: "4", reps: "20 pasos", rest: "90s", notes: "Mantener el torso erguido.", loopType: "squat" },
+        { name: "Peso Muerto Rumano con Mancuernas", muscle: "Isquiotibiales", sets: "4", reps: "12", rest: "60s", notes: "Llevar cadera hacia atrás con espalda recta.", loopType: "pull" }
+      ]
+    },
+    {
+      id: "jue-brazos-completo",
+      title: "Brazos Completos",
+      subtitle: "Bíceps y Tríceps Antagónicos",
+      description: "Brazos masivos combinando flexores y extensores.",
+      duration: "45 min",
+      exercises: [
+        { name: "Curl de Bíceps con Barra W", muscle: "Bíceps", sets: "3", reps: "12", rest: "60s", notes: "Codos quietos a los costados.", loopType: "curl" },
+        { name: "Extensiones de Tríceps con Soga", muscle: "Tríceps", sets: "3", reps: "12", rest: "60s", notes: "Abrir la soga abajo en el bloqueo.", loopType: "curl" },
+        { name: "Curl tipo Martillo", muscle: "Bíceps / Antebrazo", sets: "3", reps: "12", rest: "60s", notes: "Agarre neutro con mancuernas.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "jue-espalda-hombros",
+      title: "Espalda & Hombros",
+      subtitle: "Tracción y Fuerza Lateral",
+      description: "Postura y hombros amplios.",
+      duration: "45 min",
+      exercises: [
+        { name: "Remo con Mancuerna a una Mano", muscle: "Espalda", sets: "4", reps: "10", rest: "60s", notes: "Llevar codo hacia atrás rozando el torso.", loopType: "pull" },
+        { name: "Jalón al Pecho Polea Alta", muscle: "Dorsales", sets: "4", reps: "12", rest: "90s", notes: "Tracción limpia sin inercia.", loopType: "pull" },
+        { name: "Vuelos Laterales con Mancuerna", muscle: "Deltoides lateral", sets: "4", reps: "15", rest: "60s", notes: "Movimiento controlado al bajar.", loopType: "fly" }
+      ]
+    },
+    {
+      id: "jue-funcional-core",
+      title: "Funcional Core",
+      subtitle: "Estabilidad del Tronco",
+      description: "Foco en abdominales y lumbares.",
+      duration: "30 min",
+      exercises: [
+        { name: "Plancha Abdominal Isométrica", muscle: "Core", sets: "4", reps: "60s", rest: "30s", notes: "Apretar el cinturón abdominal.", loopType: "bench" },
+        { name: "Rueda Abdominal (o Desplazamiento)", muscle: "Core / Abdomen", sets: "3", reps: "10", rest: "60s", notes: "No arquear la zona lumbar.", loopType: "squat" },
+        { name: "Plancha Lateral", muscle: "Oblicuos", sets: "3", reps: "40s p/lado", rest: "30s", notes: "Alinear codo con hombro.", loopType: "bench" }
+      ]
+    }
+  ],
+  Viernes: [
+    {
+      id: "vie-pierna-full",
+      title: "Pierna - Full Day",
+      subtitle: "Día Completo de Tren Inferior",
+      description: "Último empuje de la semana para piernas y pantorrillas.",
+      duration: "45 min",
+      exercises: [
+        { name: "Sentadillas con Barra Libre", muscle: "Piernas", sets: "4", reps: "10", rest: "90s", notes: "Sentadilla profunda controlada.", loopType: "squat" },
+        { name: "Peso Muerto Rumano con Barra", muscle: "Isquiotibiales", sets: "4", reps: "10", rest: "90s", notes: "Foco en la bisagra de cadera.", loopType: "pull" },
+        { name: "Elevaciones de Talones de Pie", muscle: "Gemelos", sets: "4", reps: "20", rest: "45s", notes: "Máxima elongación y contracción abajo y arriba.", loopType: "squat" }
+      ]
+    },
+    {
+      id: "vie-torso-completo",
+      title: "Torso Completo",
+      subtitle: "Día de Fuerza Superior",
+      description: "Rutina para pecho y espalda en súper-serie o bloques.",
+      duration: "45 min",
+      exercises: [
+        { name: "Press de Banca Plano", muscle: "Pectoral", sets: "4", reps: "10", rest: "90s", notes: "Barra al pecho con recorrido completo.", loopType: "bench" },
+        { name: "Jalón al Pecho Polea Alta", muscle: "Dorsales", sets: "4", reps: "12", rest: "90s", notes: "Traccionar con la espalda, no con los brazos.", loopType: "pull" },
+        { name: "Press Militar de Hombros", muscle: "Deltoides", sets: "3", reps: "10", rest: "90s", notes: "Press con barra de pie o sentado.", loopType: "squat" }
+      ]
+    },
+    {
+      id: "vie-brazos-hombros",
+      title: "Brazos & Hombros",
+      subtitle: "Bombeo de Fin de Semana",
+      description: "Combinación ideal para un bombeo final de brazos y hombros.",
+      duration: "40 min",
+      exercises: [
+        { name: "Vuelos Laterales con Mancuerna", muscle: "Hombros", sets: "4", reps: "15", rest: "60s", notes: "Controlar el descenso.", loopType: "fly" },
+        { name: "Curl Alternado de Bíceps", muscle: "Bíceps", sets: "3", reps: "12", rest: "60s", notes: "Muñecas firmes.", loopType: "curl" },
+        { name: "Extensiones de Tríceps con Soga", muscle: "Tríceps", sets: "3", reps: "12", rest: "60s", notes: "Bloquear codos.", loopType: "curl" }
+      ]
+    },
+    {
+      id: "vie-desafio-hiit",
+      title: "HIIT Desafío",
+      subtitle: "Cardio Explosivo",
+      description: "Intervalos intensos para terminar la semana con todo.",
+      duration: "30 min",
+      exercises: [
+        { name: "Burpees", muscle: "Full Body / Cardio", sets: "4", reps: "15", rest: "45s", notes: "Ritmo explosivo.", loopType: "squat" },
+        { name: "Escaladores", muscle: "Cardio", sets: "4", reps: "45s", rest: "30s", notes: "Espalda paralela al suelo.", loopType: "squat" },
+        { name: "Sentadillas con Salto", muscle: "Cuádriceps / Cardio", sets: "4", reps: "45s", rest: "30s", notes: "Salto máximo.", loopType: "squat" }
+      ]
+    }
+  ]
+};
 
 export default function GimnasioPage() {
-  const [selectedRoutine, setSelectedRoutine] = useState<Routine>(mockRoutines[0]);
+  const [selectedDay, setSelectedDay] = useState<string>("Miércoles");
+  const [selectedRoutine, setSelectedRoutine] = useState<Routine>(mockRoutinesWeekly["Miércoles"][0]);
   const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
-  const [clientRoutine, setClientRoutine] = useState<Routine | null>(null);
 
   // Cargar posible cambio dinámico hecho por el Coach (guardado en localStorage de la demo)
   useEffect(() => {
     const checkCoachRedirect = () => {
       const activeVariation = localStorage.getItem("gimnasio_active_variation");
       if (activeVariation) {
-        const found = mockRoutines.find(r => r.id === activeVariation);
+        // Encontrar en qué rutina del día actual está esa variación
+        const currentDayRoutines = mockRoutinesWeekly[selectedDay] || [];
+        const found = currentDayRoutines.find(r => r.id.endsWith(activeVariation.split("-").pop() || ""));
         if (found) {
           setSelectedRoutine(found);
           // Limpiar una vez cargado para permitir selección manual si lo desea
@@ -244,16 +299,46 @@ export default function GimnasioPage() {
     };
 
     checkCoachRedirect();
-    // Revisar periódicamente si el coach actualizó el pizarrón desde su admin
     const interval = setInterval(checkCoachRedirect, 2000);
     return () => clearInterval(interval);
+  }, [selectedDay]);
+
+  // Cargar completados y día actual nativamente al iniciar
+  useEffect(() => {
+    // Detectar día de la semana actual (Lunes a Viernes)
+    const dayIndex = new Date().getDay(); // 0 = Dom, 1 = Lun, etc.
+    const mapping = ["Viernes", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Viernes"];
+    const currentDay = mapping[dayIndex] || "Miércoles";
+    setSelectedDay(currentDay);
+    setSelectedRoutine(mockRoutinesWeekly[currentDay][0]);
+
+    // Cargar historial de completados desde localStorage
+    const savedProgress = localStorage.getItem("gimnasio_completed_progress");
+    if (savedProgress) {
+      try {
+        setCompletedExercises(JSON.parse(savedProgress));
+      } catch (e) {
+        // Ignorar si el formato está roto
+      }
+    }
   }, []);
 
+  // Cambiar el día manual y resetear selección
+  const handleDayChange = (day: string) => {
+    setSelectedDay(day);
+    const dayRoutines = mockRoutinesWeekly[day] || [];
+    setSelectedRoutine(dayRoutines[0]);
+  };
+
   const toggleComplete = (exerciseName: string) => {
-    setCompletedExercises(prev => ({
-      ...prev,
-      [exerciseName]: !prev[exerciseName]
-    }));
+    const key = `${selectedRoutine.id}-${exerciseName}`;
+    const nextCompleted = {
+      ...completedExercises,
+      [key]: !completedExercises[key]
+    };
+    setCompletedExercises(nextCompleted);
+    // Guardar en localStorage para prevenir pérdidas de red
+    localStorage.setItem("gimnasio_completed_progress", JSON.stringify(nextCompleted));
   };
 
   // Renderizador del Loop de Técnica minimalista en CSS/SVG
@@ -353,78 +438,94 @@ export default function GimnasioPage() {
     }
   };
 
+  const dayRoutines = mockRoutinesWeekly[selectedDay] || [];
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-200">
       
-      {/* Header Hevy-inspired */}
-      <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3.5 transition-colors">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      {/* Header Hevy-inspired (Súper limpio, libre de colapsos) */}
+      <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-2 transition-colors">
+        <div className="max-w-xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <Link href="/" className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-500 dark:text-slate-400">
               <ArrowLeft className="h-5 w-5" />
             </Link>
-            <div className="flex items-center gap-2">
-              <Dumbbell className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <span className="text-xl font-extrabold tracking-tight">SantiGym</span>
-              <span className="bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Pizarrón</span>
+            <div className="flex items-center gap-1.5">
+              <Dumbbell className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
+              <span className="text-lg font-black tracking-tight">SantiGym</span>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <Link 
               href="/demos/gimnasio/admin" 
-              className="flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30 px-3 py-1.5 rounded-lg transition-colors"
+              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-lg transition-all active:scale-95"
+              title="Panel Coach"
             >
-              <Users className="h-4 w-4" />
-              Panel Coach
+              <Users className="h-5 w-5" />
             </Link>
             <ThemeToggle />
           </div>
         </div>
       </header>
 
-      {/* Main container */}
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+      {/* Main container (Optimizado para viewports pequeños y baja velocidad de carga) */}
+      <main className="max-w-xl mx-auto px-4 py-4 space-y-4">
         
-        {/* Banner del día */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm transition-colors">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Hoy es Miércoles</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-xs text-slate-400 dark:text-slate-500 font-semibold">Pizarrón Sincronizado</span>
-            </div>
-            <h1 className="text-2xl font-black text-slate-900 dark:text-white mt-1 leading-tight">
-              Rutinas del Ecosistema SantiGym
-            </h1>
-            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
-              Seleccioná abajo la variación indicada por tu Coach Mateo.
-            </p>
+        {/* Selector de Día (Lunes a Viernes) */}
+        <div className="space-y-1.5">
+          <label className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500">Día de Entrenamiento</label>
+          <div className="flex justify-between bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-1 rounded-xl shadow-sm transition-colors">
+            {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"].map((day) => {
+              const isActive = selectedDay === day;
+              return (
+                <button
+                  key={day}
+                  onClick={() => handleDayChange(day)}
+                  className={`flex-1 py-1.5 rounded-lg text-xs font-black text-center transition-all ${
+                    isActive 
+                      ? "bg-blue-600 text-white shadow-sm" 
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                  }`}
+                >
+                  {day.substring(0, 3)}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Selector de Tracks en Formato Píldora Hevy */}
-        <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Track asignado de hoy</label>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {mockRoutines.map((routine) => {
+        {/* Banner del Pizarrón */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm transition-colors">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-black uppercase tracking-wider text-blue-600 dark:text-blue-400">Pizarrón Digital</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">Hoy es {selectedDay}</span>
+          </div>
+          <h1 className="text-xl font-black text-slate-900 dark:text-white mt-1 leading-tight">
+            Elegí tu track y entrená
+          </h1>
+          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5 leading-normal">
+            Tacha cada ejercicio al completarlo. Se guarda en tu memoria local en caliente.
+          </p>
+        </div>
+
+        {/* Selector de Tracks (Horizontal Scrollable en móvil, previene recortes y wrapping) */}
+        <div className="space-y-1.5">
+          <label className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500">Track asignado</label>
+          <div className="flex overflow-x-auto gap-2 pb-2 -mx-4 px-4 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+            {dayRoutines.map((routine) => {
               const isSelected = selectedRoutine.id === routine.id;
               return (
                 <button
                   key={routine.id}
-                  onClick={() => {
-                    setSelectedRoutine(routine);
-                    setCompletedExercises({});
-                  }}
-                  className={`px-3 py-3 rounded-xl border font-bold text-xs text-center transition-all focus:outline-none flex flex-col items-center justify-center gap-1 ${
+                  onClick={() => setSelectedRoutine(routine)}
+                  className={`flex-shrink-0 px-4 py-2.5 rounded-xl border font-bold text-xs transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none ${
                     isSelected
                       ? "bg-blue-600 border-blue-600 text-white shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-850"
                   }`}
                 >
-                  <span className="truncate max-w-full">{routine.title}</span>
-                  <span className={`text-[9px] font-medium leading-none ${isSelected ? "text-blue-100" : "text-slate-400 dark:text-slate-500"}`}>
-                    {routine.id.includes("v2") ? "Peso Libre" : "General"}
-                  </span>
+                  <span>{routine.title}</span>
                 </button>
               );
             })}
@@ -432,57 +533,54 @@ export default function GimnasioPage() {
         </div>
 
         {/* Detalles de la rutina activa */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 shadow-sm transition-colors">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2.5 shadow-sm transition-colors">
+          <div className="flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
             <div>
-              <h2 className="text-lg font-black text-slate-900 dark:text-white leading-tight">
+              <h2 className="text-base font-black text-slate-900 dark:text-white leading-tight">
                 {selectedRoutine.title}
               </h2>
-              <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 mt-0.5">
+              <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-0.5 uppercase tracking-wide">
                 {selectedRoutine.subtitle}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg">
+            <div className="flex items-center gap-2">
+              <span className="flex items-center gap-1 text-[10px] font-black uppercase text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
                 <Clock className="h-3.5 w-3.5" />
                 {selectedRoutine.duration}
-              </span>
-              <span className="flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 px-2.5 py-1 rounded-lg">
-                <Flame className="h-3.5 w-3.5" />
-                Día: Pierna/Empuje
               </span>
             </div>
           </div>
 
-          <p className="text-sm font-semibold text-slate-600 dark:text-slate-400 leading-relaxed">
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 leading-relaxed">
             {selectedRoutine.description}
           </p>
         </div>
 
-        {/* Biblioteca de Ejercicios del Alumno */}
-        <div className="space-y-4">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Ejercicios de la Rutina ({selectedRoutine.exercises.length})</h3>
+        {/* Ejercicios del Alumno */}
+        <div className="space-y-3">
+          <h3 className="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500">Ejercicios de la Rutina ({selectedRoutine.exercises.length})</h3>
           
-          <div className="space-y-4">
+          <div className="space-y-3">
             {selectedRoutine.exercises.map((exercise) => {
-              const isDone = completedExercises[exercise.name] || false;
+              const exerciseKey = `${selectedRoutine.id}-${exercise.name}`;
+              const isDone = completedExercises[exerciseKey] || false;
               return (
                 <div 
                   key={exercise.name}
-                  className={`bg-white dark:bg-slate-900 border rounded-2xl p-4 sm:p-5 shadow-sm transition-all flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between ${
+                  className={`bg-white dark:bg-slate-900 border rounded-2xl p-4 shadow-sm transition-all flex gap-4 items-center justify-between ${
                     isDone 
-                      ? "border-emerald-500/30 bg-emerald-50/5 dark:bg-emerald-950/5" 
+                      ? "border-emerald-500/20 bg-emerald-50/5 dark:bg-emerald-950/5" 
                       : "border-slate-200 dark:border-slate-800"
                   }`}
                 >
-                  <div className="space-y-3 flex-1 w-full">
+                  <div className="space-y-2 flex-1 w-full min-w-0">
                     {/* Fila del Título */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="space-y-1">
-                        <h4 className={`text-base font-bold leading-tight ${isDone ? "text-slate-400 dark:text-slate-500 line-through" : "text-slate-900 dark:text-white"}`}>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="space-y-1 min-w-0">
+                        <h4 className={`text-sm font-bold leading-tight truncate ${isDone ? "text-slate-400 dark:text-slate-600 line-through" : "text-slate-900 dark:text-white"}`}>
                           {exercise.name}
                         </h4>
-                        <span className="inline-block text-[10px] font-black uppercase tracking-wide px-2 py-0.5 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 rounded-md">
+                        <span className="inline-block text-[9px] font-black uppercase tracking-wide px-2 py-0.5 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 rounded-md">
                           {exercise.muscle}
                         </span>
                       </div>
@@ -490,9 +588,9 @@ export default function GimnasioPage() {
                       {/* Checkbox de completado */}
                       <button 
                         onClick={() => toggleComplete(exercise.name)}
-                        className={`p-1.5 rounded-lg border transition-all active:scale-90 ${
+                        className={`p-1.5 rounded-lg border transition-all active:scale-90 shrink-0 ${
                           isDone 
-                            ? "bg-emerald-500 border-emerald-500 text-white" 
+                            ? "bg-emerald-500 border-emerald-500 text-white shadow-sm" 
                             : "border-slate-200 dark:border-slate-700 text-transparent hover:border-slate-300 dark:hover:border-slate-600"
                         }`}
                       >
@@ -500,36 +598,32 @@ export default function GimnasioPage() {
                       </button>
                     </div>
 
-                    {/* Especificaciones en Grilla */}
-                    <div className="grid grid-cols-4 gap-2 bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800/40 transition-colors">
-                      <div className="text-center">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Series</p>
-                        <p className="text-sm font-black text-slate-800 dark:text-slate-200 mt-0.5">{exercise.sets}</p>
+                    {/* Especificaciones en Grilla (Simplificada: Sin pesos fijos por pizarra general) */}
+                    <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-950 p-2 rounded-xl border border-slate-100 dark:border-slate-800/40 transition-colors text-center">
+                      <div>
+                        <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wide leading-none">Series</p>
+                        <p className="text-xs font-black text-slate-800 dark:text-slate-200 mt-1">{exercise.sets}</p>
                       </div>
-                      <div className="text-center border-l border-slate-100 dark:border-slate-800">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Repes</p>
-                        <p className="text-sm font-black text-slate-800 dark:text-slate-200 mt-0.5">{exercise.reps}</p>
+                      <div className="border-l border-slate-100 dark:border-slate-800">
+                        <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wide leading-none">Repes</p>
+                        <p className="text-xs font-black text-slate-800 dark:text-slate-200 mt-1">{exercise.reps}</p>
                       </div>
-                      <div className="text-center border-l border-slate-100 dark:border-slate-800">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Carga Rec.</p>
-                        <p className="text-sm font-black text-slate-800 dark:text-slate-200 mt-0.5">{exercise.weight}</p>
-                      </div>
-                      <div className="text-center border-l border-slate-100 dark:border-slate-800">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Descanso</p>
-                        <p className="text-sm font-black text-slate-800 dark:text-slate-200 mt-0.5">{exercise.rest}</p>
+                      <div className="border-l border-slate-100 dark:border-slate-800">
+                        <p className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wide leading-none">Mín. Descanso</p>
+                        <p className="text-xs font-black text-slate-800 dark:text-slate-200 mt-1">{exercise.rest}</p>
                       </div>
                     </div>
 
                     {/* Notas del Profe */}
-                    <p className={`text-xs font-semibold leading-relaxed ${isDone ? "text-slate-400 dark:text-slate-600" : "text-slate-500 dark:text-slate-400"}`}>
-                      💡 <span className="font-bold text-slate-600 dark:text-slate-300">Nota:</span> {exercise.notes}
+                    <p className={`text-[11px] font-semibold leading-relaxed ${isDone ? "text-slate-400 dark:text-slate-700" : "text-slate-500 dark:text-slate-400"}`}>
+                      💡 <span className="font-bold text-slate-600 dark:text-slate-300">Tip:</span> {exercise.notes}
                     </p>
                   </div>
 
                   {/* Micro-Loop animador en CSS/SVG */}
-                  <div className={`h-28 w-28 shrink-0 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 p-2 flex items-center justify-center relative overflow-hidden self-center transition-opacity duration-200 ${isDone ? "opacity-30" : "opacity-100"}`}>
+                  <div className={`h-20 w-20 shrink-0 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 p-1 flex items-center justify-center relative overflow-hidden self-center transition-all duration-200 ${isDone ? "opacity-35" : "opacity-100"}`}>
                     {renderLoop(exercise.loopType)}
-                    <span className="absolute bottom-1 right-1.5 text-[8px] font-bold tracking-widest text-slate-400 uppercase">Técnica</span>
+                    <span className="absolute bottom-0.5 right-1 text-[7px] font-black tracking-widest text-slate-400/80 uppercase leading-none">Demo</span>
                   </div>
                 </div>
               );
@@ -538,8 +632,8 @@ export default function GimnasioPage() {
         </div>
 
         {/* Footer simple */}
-        <footer className="text-center py-12 text-slate-400 dark:text-slate-500 text-xs font-medium space-y-1">
-          <p>SantiGym Pizarrón • Hecho con ❤️ para tu entrenamiento diario.</p>
+        <footer className="text-center py-8 text-slate-400 dark:text-slate-500 text-[10px] font-semibold space-y-1 border-t border-slate-150 dark:border-slate-900 mt-4 transition-colors">
+          <p>SantiGym Pizarrón • Hecho con ❤️ en Resistencia, Chaco.</p>
           <p>© {new Date().getFullYear()} Ecosistema Santi Soluciones.</p>
         </footer>
 
