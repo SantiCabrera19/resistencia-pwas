@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Settings, Database, Activity } from "lucide-react";
+import { ArrowRight, Settings, Database, Activity, Dumbbell } from "lucide-react";
 
 export function HomePortfolio() {
   const landings = [
@@ -21,6 +21,14 @@ export function HomePortfolio() {
       description: "Página tipo E-commerce inmersiva para mostrar el tamaño y capacidad del negocio. Ideal para empresas que venden por volumen.",
       publicLink: "/demos/ferreteria",
       image: "/images/ferreteria_store.png",
+    },
+    {
+      id: "gimnasio",
+      title: "SantiGym Pizarrón",
+      niche: "Fitness / Gimnasios",
+      description: "Pizarrón digital de entrenamiento PWA responsivo e instalable. Diseñado para que los alumnos consuman su rutina del día de manera inmediata sin registros.",
+      publicLink: "/demos/gimnasio",
+      image: "/images/gym_blackboard.png",
     }
   ];
 
@@ -40,6 +48,14 @@ export function HomePortfolio() {
       description: "Panel para control de inventario en tiempo real, alertas de falta de stock y gestión rápida de remitos para mayoristas.",
       adminLink: "/demos/ferreteria/admin",
       icon: <Database className="h-16 w-16 text-emerald-500 opacity-20 transition-all group-hover:scale-110 group-hover:opacity-40" />,
+    },
+    {
+      id: "gimnasio-admin",
+      title: "Gestor de Rutinas y Flujo",
+      niche: "Software Interno",
+      description: "Panel diario del coach para organizar entrenamientos en caliente y balancear la congestión en sala a través de variaciones inteligentes.",
+      adminLink: "/demos/gimnasio/admin",
+      icon: <Dumbbell className="h-16 w-16 text-emerald-500 opacity-20 transition-all group-hover:scale-110 group-hover:opacity-40" />,
     }
   ];
 
