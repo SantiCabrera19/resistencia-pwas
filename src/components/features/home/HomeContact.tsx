@@ -1,6 +1,14 @@
 "use client";
 
-import { MessageSquare, Instagram, ExternalLink, Sparkles } from "lucide-react";
+import { MessageSquare, ExternalLink, Sparkles } from "lucide-react";
+
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
 
 export function HomeContact() {
   return (
@@ -47,7 +55,7 @@ export function HomeContact() {
               rel="noopener noreferrer"
               className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-tr from-[#fd5949] to-[#d6249f] hover:opacity-95 px-8 py-4 text-sm font-black text-white shadow-md shadow-rose-500/10 hover:shadow-rose-500/20 transition-all active:scale-95 duration-200 cursor-pointer"
             >
-              <Instagram className="h-4.5 w-4.5" />
+              <InstagramIcon className="h-4.5 w-4.5" />
               Seguinos en Instagram
             </a>
           </div>
