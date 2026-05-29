@@ -22,11 +22,13 @@ const mockRoutinesWeekly: Record<string, Routine[]> = {
   Lunes: [
     {
       id: "lun-pierna-v1",
-      title: "Pierna - V1 (Máquinas)",
+      title: "Pierna - V1 (Máquinas) + Hombros",
       exercises: [
         { name: "Sentadillas con Barra Libre", muscle: "Pierna", sets: "4", reps: "10" },
         { name: "Prensa de Piernas a 45°", muscle: "Pierna", sets: "4", reps: "12" },
-        { name: "Camilla de Extensión", muscle: "Pierna", sets: "3", reps: "15" }
+        { name: "Camilla de Extensión", muscle: "Pierna", sets: "3", reps: "15" },
+        { name: "Press Militar con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "10" },
+        { name: "Vuelos Laterales con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "12" }
       ]
     },
     {
@@ -60,11 +62,12 @@ const mockRoutinesWeekly: Record<string, Routine[]> = {
   Martes: [
     {
       id: "mar-pierna-v2",
-      title: "Pierna - V2 (Peso Libre)",
+      title: "Pierna - V2 (Peso Libre) + Hombros",
       exercises: [
         { name: "Sentadilla Búlgara con Mancuernas", muscle: "Pierna", sets: "4", reps: "10" },
         { name: "Estocadas Caminando con Mancuernas", muscle: "Pierna", sets: "4", reps: "20" },
-        { name: "Peso Muerto Rumano con Mancuernas", muscle: "Pierna", sets: "4", reps: "12" }
+        { name: "Peso Muerto Rumano con Mancuernas", muscle: "Pierna", sets: "4", reps: "12" },
+        { name: "Vuelos Laterales con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "12" }
       ]
     },
     {
@@ -98,11 +101,13 @@ const mockRoutinesWeekly: Record<string, Routine[]> = {
   Miércoles: [
     {
       id: "mie-pierna-v1",
-      title: "Pierna - V1 (Máquinas)",
+      title: "Pierna - V1 (Máquinas) + Hombros",
       exercises: [
         { name: "Sentadillas con Barra Libre", muscle: "Pierna", sets: "4", reps: "10" },
         { name: "Prensa de Piernas a 45°", muscle: "Pierna", sets: "4", reps: "12" },
-        { name: "Camilla de Extensión", muscle: "Pierna", sets: "3", reps: "15" }
+        { name: "Camilla de Extensión", muscle: "Pierna", sets: "3", reps: "15" },
+        { name: "Press Militar con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "10" },
+        { name: "Vuelos Laterales con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "12" }
       ]
     },
     {
@@ -136,11 +141,12 @@ const mockRoutinesWeekly: Record<string, Routine[]> = {
   Jueves: [
     {
       id: "jue-pierna-v2",
-      title: "Pierna - V2 (Peso Libre)",
+      title: "Pierna - V2 (Peso Libre) + Hombros",
       exercises: [
         { name: "Sentadilla Búlgara con Mancuernas", muscle: "Pierna", sets: "4", reps: "10" },
         { name: "Estocadas Caminando con Mancuernas", muscle: "Pierna", sets: "4", reps: "20" },
-        { name: "Peso Muerto Rumano con Mancuernas", muscle: "Pierna", sets: "4", reps: "12" }
+        { name: "Peso Muerto Rumano con Mancuernas", muscle: "Pierna", sets: "4", reps: "12" },
+        { name: "Vuelos Laterales con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "12" }
       ]
     },
     {
@@ -174,11 +180,12 @@ const mockRoutinesWeekly: Record<string, Routine[]> = {
   Viernes: [
     {
       id: "vie-pierna-full",
-      title: "Pierna - Full Day",
+      title: "Pierna - Full Day + Hombros",
       exercises: [
         { name: "Sentadillas con Barra Libre", muscle: "Pierna", sets: "4", reps: "10" },
         { name: "Peso Muerto Rumano con Barra", muscle: "Pierna", sets: "4", reps: "10" },
-        { name: "Elevaciones de Talones de Pie", muscle: "Pierna", sets: "4", reps: "20" }
+        { name: "Elevaciones de Talones de Pie", muscle: "Pierna", sets: "4", reps: "20" },
+        { name: "Vuelos Posteriores con Mancuernas (Hombros)", muscle: "Hombros", sets: "4", reps: "15" }
       ]
     },
     {
@@ -213,35 +220,90 @@ const mockRoutinesWeekly: Record<string, Routine[]> = {
 
 export default function GimnasioPage() {
   const [selectedDay, setSelectedDay] = useState<string>("Miércoles");
+  const [routinesData, setRoutinesData] = useState<Record<string, Routine[]>>(mockRoutinesWeekly);
   const [selectedRoutine, setSelectedRoutine] = useState<Routine>(mockRoutinesWeekly["Miércoles"][0]);
   const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
 
-  // Cargar posible cambio dinámico hecho por el Coach (guardado en localStorage de la demo)
+  // Cargar las rutinas del Coach y sincronizar cambios de aforo / ediciones en vivo
   useEffect(() => {
-    const checkCoachRedirect = () => {
+    const syncData = () => {
+      // 1. Cargar rutinas personalizadas del coach
+      const coachData = localStorage.getItem("gimnasio_coach_routines");
+      let activeRoutines = mockRoutinesWeekly;
+
+      if (coachData) {
+        try {
+          const parsed = JSON.parse(coachData);
+          if (parsed && typeof parsed === "object") {
+            activeRoutines = parsed;
+            setRoutinesData(prev => {
+              if (JSON.stringify(prev) !== JSON.stringify(parsed)) {
+                return parsed;
+              }
+              return prev;
+            });
+          }
+        } catch (e) {
+          // Fallback silencioso
+        }
+      }
+
+      const currentDayRoutines = activeRoutines[selectedDay] || [];
+
+      // 2. Controlar redirección de aforo hecha por el Coach (V1 -> V2)
       const activeVariation = localStorage.getItem("gimnasio_active_variation");
       if (activeVariation) {
-        const currentDayRoutines = mockRoutinesWeekly[selectedDay] || [];
         const found = currentDayRoutines.find(r => r.id.endsWith(activeVariation.split("-").pop() || ""));
         if (found) {
           setSelectedRoutine(found);
           localStorage.removeItem("gimnasio_active_variation");
+          return;
         }
       }
+
+      // 3. Mantener la rutina seleccionada sincronizada con ediciones en vivo del Coach
+      setSelectedRoutine(prev => {
+        const matchingRoutine = currentDayRoutines.find(r => r.id === prev.id);
+        if (matchingRoutine) {
+          if (JSON.stringify(matchingRoutine) !== JSON.stringify(prev)) {
+            return matchingRoutine;
+          }
+          return prev;
+        }
+        // Si no se encuentra la rutina (borrada), usar la primera disponible del día
+        if (currentDayRoutines.length > 0) {
+          return currentDayRoutines[0];
+        }
+        return { id: "empty", title: "Sin Rutinas", exercises: [] };
+      });
     };
 
-    checkCoachRedirect();
-    const interval = setInterval(checkCoachRedirect, 2000);
+    syncData();
+    const interval = setInterval(syncData, 1500); // Polling rápido para mantener la demo en tiempo real
     return () => clearInterval(interval);
   }, [selectedDay]);
 
-  // Cargar completados y día actual nativamente al iniciar
+  // Cargar completados, rutinas iniciales y día actual al montar el componente
   useEffect(() => {
     const dayIndex = new Date().getDay(); // 0 = Dom, 1 = Lun, etc.
     const mapping = ["Viernes", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Viernes"];
     const currentDay = mapping[dayIndex] || "Miércoles";
     setSelectedDay(currentDay);
-    setSelectedRoutine(mockRoutinesWeekly[currentDay][0]);
+
+    // Cargar inmediatamente de localStorage para evitar parpadeo con data vieja
+    const coachData = localStorage.getItem("gimnasio_coach_routines");
+    let initialRoutines = mockRoutinesWeekly;
+    if (coachData) {
+      try {
+        const parsed = JSON.parse(coachData);
+        if (parsed && typeof parsed === "object") {
+          initialRoutines = parsed;
+          setRoutinesData(parsed);
+        }
+      } catch (e) {}
+    }
+    const dayRoutines = initialRoutines[currentDay] || [];
+    setSelectedRoutine(dayRoutines[0] || { id: "empty", title: "Sin Rutinas", exercises: [] });
 
     const savedProgress = localStorage.getItem("gimnasio_completed_progress");
     if (savedProgress) {
@@ -255,8 +317,8 @@ export default function GimnasioPage() {
 
   const handleDayChange = (day: string) => {
     setSelectedDay(day);
-    const dayRoutines = mockRoutinesWeekly[day] || [];
-    setSelectedRoutine(dayRoutines[0]);
+    const dayRoutines = routinesData[day] || [];
+    setSelectedRoutine(dayRoutines[0] || { id: "empty", title: "Sin Rutinas", exercises: [] });
   };
 
   const toggleComplete = (exerciseName: string) => {
@@ -269,21 +331,21 @@ export default function GimnasioPage() {
     localStorage.setItem("gimnasio_completed_progress", JSON.stringify(nextCompleted));
   };
 
-  const dayRoutines = mockRoutinesWeekly[selectedDay] || [];
+  const dayRoutines = routinesData[selectedDay] || [];
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-200">
       
       {/* Header Hevy-inspired (Compacto, ultra rápido) */}
-      <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-2 transition-colors">
+      <header className="sticky top-0 z-30 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-2.5 transition-colors">
         <div className="max-w-xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors text-slate-500 dark:text-slate-400">
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4" />
             </Link>
             <div className="flex items-center gap-1.5">
-              <Dumbbell className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
-              <span className="text-base font-black tracking-tight">SantiGym</span>
+              <Dumbbell className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400 shrink-0" />
+              <span className="text-sm font-black tracking-tight uppercase">SantiGym</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -292,7 +354,7 @@ export default function GimnasioPage() {
               className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-lg transition-all active:scale-95"
               title="Panel Coach"
             >
-              <Users className="h-5 w-5" />
+              <Users className="h-4 w-4" />
             </Link>
             <ThemeToggle />
           </div>
@@ -304,7 +366,6 @@ export default function GimnasioPage() {
         
         {/* Selector de Día (Lunes a Viernes) */}
         <div className="space-y-1">
-          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Día de Entrenamiento</span>
           <div className="flex justify-between bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-0.5 rounded-lg shadow-sm transition-colors">
             {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"].map((day) => {
               const isActive = selectedDay === day;
@@ -312,49 +373,49 @@ export default function GimnasioPage() {
                 <button
                   key={day}
                   onClick={() => handleDayChange(day)}
-                  className={`flex-1 py-1 rounded-md text-[10px] font-black text-center transition-all ${
+                  className={`flex-1 py-1.5 rounded-md text-[10px] font-black text-center transition-all ${
                     isActive 
                       ? "bg-blue-600 text-white shadow-sm" 
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                   }`}
                 >
-                  {day.substring(0, 3)}
+                  {day.substring(0, 3).toUpperCase()}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Banner de Sincronización e Información de Track */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3 flex items-center justify-between shadow-sm transition-colors">
+        {/* Cabecera de la Rutina (Súper minimalista) */}
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
           <div>
-            <h1 className="text-sm font-black text-slate-900 dark:text-white leading-none">
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-450 dark:text-slate-550 block">Rutina Activa</span>
+            <h1 className="text-sm font-black text-slate-800 dark:text-slate-100 mt-0.5">
               {selectedRoutine.title}
             </h1>
-            <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 mt-1 block uppercase tracking-wider">
-              {selectedDay} • Sincronizado
-            </span>
           </div>
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+          <div className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/20 px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider select-none">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Sync
+          </div>
         </div>
 
         {/* Selector de Tracks (Horizontal Scrollable) */}
         <div className="space-y-1">
-          <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Cambiar Track</span>
-          <div className="flex overflow-x-auto gap-1.5 pb-1 -mx-4 px-4 scrollbar-none">
+          <div className="flex overflow-x-auto gap-1.5 pb-1.5 -mx-4 px-4 scrollbar-none">
             {dayRoutines.map((routine) => {
               const isSelected = selectedRoutine.id === routine.id;
               return (
                 <button
                   key={routine.id}
                   onClick={() => setSelectedRoutine(routine)}
-                  className={`flex-shrink-0 px-3.5 py-2 rounded-lg border font-bold text-[11px] transition-all whitespace-nowrap focus:outline-none ${
+                  className={`flex-shrink-0 px-3 py-1.5 rounded-md border font-black text-[10px] uppercase tracking-wide transition-all whitespace-nowrap focus:outline-none ${
                     isSelected
                       ? "bg-blue-600 border-blue-600 text-white shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-450 hover:bg-slate-50 dark:hover:bg-slate-850"
                   }`}
                 >
-                  {routine.title}
+                  {routine.title.replace(" + Hombros", "")}
                 </button>
               );
             })}
@@ -364,9 +425,9 @@ export default function GimnasioPage() {
         {/* Pizarrón / Listita de Supermercado (Optimización Extrema) */}
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden transition-colors">
           
-          <div className="bg-slate-50 dark:bg-slate-950 px-4 py-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between transition-colors">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Ejercicios</span>
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Series x Repes</span>
+          <div className="bg-slate-50 dark:bg-slate-950 px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between transition-colors select-none">
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Ejercicios ({selectedRoutine.exercises.length})</span>
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Sets x Reps</span>
           </div>
 
           <div className="divide-y divide-slate-150 dark:divide-slate-800">
@@ -376,23 +437,23 @@ export default function GimnasioPage() {
               return (
                 <div 
                   key={exercise.name}
-                  className={`flex items-center justify-between py-3 px-4 transition-colors ${
-                    isDone ? "bg-emerald-500/[0.02] dark:bg-emerald-500/[0.01] opacity-50" : ""
+                  className={`flex items-center justify-between py-4.5 px-5 transition-colors select-none ${
+                    isDone ? "bg-emerald-500/[0.01] dark:bg-emerald-500/[0.005] opacity-40" : ""
                   }`}
                 >
                   {/* Lado izquierdo: Check y Nombre */}
-                  <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex items-center gap-4 min-w-0">
                     <button 
                       onClick={() => toggleComplete(exercise.name)}
-                      className={`h-5 w-5 rounded-md border flex items-center justify-center shrink-0 transition-all active:scale-90 ${
+                      className={`h-8 w-8 rounded-lg border flex items-center justify-center shrink-0 transition-all active:scale-95 ${
                         isDone 
                           ? "bg-emerald-500 border-emerald-500 text-white shadow-sm" 
-                          : "border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 text-transparent"
+                          : "border-slate-300 dark:border-slate-700 hover:border-slate-455 dark:hover:border-slate-650 text-transparent"
                       }`}
                     >
-                      <CheckCircle2 className="h-3.5 w-3.5 fill-current" />
+                      <CheckCircle2 className="h-4.5 w-4.5 fill-current" />
                     </button>
-                    <span className={`text-xs font-bold truncate leading-none mt-0.5 ${
+                    <span className={`text-sm font-black truncate leading-tight tracking-tight mt-0.5 ${
                       isDone 
                         ? "text-slate-400 dark:text-slate-600 line-through" 
                         : "text-slate-800 dark:text-slate-100"
@@ -403,12 +464,12 @@ export default function GimnasioPage() {
 
                   {/* Lado derecho: Píldora de Series x Repes */}
                   <div className="shrink-0 pl-3">
-                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-md tracking-wide transition-colors ${
+                    <span className={`text-xs font-black px-3 py-1.5 rounded-md tracking-wider transition-colors ${
                       isDone 
                         ? "bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-600" 
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-450"
                     }`}>
-                      {exercise.sets} x {exercise.reps}
+                      {exercise.sets}x{exercise.reps}
                     </span>
                   </div>
                 </div>
@@ -418,9 +479,9 @@ export default function GimnasioPage() {
         </div>
 
         {/* Footer ultraliviano */}
-        <footer className="text-center py-6 text-slate-400 dark:text-slate-500 text-[9px] font-semibold space-y-1">
-          <p>SantiGym Pizarrón • Optimización de Carga Instantánea.</p>
-          <p>© {new Date().getFullYear()} Ecosistema Santi Soluciones.</p>
+        <footer className="text-center py-4 text-slate-400 dark:text-slate-500 text-[9px] font-black uppercase tracking-wider space-y-1">
+          <p>SantiGym Pizarrón • Carga Ultra Veloz.</p>
+          <p>© {new Date().getFullYear()} Resistencia PWAs.</p>
         </footer>
 
       </main>
