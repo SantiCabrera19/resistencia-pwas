@@ -24,7 +24,7 @@ export function HomeHero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 dark:bg-orange-500/5 px-4 py-2 text-xs font-black text-orange-655 dark:text-orange-400 border border-orange-500/20 dark:border-orange-500/10 backdrop-blur-md animate-in fade-in slide-in-from-top-4 duration-300">
           <Sparkles className="h-3.5 w-3.5 animate-pulse" />
-          <span>ESTUDIO PWA & SOLUCIONES INTERNAS</span>
+          <span>ESTUDIO DE DISEÑO & SOLUCIONES INTERACTIVAS</span>
         </div>
 
         {/* Hero Title */}
@@ -34,7 +34,7 @@ export function HomeHero() {
 
         {/* Description Paragraph */}
         <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
-          Diseñamos aplicaciones web instalables (PWA) e interfaces de control a medida. Rápidas, autogestionables y 100% enfocadas en generar ingresos sin dependencias técnicas.
+          Diseñamos aplicaciones web instalables e interfaces de control a medida. Rápidas, autogestionables y 100% enfocadas en generar ingresos sin dependencias técnicas.
         </p>
 
         {/* CTA Buttons */}
@@ -54,7 +54,7 @@ export function HomeHero() {
           <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">SantiGym PWA</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">SantiGym</span>
             </div>
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Pizarrón del Alumno</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
@@ -66,7 +66,7 @@ export function HomeHero() {
           <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-orange-500"></span>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Control Tower</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Panel del Coach</span>
             </div>
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Gestión Autónoma</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">

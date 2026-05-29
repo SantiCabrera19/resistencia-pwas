@@ -8,12 +8,12 @@ export function HomePortfolio() {
   const landings = [
     {
       id: "gimnasio",
-      title: "SantiGym Pizarrón PWA",
+      title: "SantiGym Pizarrón Interactivo",
       niche: "Fitness / Deporte",
       description: "Pizarrón táctil instalable. Diseñado para que los alumnos tachen sus ejercicios completados de forma inmediata sin demoras ni datos móviles lentos.",
       publicLink: "/demos/gimnasio",
       image: "/images/gym_blackboard.png",
-      badge: "SWEAT-PROOF DESIGN"
+      badge: "DISEÑO DEPORTIVO"
     },
     {
       id: "odontologo",
@@ -22,7 +22,7 @@ export function HomePortfolio() {
       description: "Vidriera médica minimalista de alto impacto visual. Diseñada para transmitir higiene, calma y facilitar la reserva ágil de primeros turnos.",
       publicLink: "/demos/odontologo",
       image: "/images/smile.png",
-      badge: "PREMIUM HEALTH"
+      badge: "SALUD Y ESTÉTICA"
     },
     {
       id: "ferreteria",
@@ -31,7 +31,7 @@ export function HomePortfolio() {
       description: "Catálogo virtual inmersivo para compras mayoristas y por volumen. Interfaz diseñada para destacar la capacidad logística y stock permanente.",
       publicLink: "/demos/ferreteria",
       image: "/images/ferreteria_store.png",
-      badge: "INDUSTRIAL CAPACITY"
+      badge: "FUERZA INDUSTRIAL"
     }
   ];
 
@@ -39,11 +39,11 @@ export function HomePortfolio() {
     {
       id: "gimnasio-admin",
       title: "CRM Coach & Aforo",
-      niche: "Fitness PWA Admin",
+      niche: "Fitness Admin",
       description: "Panel táctil del entrenador. Permite agregar ejercicios, remover alumnos de baja, y desviar el flujo de tráfico en máquinas (V1 a V2) en tiempo real.",
       adminLink: "/demos/gimnasio/admin",
       icon: <Dumbbell className="h-10 w-10 text-orange-600 dark:text-orange-400" />,
-      badge: "SYNC ACTIVE"
+      badge: "CONEXIÓN EN VIVO"
     },
     {
       id: "odontologo-admin",
@@ -52,7 +52,7 @@ export function HomePortfolio() {
       description: "Gestión de agenda odontológica y ficha médica digital. Interfaz de respuesta ultra rápida optimizada para recepcionistas ocupadas.",
       adminLink: "/demos/odontologo/admin",
       icon: <Activity className="h-10 w-10 text-rose-500 dark:text-rose-400" />,
-      badge: "CALENDAR SYNC"
+      badge: "AGENDA EN VIVO"
     },
     {
       id: "ferreteria-admin",
@@ -61,7 +61,7 @@ export function HomePortfolio() {
       description: "Panel de control de inventario mayorista con alertas de stock mínimo crítico e impresión instantánea de remitos de entrega.",
       adminLink: "/demos/ferreteria/admin",
       icon: <Database className="h-10 w-10 text-blue-500 dark:text-blue-400" />,
-      badge: "STOCK FLOW"
+      badge: "CONTROL DE STOCK"
     }
   ];
 

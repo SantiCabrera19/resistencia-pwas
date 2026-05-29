@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Santi Soluciones",
     short_name: "Santi",
     description:
-      "PWAs + Mini-CRMs para negocios locales de Resistencia, Chaco.",
+      "Sistemas + Plantillas para negocios locales de Resistencia, Chaco.",
     start_url: "/",
     display: "standalone",
     background_color: "#fafafa",

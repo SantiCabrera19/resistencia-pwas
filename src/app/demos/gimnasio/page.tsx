@@ -396,7 +396,7 @@ export default function GimnasioPage() {
           </div>
           <div className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/20 px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider select-none">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Sync
+            En Vivo
           </div>
         </div>
 
@@ -481,7 +481,7 @@ export default function GimnasioPage() {
         {/* Footer ultraliviano */}
         <footer className="text-center py-4 text-slate-400 dark:text-slate-500 text-[9px] font-black uppercase tracking-wider space-y-1">
           <p>SantiGym Pizarrón • Carga Ultra Veloz.</p>
-          <p>© {new Date().getFullYear()} Resistencia PWAs.</p>
+          <p>© {new Date().getFullYear()} Resistencia.</p>
         </footer>
 
       </main>

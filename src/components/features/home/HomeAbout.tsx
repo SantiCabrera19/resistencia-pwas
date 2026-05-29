@@ -10,7 +10,7 @@ export function HomeAbout() {
         {/* Main Header */}
         <div className="space-y-4">
           <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl select-none leading-tight">
-            La potencia de una PWA a tu alcance
+            La potencia de nuestras plantillas a tu alcance
           </h2>
           <p className="max-w-2xl mx-auto text-sm sm:text-base font-semibold text-slate-500 dark:text-slate-400">
             Optimizamos tu tecnología de punta a punta para que te concentres únicamente en crecer. Sin dolores de cabeza técnicos.
@@ -47,9 +47,9 @@ export function HomeAbout() {
             <div className="h-12 w-12 bg-orange-100 dark:bg-orange-950/50 rounded-2xl flex items-center justify-center text-orange-655 dark:text-orange-400 text-lg font-black mb-6 select-none shadow-sm">
               ⚡
             </div>
-            <h3 className="text-slate-900 dark:text-white font-black text-xl mb-3">Velocidad PWA Extrema</h3>
+            <h3 className="text-slate-900 dark:text-white font-black text-xl mb-3">Velocidad y Carga Extrema</h3>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
-              Web apps instalables en el celular de tus clientes en un segundo. Vuelan con cualquier conexión (perfecto para cuando hay poca señal) y consumen el mínimo de datos móviles.
+              Plantillas preparadas para instalarse en el celular de tus clientes en un segundo. Vuelan con cualquier conexión (incluso sin señal) y consumen el mínimo de datos.
             </p>
           </div>
         </div>
@@ -58,7 +58,7 @@ export function HomeAbout() {
         <div className="bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800/60 rounded-3xl p-6 sm:p-10 text-left space-y-8 shadow-sm">
           <div className="space-y-1 select-none">
             <span className="text-[10px] font-black uppercase tracking-widest text-orange-655 dark:text-orange-400">Comparativa</span>
-            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">¿Por qué una PWA de Resistencia es diferente?</h3>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">¿Por qué nuestras plantillas son diferentes?</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">
@@ -84,7 +84,7 @@ export function HomeAbout() {
 
             {/* Resistencia PWA Column */}
             <div className="space-y-4 pt-6 md:pt-0 md:pl-8">
-              <span className="text-[10px] font-black uppercase text-emerald-600 dark:text-emerald-400 tracking-wider">Resistencia PWAs</span>
+              <span className="text-[10px] font-black uppercase text-emerald-600 dark:text-emerald-400 tracking-wider">Nuestras Plantillas</span>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
                   <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
@@ -92,7 +92,7 @@ export function HomeAbout() {
                 </li>
                 <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
                   <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                  Acceso offline nativo. Tacha tus tareas o mira tus rutinas al instante.
+                  Acceso inmediato sin demoras. Mirá tus rutinas o gestioná al instante.
                 </li>
                 <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
                   <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />

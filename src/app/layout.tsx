@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Santi - Soluciones",
   description:
-    "Plataforma de PWAs y sistemas de gestión para negocios locales de Resistencia, Chaco.",
+    "Plataforma de plantillas y sistemas de gestión para negocios locales de Resistencia, Chaco.",
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";

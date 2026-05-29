@@ -434,7 +434,7 @@ export default function GymAdminPage() {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider select-none">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Sync
+              Conectado
             </div>
             <ThemeToggle />
           </div>
@@ -771,7 +771,7 @@ export default function GymAdminPage() {
         {/* Footer */}
         <footer className="text-center py-4 text-slate-400 dark:text-slate-500 text-[9px] font-black uppercase tracking-wider space-y-1">
           <p>SantiGym Coach Panel • Gestión desde el Celular.</p>
-          <p>© {new Date().getFullYear()} Resistencia PWAs.</p>
+          <p>© {new Date().getFullYear()} Resistencia.</p>
         </footer>
       </main>
 
