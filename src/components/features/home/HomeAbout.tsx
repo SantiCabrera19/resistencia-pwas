@@ -54,54 +54,6 @@ export function HomeAbout() {
           </div>
         </div>
 
-        {/* CONCEPTS > CODE: High-End Comparison Table */}
-        <div className="bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800/60 rounded-3xl p-6 sm:p-10 text-left space-y-8 shadow-sm">
-          <div className="space-y-1 select-none">
-            <span className="text-[10px] font-black uppercase tracking-widest text-orange-655 dark:text-orange-400">Comparativa</span>
-            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">¿Por qué nuestras plantillas son diferentes?</h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800">
-            
-            {/* Standard Column */}
-            <div className="space-y-4 pb-6 md:pb-0">
-              <span className="text-[10px] font-black uppercase text-red-500 tracking-wider">Sitios WordPress / Web Genérica</span>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
-                  <XCircle className="h-4.5 w-4.5 text-red-500 shrink-0 mt-0.5" />
-                  Plugins pesados que se rompen con cada actualización.
-                </li>
-                <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
-                  <XCircle className="h-4.5 w-4.5 text-red-500 shrink-0 mt-0.5" />
-                  Carga lenta e inestable con baja señal o 4G en tránsito.
-                </li>
-                <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
-                  <XCircle className="h-4.5 w-4.5 text-red-500 shrink-0 mt-0.5" />
-                  Soporte ausente o a través de correos automáticos fríos e impersonales.
-                </li>
-              </ul>
-            </div>
-
-            {/* Resistencia PWA Column */}
-            <div className="space-y-4 pt-6 md:pt-0 md:pl-8">
-              <span className="text-[10px] font-black uppercase text-emerald-600 dark:text-emerald-400 tracking-wider">Nuestras Plantillas</span>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
-                  <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                  Código ultra limpio y liviano sin plugins inútiles.
-                </li>
-                <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
-                  <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                  Acceso inmediato sin demoras. Mirá tus rutinas o gestioná al instante.
-                </li>
-                <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
-                  <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                  Soporte presencial y directo. Vos nos proponés los diseños y nosotros los programamos.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
       </div>
     </section>
