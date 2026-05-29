@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle2, Zap, ShieldAlert, Sparkles } from "lucide-react";
 
 export function HomeHero() {
   const scrollToPortfolio = () => {
@@ -9,52 +8,90 @@ export function HomeHero() {
   };
 
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 pt-32 pb-20 sm:pt-40 sm:pb-24 text-center overflow-hidden">
-      {/* Background Image of Resistencia */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/Resistencia.jpg"
-          alt="Ciudad de Resistencia, Chaco"
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover object-center"
-          quality={85}
-        />
-        {/* White / Slate clean overlay inspired by medios.io */}
-        <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-[1px]"></div>
-      </div>
+    <section className="relative flex min-h-[95vh] flex-col items-center justify-center px-6 pt-32 pb-20 sm:pt-40 sm:pb-28 text-center overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
       
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl space-y-8">
-        <div className="inline-flex flex-wrap justify-center items-center gap-2 rounded-2xl sm:rounded-full bg-slate-200/80 dark:bg-slate-900/65 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold text-slate-750 dark:text-slate-200 ring-1 ring-inset ring-slate-300/40 dark:ring-slate-800/40 backdrop-blur-md max-w-full text-center">
-          <span>Agencia de Desarrollo de Software</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse shrink-0"></span>
-          <span>Resistencia, Chaco</span>
+      {/* Mesh Grid Background inspired by premium designs */}
+      <div className="absolute inset-0 z-0 opacity-[0.4] dark:opacity-[0.15] pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"></div>
+      </div>
+
+      {/* Glowing Peach/Orange Ambient Orbs */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[350px] sm:w-[600px] h-[250px] sm:h-[400px] bg-gradient-to-r from-orange-400/20 via-rose-400/10 to-orange-500/10 dark:from-orange-500/10 dark:via-rose-500/5 dark:to-transparent rounded-full blur-3xl opacity-80 pointer-events-none z-0"></div>
+
+      {/* Content Container */}
+      <div className="relative z-10 mx-auto max-w-5xl space-y-8 flex flex-col items-center">
+        
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 dark:bg-orange-500/5 px-4 py-2 text-xs font-black text-orange-655 dark:text-orange-400 border border-orange-500/20 dark:border-orange-500/10 backdrop-blur-md animate-in fade-in slide-in-from-top-4 duration-300">
+          <Sparkles className="h-3.5 w-3.5 animate-pulse" />
+          <span>ESTUDIO PWA & SOLUCIONES INTERNAS</span>
         </div>
 
-        <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white sm:text-7xl">
-          Digitalizamos tu negocio con <span className="text-orange-600 dark:text-orange-550">soluciones reales.</span>
+        {/* Hero Title */}
+        <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white sm:text-7xl max-w-4xl leading-[1.08] select-none">
+          Digitalizamos tu negocio con <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-rose-500 to-orange-500 dark:from-orange-550 dark:via-rose-400 dark:to-orange-450">soluciones que vuelan.</span>
         </h1>
 
-        <p className="mx-auto max-w-2xl text-lg text-slate-650 dark:text-slate-350 leading-relaxed font-semibold">
-          Diseñamos plataformas rápidas, fáciles de usar y pensadas para hacerte la vida más fácil. Ni más ni menos de lo que necesitás para vender, gestionar y crecer.
+        {/* Description Paragraph */}
+        <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+          Diseñamos aplicaciones web instalables (PWA) e interfaces de control a medida. Rápidas, autogestionables y 100% enfocadas en generar ingresos sin dependencias técnicas.
         </p>
 
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row pt-4">
+        {/* CTA Buttons */}
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row pt-4 w-full max-w-md">
           <button 
             onClick={scrollToPortfolio}
-            className="flex items-center gap-2 rounded-lg bg-orange-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-orange-500 hover:shadow-orange-500/25 active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-base font-black text-white shadow-lg shadow-orange-600/10 hover:shadow-orange-600/20 transition-all hover:bg-orange-500 active:scale-95 duration-200 cursor-pointer"
           >
             Ver Demos & Plantillas
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>
+
+        {/* Floating Showcase Cards - A Radical Touch! */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-16 w-full max-w-4xl text-left select-none">
+          {/* Card 1 */}
+          <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">SantiGym PWA</span>
+            </div>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Pizarrón del Alumno</h3>
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+              Damos de baja los PDFs rotos. El alumno entra al gimnasio, toca check en su celu y entrena. Rápido y sin logins molestos.
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-2 w-2 rounded-full bg-orange-500"></span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Control Tower</span>
+            </div>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Gestión Autónoma</h3>
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+              CRUD manual de ejercicios y roster de clientes. Modificás tus servicios desde el celular con un panel táctil robusto.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-2 w-2 rounded-full bg-blue-500"></span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Rendimiento</span>
+            </div>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Carga en 100ms</h3>
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+              Infraestructura optimizada que vuela incluso sin buena señal de datos en la sala de musculación o corralón.
+            </p>
+          </div>
+        </div>
+
       </div>
 
       <button 
         onClick={scrollToPortfolio}
-        className="absolute bottom-10 z-10 animate-bounce text-orange-600 hover:text-orange-500 dark:text-orange-500 dark:hover:text-orange-450 transition-colors"
+        className="absolute bottom-6 sm:bottom-10 z-10 animate-bounce text-orange-600 hover:text-orange-500 dark:text-orange-500 dark:hover:text-orange-450 transition-colors"
         aria-label="Scroll down"
       >
         <ChevronDown className="h-8 w-8" />

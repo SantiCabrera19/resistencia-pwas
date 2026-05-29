@@ -2,130 +2,138 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Settings, Database, Activity, Dumbbell } from "lucide-react";
+import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink } from "lucide-react";
 
 export function HomePortfolio() {
   const landings = [
     {
+      id: "gimnasio",
+      title: "SantiGym Pizarrón PWA",
+      niche: "Fitness / Deporte",
+      description: "Pizarrón táctil instalable. Diseñado para que los alumnos tachen sus ejercicios completados de forma inmediata sin demoras ni datos móviles lentos.",
+      publicLink: "/demos/gimnasio",
+      image: "/images/gym_blackboard.png",
+      badge: "SWEAT-PROOF DESIGN"
+    },
+    {
       id: "odontologo",
       title: "Consultorio Dr. Smile",
       niche: "Odontología / Salud",
-      description: "Página web minimalista blanca y verde diseñada para transmitir paz y limpieza. Optimizada para la captación de nuevos pacientes en buscadores.",
+      description: "Vidriera médica minimalista de alto impacto visual. Diseñada para transmitir higiene, calma y facilitar la reserva ágil de primeros turnos.",
       publicLink: "/demos/odontologo",
       image: "/images/smile.png",
+      badge: "PREMIUM HEALTH"
     },
     {
       id: "ferreteria",
-      title: "FerreMax Industrial",
-      niche: "Ferretería / Corralón",
-      description: "Página tipo E-commerce inmersiva para mostrar el tamaño y capacidad del negocio. Ideal para empresas que venden por volumen.",
+      title: "FerreMax Corralón",
+      niche: "Ferretería / Corralones",
+      description: "Catálogo virtual inmersivo para compras mayoristas y por volumen. Interfaz diseñada para destacar la capacidad logística y stock permanente.",
       publicLink: "/demos/ferreteria",
       image: "/images/ferreteria_store.png",
-    },
-    {
-      id: "gimnasio",
-      title: "SantiGym Pizarrón",
-      niche: "Fitness / Gimnasios",
-      description: "Pizarrón digital de entrenamiento PWA responsivo e instalable. Diseñado para que los alumnos consuman su rutina del día de manera inmediata sin registros.",
-      publicLink: "/demos/gimnasio",
-      image: "/images/gym_blackboard.png",
+      badge: "INDUSTRIAL CAPACITY"
     }
   ];
 
   const sistemas = [
     {
+      id: "gimnasio-admin",
+      title: "CRM Coach & Aforo",
+      niche: "Fitness PWA Admin",
+      description: "Panel táctil del entrenador. Permite agregar ejercicios, remover alumnos de baja, y desviar el flujo de tráfico en máquinas (V1 a V2) en tiempo real.",
+      adminLink: "/demos/gimnasio/admin",
+      icon: <Dumbbell className="h-10 w-10 text-orange-600 dark:text-orange-400" />,
+      badge: "SYNC ACTIVE"
+    },
+    {
       id: "odontologo-admin",
-      title: "CRM Médico & Turnos",
-      niche: "Software Interno",
-      description: "Sistema privado para gestionar historias clínicas, turnos del día y datos de pacientes. Interfaz enfocada en la velocidad de atención.",
+      title: "CRM Médico & Turnero",
+      niche: "Salud Admin",
+      description: "Gestión de agenda odontológica y ficha médica digital. Interfaz de respuesta ultra rápida optimizada para recepcionistas ocupadas.",
       adminLink: "/demos/odontologo/admin",
-      icon: <Activity className="h-16 w-16 text-orange-500 dark:text-orange-400 opacity-20 transition-all group-hover:scale-110 group-hover:opacity-40" />,
+      icon: <Activity className="h-10 w-10 text-rose-500 dark:text-rose-400" />,
+      badge: "CALENDAR SYNC"
     },
     {
       id: "ferreteria-admin",
-      title: "Gestor de Stock y Pedidos",
-      niche: "Software Interno",
-      description: "Panel para control de inventario en tiempo real, alertas de falta de stock y gestión rápida de remitos para mayoristas.",
+      title: "Gestor de Remitos y Stock",
+      niche: "Industrial CRM",
+      description: "Panel de control de inventario mayorista con alertas de stock mínimo crítico e impresión instantánea de remitos de entrega.",
       adminLink: "/demos/ferreteria/admin",
-      icon: <Database className="h-16 w-16 text-orange-500 dark:text-orange-400 opacity-20 transition-all group-hover:scale-110 group-hover:opacity-40" />,
-    },
-    {
-      id: "gimnasio-admin",
-      title: "Gestor de Rutinas y Flujo",
-      niche: "Software Interno",
-      description: "Panel diario del coach para organizar entrenamientos en caliente y balancear la congestión en sala a través de variaciones inteligentes.",
-      adminLink: "/demos/gimnasio/admin",
-      icon: <Dumbbell className="h-16 w-16 text-orange-500 dark:text-orange-400 opacity-20 transition-all group-hover:scale-110 group-hover:opacity-40" />,
+      icon: <Database className="h-10 w-10 text-blue-500 dark:text-blue-400" />,
+      badge: "STOCK FLOW"
     }
   ];
 
   return (
-    <section className="relative px-6 py-24 sm:py-32 overflow-hidden transition-colors" id="portfolio">
-      {/* Background Image of Universo Resistencia */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/Universo-Resistencia.jpg"
-          alt="Universo Resistencia"
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-          quality={85}
-        />
-        {/* Clean slate/white light overlay inspired by medios.io */}
-        <div className="absolute inset-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-[1px]"></div>
+    <section className="relative px-6 py-24 sm:py-32 overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors" id="portfolio">
+      
+      {/* Subtle Background meshes */}
+      <div className="absolute inset-0 z-0 opacity-[0.25] dark:opacity-[0.1] pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"></div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="mb-20">
-          <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl mb-4">
-            Catálogo de Soluciones
+      <div className="relative z-10 mx-auto max-w-6xl space-y-24">
+        
+        {/* Section Title */}
+        <div className="space-y-4 text-center max-w-3xl mx-auto select-none">
+          <span className="text-[10px] font-black uppercase tracking-widest text-orange-655 dark:text-orange-400">Demostraciones</span>
+          <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+            Catálogo de Soluciones Activas
           </h2>
-          <p className="max-w-3xl text-sm sm:text-base font-semibold text-slate-550 dark:text-slate-400">
-            Nuestro trabajo se divide en dos grandes áreas: tu "vidriera pública" para atraer clientes, y tus "sistemas de gestión internos" para que tu negocio funcione como un reloj.
+          <p className="text-sm sm:text-base font-semibold text-slate-500 dark:text-slate-400">
+            Nuestros productos se dividen en dos áreas: la **vidriera pública** para captar clientes, y los **sistemas privados** para gestionar tu negocio como corresponde.
           </p>
         </div>
 
-        {/* --- Sección 1: Landings --- */}
-        <div className="mb-24">
-          <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-600 text-xs font-black text-white">1</span>
-            Vidrieras Web (Para atraer clientes)
+        {/* ─── LANDINGS SECTION ─── */}
+        <div className="space-y-8">
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-orange-600 text-[10px] font-black text-white select-none">1</span>
+            Vidrieras Web (Captar Clientes)
           </h3>
-          <div className="grid gap-8 sm:grid-cols-2">
+          
+          <div className="grid gap-8 sm:grid-cols-3">
             {landings.map((demo) => (
               <div 
                 key={demo.id}
-                className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800/80 transition-all hover:shadow-md hover:border-orange-500/40"
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 shadow-sm transition-all hover:shadow-lg hover:border-orange-500/30 hover:scale-[1.01] duration-300"
               >
-                <div className="h-56 w-full relative bg-slate-100 dark:bg-slate-950 overflow-hidden">
+                {/* Image container */}
+                <div className="h-48 w-full relative bg-slate-100 dark:bg-slate-950 overflow-hidden">
                   <Image 
                     src={demo.image} 
                     alt={`Preview de ${demo.title}`}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 576px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 33vw, 384px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                   />
+                  <div className="absolute top-3 left-3 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md px-2.5 py-1 rounded-md border border-slate-200/30 text-[8px] font-black uppercase text-slate-700 dark:text-slate-200 tracking-wider">
+                    {demo.badge}
+                  </div>
                 </div>
                 
-                <div className="flex flex-1 flex-col p-6 sm:p-8">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-orange-655 dark:text-orange-400">
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-6 space-y-4">
+                  <div>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-orange-655 dark:text-orange-450 block">
                       {demo.niche}
                     </span>
+                    <h4 className="text-base font-black text-slate-900 dark:text-white mt-1">
+                      {demo.title}
+                    </h4>
                   </div>
-                  <h4 className="text-xl font-black text-slate-900 dark:text-white mb-3">
-                    {demo.title}
-                  </h4>
-                  <p className="text-sm font-semibold text-slate-550 dark:text-slate-400 mb-8 flex-1 leading-relaxed">
+                  
+                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 flex-1 leading-relaxed">
                     {demo.description}
                   </p>
                   
                   <Link
                     href={demo.publicLink}
-                    className="flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-4 py-3.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-orange-500 active:scale-95"
+                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-4 py-3 text-xs font-black text-white hover:bg-orange-500 active:scale-95 transition-all shadow-sm"
                   >
-                    Ver Página de Ejemplo
-                    <ArrowRight className="h-4 w-4" />
+                    Ver Sitio Demo
+                    <ExternalLink className="h-3.5 w-3.5" />
                   </Link>
                 </div>
               </div>
@@ -133,48 +141,60 @@ export function HomePortfolio() {
           </div>
         </div>
 
-        {/* --- Sección 2: Sistemas --- */}
-        <div>
-          <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-600 text-xs font-black text-white">2</span>
-            Sistemas a Medida (Control Interno)
+        {/* ─── SYSTEMS SECTION ─── */}
+        <div className="space-y-8">
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] font-black text-slate-700 dark:text-slate-200 select-none">2</span>
+            Sistemas de Gestión (Control Interno)
           </h3>
-          <div className="grid gap-8 sm:grid-cols-2">
+          
+          <div className="grid gap-8 sm:grid-cols-3">
             {sistemas.map((sistema) => (
               <div 
                 key={sistema.id}
-                className="group relative flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800/80 transition-all hover:shadow-md hover:border-orange-500/40"
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 shadow-sm transition-all hover:shadow-lg hover:border-orange-500/30 hover:scale-[1.01] duration-300"
               >
-                {/* Decoration background icon instead of image */}
-                <div className="absolute -right-6 -top-6">
-                  {sistema.icon}
-                </div>
-                
-                <div className="flex flex-1 flex-col p-6 sm:p-8 relative z-10">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                      {sistema.niche}
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-6 space-y-6">
+                  {/* Top Bar with Icon and Badge */}
+                  <div className="flex items-center justify-between">
+                    <div className="h-14 w-14 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/60 flex items-center justify-center">
+                      {sistema.icon}
+                    </div>
+                    <span className="bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-850 px-2 py-0.5 rounded-md text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none">
+                      {sistema.badge}
                     </span>
                   </div>
-                  <h4 className="text-xl font-black text-slate-900 dark:text-white mb-3">
-                    {sistema.title}
-                  </h4>
-                  <p className="text-sm font-semibold text-slate-550 dark:text-slate-400 mb-8 flex-1 leading-relaxed">
-                    {sistema.description}
-                  </p>
+
+                  {/* Text details */}
+                  <div className="space-y-2 flex-1">
+                    <div>
+                      <span className="text-[9px] font-black uppercase text-slate-400 dark:text-slate-500 tracking-wider">
+                        {sistema.niche}
+                      </span>
+                      <h4 className="text-base font-black text-slate-900 dark:text-white mt-1">
+                        {sistema.title}
+                      </h4>
+                    </div>
+                    <p className="text-xs font-semibold text-slate-550 dark:text-slate-400 leading-relaxed">
+                      {sistema.description}
+                    </p>
+                  </div>
                   
+                  {/* CTA Link */}
                   <Link
                     href={sistema.adminLink}
-                    className="flex items-center justify-center gap-2 rounded-xl bg-slate-100 dark:bg-slate-800 px-4 py-3.5 text-sm font-bold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors hover:bg-slate-200 dark:hover:bg-slate-750 active:scale-95 animate-in"
+                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-3 text-xs font-black text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 active:scale-95 transition-all shadow-xs"
                   >
-                    <Settings className="h-4 w-4" />
-                    Probar el Sistema
+                    <Settings className="h-3.5 w-3.5" />
+                    Probar Consola Admin
                   </Link>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );
