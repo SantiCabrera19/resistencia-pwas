@@ -173,6 +173,7 @@ export function HomePortfolio() {
                 </div>
               </div>
             ))}
+          </div>
         </div>
       </div>
     </section>
