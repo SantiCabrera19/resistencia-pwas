@@ -3,6 +3,7 @@ import { HomeHeader } from "@/components/features/home/HomeHeader";
 import { HomeHero } from "@/components/features/home/HomeHero";
 import { HomeAbout } from "@/components/features/home/HomeAbout";
 import { HomePortfolio } from "@/components/features/home/HomePortfolio";
+import { HomeManifesto } from "@/components/features/home/HomeManifesto";
 import { HomeContact } from "@/components/features/home/HomeContact";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PWALaunchDirector } from "@/components/layout/PWALaunchDirector";
@@ -18,6 +19,7 @@ export default function HomePage() {
           <HomeHero />
           <HomeAbout />
           <HomePortfolio />
+          <HomeManifesto />
           <HomeContact />
         </main>
 
