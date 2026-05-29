@@ -27,17 +27,17 @@ export function HomeManifesto() {
         
         {/* Badge */}
         <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 dark:bg-orange-500/5 px-4 py-2 text-xs font-black text-orange-655 dark:text-orange-450 border border-orange-500/20 dark:border-orange-500/10 backdrop-blur-md">
-          <Code2 className="h-3.5 w-3.5" />
-          <span>NUESTRO MANIFIESTO</span>
+          <Sparkles className="h-3.5 w-3.5" />
+          <span>NUESTRA FILOSOFÍA</span>
         </div>
 
         {/* Headline */}
         <div className="space-y-4 max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-            Creemos en la tecnología <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-rose-500 dark:from-orange-450 dark:to-rose-450">cercana e impecable.</span>
+            Creemos en las soluciones <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-rose-500 dark:from-orange-450 dark:to-rose-450">cercanas e impecables.</span>
           </h2>
           <p className="text-sm sm:text-base font-semibold text-slate-650 dark:text-slate-400 leading-relaxed">
-            Resistencia no es solo un nombre, es el lugar donde vivimos y trabajamos. No hacemos páginas al por mayor; creamos software artesanal que ayuda a crecer a los comercios de nuestra zona de forma real y honesta.
+            Resistencia no es solo un nombre, es el lugar donde vivimos y trabajamos. No hacemos páginas al por mayor; creamos soluciones a medida que ayudan a crecer a los comercios de nuestra ciudad de forma real y honesta.
           </p>
         </div>
 
@@ -45,10 +45,10 @@ export function HomeManifesto() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-4xl mx-auto pt-6">
           {/* Pillar 1 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
-            <div className="text-lg mb-3">🛠️</div>
-            <h3 className="font-black text-sm text-slate-800 dark:text-white">Código Artesanal</h3>
+            <div className="text-lg mb-3">🎨</div>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Diseño a tu Medida</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-              No arrastramos componentes genéricos inflados ni herramientas pesadas. Diseñamos a medida y escribimos cada línea a mano para que tu web sea liviana, veloz y eterna.
+              Traenos las ideas, capturas de pantalla o páginas que te inspiran de internet y nosotros nos ocupamos de darles vida con un acabado estético premium, adaptado 100% a tu marca.
             </p>
           </div>
 
