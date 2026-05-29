@@ -34,11 +34,11 @@ export function HomeAbout() {
           {/* Pillar 2 */}
           <div className="group bg-slate-50 dark:bg-slate-900/40 p-8 rounded-3xl border border-slate-100 dark:border-slate-800/60 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-500/5 duration-350">
             <div className="h-12 w-12 bg-orange-100 dark:bg-orange-950/50 rounded-2xl flex items-center justify-center text-orange-655 dark:text-orange-400 text-lg font-black mb-6 select-none shadow-sm">
-              💰
+              📍
             </div>
-            <h3 className="text-slate-900 dark:text-white font-black text-xl mb-3">Monetización & Autonomía</h3>
+            <h3 className="text-slate-900 dark:text-white font-black text-xl mb-3">Presencia & Soporte Local</h3>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
-              Integrá tus métodos de cobro, vendé planes de suscripción o colocá tus propios anuncios sin intermediarios ni comisiones abusivas. Tus ingresos y políticas son 100% tuyos.
+              Somos de Resistencia, Chaco. No lidiás con bots ni tickets automáticos en inglés. Nos juntamos a tomar unos mates, lo charlamos en tu local y lo resolvemos en el día. Jamás te dejamos en banda.
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export function HomeAbout() {
                 </li>
                 <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
                   <XCircle className="h-4.5 w-4.5 text-red-500 shrink-0 mt-0.5" />
-                  Dependencia total de programadores para cambiar una nota o precio.
+                  Soporte ausente o a través de correos automáticos fríos e impersonales.
                 </li>
               </ul>
             </div>
@@ -96,7 +96,7 @@ export function HomeAbout() {
                 </li>
                 <li className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400">
                   <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                  Paneles móviles súper simples para cambiar todo en 5 segundos.
+                  Soporte presencial y directo. Vos nos proponés los diseños y nosotros los programamos.
                 </li>
               </ul>
             </div>

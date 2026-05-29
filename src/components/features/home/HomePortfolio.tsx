@@ -8,27 +8,27 @@ export function HomePortfolio() {
   const landings = [
     {
       id: "gimnasio",
-      title: "SantiGym Pizarrón Interactivo",
+      title: "Gimnasios & Centros Deportivos",
       niche: "Fitness / Deporte",
-      description: "Pizarrón táctil instalable. Diseñado para que los alumnos tachen sus ejercicios completados de forma inmediata sin demoras ni datos móviles lentos.",
+      description: "Plantilla web y pizarrón interactivo de rutinas. Diseñado para que tus alumnos sigan su entrenamiento de forma dinámica desde el celular sin fricción ni demoras.",
       publicLink: "/demos/gimnasio",
       image: "/images/gym_blackboard.png",
       badge: "DISEÑO DEPORTIVO"
     },
     {
       id: "odontologo",
-      title: "Consultorio Dr. Smile",
+      title: "Consultorios & Clínicas de Salud",
       niche: "Odontología / Salud",
-      description: "Vidriera médica minimalista de alto impacto visual. Diseñada para transmitir higiene, calma y facilitar la reserva ágil de primeros turnos.",
+      description: "Vidriera profesional y turnero digital de alta estética. Transmite absoluta confianza e higiene visual, facilitando la agenda de citas rápidas.",
       publicLink: "/demos/odontologo",
       image: "/images/smile.png",
       badge: "SALUD Y ESTÉTICA"
     },
     {
       id: "ferreteria",
-      title: "FerreMax Corralón",
+      title: "Ferreterías, Corralones & Distribuidores",
       niche: "Ferretería / Corralones",
-      description: "Catálogo virtual inmersivo para compras mayoristas y por volumen. Interfaz diseñada para destacar la capacidad logística y stock permanente.",
+      description: "Catálogo interactivo optimizado para pedidos rápidos. Interfaz estructurada para mostrar stock, categorizar herramientas y cotizar envíos al instante.",
       publicLink: "/demos/ferreteria",
       image: "/images/ferreteria_store.png",
       badge: "FUERZA INDUSTRIAL"
@@ -38,27 +38,27 @@ export function HomePortfolio() {
   const sistemas = [
     {
       id: "gimnasio-admin",
-      title: "CRM Coach & Aforo",
+      title: "Consola del Entrenador",
       niche: "Fitness Admin",
-      description: "Panel táctil del entrenador. Permite agregar ejercicios, remover alumnos de baja, y desviar el flujo de tráfico en máquinas (V1 a V2) en tiempo real.",
+      description: "Panel táctil del entrenador. Permite gestionar alumnos activos, asignar rutinas específicas y controlar la ocupación de la sala en tiempo real.",
       adminLink: "/demos/gimnasio/admin",
       icon: <Dumbbell className="h-10 w-10 text-orange-600 dark:text-orange-400" />,
       badge: "CONEXIÓN EN VIVO"
     },
     {
       id: "odontologo-admin",
-      title: "CRM Médico & Turnero",
+      title: "Turnos y Fichas Odontológicas",
       niche: "Salud Admin",
-      description: "Gestión de agenda odontológica y ficha médica digital. Interfaz de respuesta ultra rápida optimizada para recepcionistas ocupadas.",
+      description: "Gestión de agenda médica diaria, control de citas confirmadas e historial clínico de pacientes con una velocidad de respuesta instantánea.",
       adminLink: "/demos/odontologo/admin",
       icon: <Activity className="h-10 w-10 text-rose-500 dark:text-rose-400" />,
       badge: "AGENDA EN VIVO"
     },
     {
       id: "ferreteria-admin",
-      title: "Gestor de Remitos y Stock",
+      title: "Gestor de Pedidos, Remitos y Stock",
       niche: "Industrial CRM",
-      description: "Panel de control de inventario mayorista con alertas de stock mínimo crítico e impresión instantánea de remitos de entrega.",
+      description: "Panel central de inventario mayorista con alertas de stock mínimo crítico e impresión instantánea de remitos de entrega de materiales.",
       adminLink: "/demos/ferreteria/admin",
       icon: <Database className="h-10 w-10 text-blue-500 dark:text-blue-400" />,
       badge: "CONTROL DE STOCK"

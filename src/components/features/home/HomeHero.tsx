@@ -33,8 +33,8 @@ export function HomeHero() {
         </h1>
 
         {/* Description Paragraph */}
-        <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
-          Diseñamos aplicaciones web instalables e interfaces de control a medida. Rápidas, autogestionables y 100% enfocadas en generar ingresos sin dependencias técnicas.
+        <p className="mx-auto max-w-3xl text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-semibold">
+          Diseñamos sitios rápidos, catálogos interactivos e interfaces a medida para comercios de la zona. Vos proponés el diseño o ideas que te encantan, y nosotros nos encargamos de maquetar, programar y darte soporte presencial.
         </p>
 
         {/* CTA Buttons */}
@@ -48,17 +48,17 @@ export function HomeHero() {
           </button>
         </div>
 
-        {/* Floating Showcase Cards - A Radical Touch! */}
+        {/* Floating Showcase Cards - A Radical and Human Touch! */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-16 w-full max-w-4xl text-left select-none">
           {/* Card 1 */}
           <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">SantiGym</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Cercanía Real</span>
             </div>
-            <h3 className="font-black text-sm text-slate-800 dark:text-white">Pizarrón del Alumno</h3>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Soporte en Persona</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-              Damos de baja los PDFs rotos. El alumno entra al gimnasio, toca check en su celu y entrena. Rápido y sin logins molestos.
+              Somos de acá, de Resistencia. Nos sentamos a tomar unos mates, charlamos en tu local y resolvemos lo que necesites cara a cara. Jamás te dejamos en banda ni esperando días un soporte frío.
             </p>
           </div>
 
@@ -66,11 +66,11 @@ export function HomeHero() {
           <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-orange-500"></span>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Panel del Coach</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Co-Creación</span>
             </div>
-            <h3 className="font-black text-sm text-slate-800 dark:text-white">Gestión Autónoma</h3>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Vos Proponés la Estética</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-              CRUD manual de ejercicios y roster de clientes. Modificás tus servicios desde el celular con un panel táctil robusto.
+              Traenos las ideas, capturas o páginas que te inspiran de internet. Nosotros nos ocupamos de maquetarlas y programar el código a medida. Libertad visual absoluta para tu marca.
             </p>
           </div>
 
@@ -78,11 +78,11 @@ export function HomeHero() {
           <div className="group bg-white/70 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/30 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-blue-500"></span>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Rendimiento</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Tranquilidad</span>
             </div>
-            <h3 className="font-black text-sm text-slate-800 dark:text-white">Carga en 100ms</h3>
+            <h3 className="font-black text-sm text-slate-800 dark:text-white">Hosting y Servidores</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-              Infraestructura optimizada que vuela incluso sin buena señal de datos en la sala de musculación o corralón.
+              Nosotros nos hacemos cargo de mantener las cosas funcionando rápido y seguras, de las actualizaciones y el backup. Tu web estará en el aire siempre lista para vender.
             </p>
           </div>
         </div>
