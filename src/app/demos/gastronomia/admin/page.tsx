@@ -27,7 +27,7 @@ export default function GastronomiaAdminPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setQrUrl(`${window.location.origin}/demos/gastronomia`);
+      setQrUrl(`${window.location.origin}/demos/gastronomia?mesa=4`);
     }
   }, []);
 
