@@ -7,6 +7,7 @@ import { Catalog } from "@/components/features/ferreteria/Catalog";
 import { Benefits } from "@/components/features/ferreteria/Benefits";
 import { Contact } from "@/components/features/ferreteria/Contact";
 import Link from "next/link";
+import { PwaInstallBanner } from "@/components/ui/PwaInstallBanner";
 
 export const metadata: Metadata = {
   title: "FerreMax Industrial",
@@ -39,6 +40,8 @@ export default function FerreteriaDemoPage() {
             </div>
           </div>
         </footer>
+
+        <PwaInstallBanner />
       </div>
     </SmoothScroll>
   );

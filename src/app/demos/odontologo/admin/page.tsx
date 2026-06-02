@@ -1,20 +1,35 @@
 "use client";
 
 import { useState } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { PageHeader } from "@/components/ui/Admin/PageHeader";
 import { 
   Plus, Check, X, Clock, AlertTriangle, 
-  Calendar as CalendarIcon, Search, Trash2, 
-  Sparkles, CheckCircle2, AlertCircle 
+  Calendar as CalendarIcon, Search, Trash2, Loader2,
+  Sparkles, CheckCircle2, AlertCircle, RefreshCw
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Turno, MOCK_TURNOS_HOY } from "@/data/mock-odontologo-admin";
 
 export default function OdontologoDashboard() {
   // --- Estados Principales ---
-  const [appointments, setAppointments] = useState<Turno[]>(MOCK_TURNOS_HOY);
+  const [appointments, setAppointments, isAppointmentsLoaded] = useLocalStorage<Turno[]>("odontologo_appointments", MOCK_TURNOS_HOY);
+  
+  const handleResetDemo = () => {
+    if (window.confirm("¿Seguro que querés restablecer los datos de esta demo a la configuración inicial? Esto borrará tus turnos programados hoy.")) {
+      localStorage.removeItem("odontologo_appointments");
+      window.location.reload();
+    }
+  };
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDay, setSelectedDay] = useState<number>(26); // Día actual simulado
+
+  // Estados de carga simulados
+  const [isProcessingStatus, setIsProcessingStatus] = useState(false);
+  const [isScheduling, setIsScheduling] = useState(false);
+  const [isReprogramming, setIsReprogramming] = useState(false);
+  const [isCancellingDay, setIsCancellingDay] = useState(false);
   
   // Modales
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
@@ -78,10 +93,14 @@ export default function OdontologoDashboard() {
 
   // --- Acciones de Turnos ---
   const handleMarkInSala = (id: string, name: string) => {
-    setAppointments(appointments.map(appt => 
-      appt.id === id ? { ...appt, estado: "En Sala" as const } : appt
-    ));
-    addToast(`Paciente ${name} marcado "En Sala".`, "success");
+    setIsProcessingStatus(true);
+    setTimeout(() => {
+      setAppointments(appointments.map(appt => 
+        appt.id === id ? { ...appt, estado: "En Sala" as const } : appt
+      ));
+      addToast(`Paciente ${name} marcado "En Sala".`, "success");
+      setIsProcessingStatus(false);
+    }, 800);
   };
 
   const openReprogramModal = (appt: Turno) => {
@@ -92,12 +111,16 @@ export default function OdontologoDashboard() {
 
   const handleReprogram = () => {
     if (!selectedAppt) return;
-    setAppointments(appointments.map(appt => 
-      appt.id === selectedAppt.id ? { ...appt, hora: reprogramTime, estado: "Confirmado" as const } : appt
-    ));
-    addToast(`Turno de ${selectedAppt.paciente} reprogramado a las ${reprogramTime} hs.`, "success");
-    setIsReprogramModalOpen(false);
-    setSelectedAppt(null);
+    setIsReprogramming(true);
+    setTimeout(() => {
+      setAppointments(appointments.map(appt => 
+        appt.id === selectedAppt.id ? { ...appt, hora: reprogramTime, estado: "Confirmado" as const } : appt
+      ));
+      addToast(`Turno de ${selectedAppt.paciente} reprogramado a las ${reprogramTime} hs.`, "success");
+      setIsReprogramModalOpen(false);
+      setSelectedAppt(null);
+      setIsReprogramming(false);
+    }, 1200);
   };
 
   const openCancelModal = (appt: Turno) => {
@@ -107,12 +130,16 @@ export default function OdontologoDashboard() {
 
   const handleCancelAppt = () => {
     if (!selectedAppt) return;
-    setAppointments(appointments.map(appt => 
-      appt.id === selectedAppt.id ? { ...appt, estado: "Cancelado" as const } : appt
-    ));
-    addToast(`Turno de ${selectedAppt.paciente} cancelado.`, "error");
-    setIsCancelModalOpen(false);
-    setSelectedAppt(null);
+    setIsProcessingStatus(true);
+    setTimeout(() => {
+      setAppointments(appointments.map(appt => 
+        appt.id === selectedAppt.id ? { ...appt, estado: "Cancelado" as const } : appt
+      ));
+      addToast(`Turno de ${selectedAppt.paciente} cancelado.`, "error");
+      setIsCancelModalOpen(false);
+      setSelectedAppt(null);
+      setIsProcessingStatus(false);
+    }, 1000);
   };
 
   const handleAddNewAppt = (e: React.FormEvent) => {
@@ -122,25 +149,30 @@ export default function OdontologoDashboard() {
       return;
     }
 
-    const newAppt: Turno = {
-      id: Date.now().toString(),
-      paciente: newPatient,
-      hora: newTime,
-      tratamiento: newTreatment,
-      estado: newStatus
-    };
+    setIsScheduling(true);
 
-    // Ordenar turnos por hora después de agregar
-    const updated = [...appointments, newAppt].sort((a, b) => a.hora.localeCompare(b.hora));
-    setAppointments(updated);
-    addToast(`Turno agendado para ${newPatient} a las ${newTime} hs.`, "success");
-    
-    // Resetear formulario
-    setNewPatient("");
-    setNewTime("12:00");
-    setNewTreatment("Consulta General");
-    setNewStatus("Confirmado");
-    setIsNewModalOpen(false);
+    setTimeout(() => {
+      const newAppt: Turno = {
+        id: Date.now().toString(),
+        paciente: newPatient,
+        hora: newTime,
+        tratamiento: newTreatment,
+        estado: newStatus
+      };
+
+      // Ordenar turnos por hora después de agregar
+      const updated = [...appointments, newAppt].sort((a, b) => a.hora.localeCompare(b.hora));
+      setAppointments(updated);
+      addToast(`Turno agendado para ${newPatient} a las ${newTime} hs.`, "success");
+      
+      // Resetear formulario
+      setNewPatient("");
+      setNewTime("12:00");
+      setNewTreatment("Consulta General");
+      setNewStatus("Confirmado");
+      setIsNewModalOpen(false);
+      setIsScheduling(false);
+    }, 1500);
   };
 
   const handleCancelEntireDay = () => {
@@ -151,10 +183,18 @@ export default function OdontologoDashboard() {
       return;
     }
 
-    setAppointments(appointments.map(appt => ({ ...appt, estado: "Cancelado" as const })));
-    addToast("Jornada laboral cancelada. Todos los turnos pasaron a 'Cancelado'.", "error");
-    setIsCancelDayModalOpen(false);
+    setIsCancellingDay(true);
+    setTimeout(() => {
+      setAppointments(appointments.map(appt => ({ ...appt, estado: "Cancelado" as const })));
+      addToast("Jornada laboral cancelada. Todos los turnos pasaron a 'Cancelado'.", "error");
+      setIsCancelDayModalOpen(false);
+      setIsCancellingDay(false);
+    }, 2000);
   };
+
+  if (!isAppointmentsLoaded) {
+    return <div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-emerald-600" /></div>;
+  }
 
   // --- Badge de Estado Helper ---
   const getStatusBadge = (estado: Turno["estado"]) => {
@@ -238,13 +278,22 @@ export default function OdontologoDashboard() {
         title="Agenda del Día" 
         description={`Tenés ${turnosTotales} turnos programados para hoy. ${porConfirmarCount} pendientes de confirmación.`}
         action={
-          <button 
-            onClick={() => setIsNewModalOpen(true)}
-            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-bold hover:bg-emerald-700 transition-all hover:shadow-md active:scale-95 text-sm"
-          >
-            <Plus className="h-4.5 w-4.5" />
-            Nuevo Turno
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleResetDemo}
+              className="flex items-center gap-2 border border-red-500/20 hover:border-red-500 hover:bg-red-500/10 text-red-500 px-4 py-2.5 rounded-lg font-bold transition-all text-sm"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Restablecer Demo
+            </button>
+            <button 
+              onClick={() => setIsNewModalOpen(true)}
+              className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-bold hover:bg-emerald-700 transition-all hover:shadow-md active:scale-95 text-sm"
+            >
+              <Plus className="h-4.5 w-4.5" />
+              Nuevo Turno
+            </button>
+          </div>
         }
       />
 
@@ -339,7 +388,8 @@ export default function OdontologoDashboard() {
                               {appt.estado !== "Completado" && appt.estado !== "En Sala" && appt.estado !== "Cancelado" && (
                                 <button 
                                   onClick={() => handleMarkInSala(appt.id, appt.paciente)}
-                                  className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors" 
+                                  disabled={isProcessingStatus}
+                                  className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors disabled:opacity-50" 
                                   title="Marcar en sala"
                                 >
                                   <Check className="h-4.5 w-4.5" />
@@ -348,7 +398,8 @@ export default function OdontologoDashboard() {
                               {appt.estado !== "Cancelado" && appt.estado !== "Completado" && (
                                 <button 
                                   onClick={() => openReprogramModal(appt)}
-                                  className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors" 
+                                  disabled={isProcessingStatus}
+                                  className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors disabled:opacity-50" 
                                   title="Reprogramar"
                                 >
                                   <Clock className="h-4.5 w-4.5" />
@@ -357,7 +408,8 @@ export default function OdontologoDashboard() {
                               {appt.estado !== "Cancelado" && (
                                 <button 
                                   onClick={() => openCancelModal(appt)}
-                                  className="p-1.5 text-red-500 hover:bg-red-50 rounded-md transition-colors" 
+                                  disabled={isProcessingStatus}
+                                  className="p-1.5 text-red-500 hover:bg-red-50 rounded-md transition-colors disabled:opacity-50" 
                                   title="Cancelar turno"
                                 >
                                   <X className="h-4.5 w-4.5" />
@@ -565,9 +617,10 @@ export default function OdontologoDashboard() {
                 </button>
                 <button 
                   type="submit"
-                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all"
+                  disabled={isScheduling}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Guardar Turno
+                  {isScheduling ? <Loader2 className="h-4 w-4 animate-spin" /> : "Guardar Turno"}
                 </button>
               </div>
             </form>
@@ -624,9 +677,10 @@ export default function OdontologoDashboard() {
                 </button>
                 <button 
                   onClick={handleReprogram}
-                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all"
+                  disabled={isReprogramming}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Confirmar Cambio
+                  {isReprogramming ? <Loader2 className="h-4 w-4 animate-spin" /> : "Confirmar Cambio"}
                 </button>
               </div>
             </div>
@@ -663,9 +717,10 @@ export default function OdontologoDashboard() {
                 </button>
                 <button 
                   onClick={handleCancelAppt}
-                  className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all"
+                  disabled={isProcessingStatus}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Sí, Cancelar Turno
+                  {isProcessingStatus ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sí, Cancelar Turno"}
                 </button>
               </div>
             </div>
@@ -716,9 +771,10 @@ export default function OdontologoDashboard() {
                 </button>
                 <button 
                   onClick={handleCancelEntireDay}
-                  className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all"
+                  disabled={isCancellingDay}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Sí, Cancelar Jornada
+                  {isCancellingDay ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sí, Cancelar Jornada"}
                 </button>
               </div>
             </div>

@@ -18,8 +18,8 @@ export function HomeManifesto() {
           priority
         />
         {/* Subtle radial and linear overlays for smooth blend in both light and dark modes */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/90 dark:from-slate-950 dark:via-slate-950/80 dark:to-slate-950/90 transition-colors duration-200"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,white_90%)] dark:bg-[radial-gradient(circle_at_center,transparent_20%,#020617_90%)] transition-colors duration-200"></div>
+        <div className="absolute inset-0 bg-slate-100/50 dark:bg-slate-950/60 transition-colors duration-200"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent dark:from-slate-950 dark:via-slate-950/80 dark:to-transparent transition-colors duration-200"></div>
       </div>
 
       {/* Content Container */}
@@ -45,7 +45,6 @@ export function HomeManifesto() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-4xl mx-auto pt-6">
           {/* Pillar 1 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
-            <div className="text-lg mb-3">🎨</div>
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Diseño a tu Medida</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               Traenos las ideas, capturas de pantalla o páginas que te inspiran de internet y nosotros nos ocupamos de darles vida con un acabado estético premium, adaptado 100% a tu marca.
@@ -54,7 +53,6 @@ export function HomeManifesto() {
 
           {/* Pillar 2 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
-            <div className="text-lg mb-3">🤝</div>
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Cercanía y Confianza</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               Trabajamos con comercios locales. Creemos que la cercanía humana genera las mejores relaciones de trabajo. Estamos siempre disponibles, cara a cara y en persona.
@@ -63,7 +61,6 @@ export function HomeManifesto() {
 
           {/* Pillar 3 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
-            <div className="text-lg mb-3">🚀</div>
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Impulso Local</h3>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               Digitalizar los negocios de nuestra ciudad nos fortalece a todos. Nos comprometemos a que tu marca tenga una presencia premium única en internet que te enorgullezca mostrar.

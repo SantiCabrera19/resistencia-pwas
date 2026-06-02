@@ -24,7 +24,6 @@ export function HomeContact() {
       gimnasio: {
         title: "Pack Fitness Integral",
         rubroText: "Gimnasio o Centro de Entrenamiento",
-        emoji: "🏋️‍♂️",
         benefits: {
           completo: [
             "Pizarrón interactivo de rutinas para el celular del alumno.",
@@ -46,7 +45,6 @@ export function HomeContact() {
       salud: {
         title: "Pack Turnero y Confianza",
         rubroText: "Consultorio de Salud o Estética",
-        emoji: "🩺",
         benefits: {
           completo: [
             "Sitio web premium que transmite máxima higiene visual.",
@@ -68,7 +66,6 @@ export function HomeContact() {
       comercio: {
         title: "Pack Catálogo y Distribución",
         rubroText: "Ferretería, Corralón o Comercio Local",
-        emoji: "🛒",
         benefits: {
           completo: [
             "Catálogo inmersivo de productos con stock en vivo.",
@@ -90,7 +87,6 @@ export function HomeContact() {
       otro: {
         title: "Solución Exclusiva a Medida",
         rubroText: "Servicios y Proyectos Especiales",
-        emoji: "✨",
         benefits: {
           completo: [
             "Diseño 100% libre basado en las referencias que nos pases.",
@@ -115,7 +111,6 @@ export function HomeContact() {
     return {
       title: currentRubro.title,
       rubroText: currentRubro.rubroText,
-      emoji: currentRubro.emoji,
       benefits: currentRubro.benefits[solucion]
     };
   };
@@ -153,68 +148,64 @@ export function HomeContact() {
           <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl leading-none">
             ¿Tenés un local y querés vender más?
           </h2>
-          <p className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            No necesitás lidiar con programadores distantes ni paneles complejos. Diseñá tu idea en 3 clics y charlémosla en persona con unos mates de por medio.
+          <p className="text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            No necesitás lidiar con paneles complejos. Diseñá tu idea en 3 clics y charlémosla en persona con unos mates de por medio.
           </p>
         </div>
 
         {/* Interactive Workspace Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-5xl mx-auto">
           
-          {/* Left Column: The Configuration Panel */}
-          <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800 p-6 sm:p-8 rounded-3xl shadow-sm space-y-8 select-none transition-colors">
+          {/* Left Column: The Configuration Panel with pristine dark mode support */}
+          <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-700/50 p-6 sm:p-8 rounded-3xl shadow-sm space-y-8 select-none transition-colors duration-200">
             
             {/* Step 1: Rubro */}
             <div className="space-y-3">
               <label className="text-[10px] font-black uppercase text-orange-655 dark:text-orange-450 tracking-wider">
-                Paso 1: ¿A qué se dedica tu negocio?
+                ¿A qué se dedica tu negocio?
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => setRubro("gimnasio")}
-                  className={`flex items-center gap-2.5 p-4 rounded-xl border text-xs font-black text-left transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`flex items-center justify-center p-4 rounded-xl border text-xs font-black text-center transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     rubro === "gimnasio"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-base shrink-0">🏋️‍♂️</span>
                   <span>Gimnasio o Deporte</span>
                 </button>
 
                 <button
                   onClick={() => setRubro("salud")}
-                  className={`flex items-center gap-2.5 p-4 rounded-xl border text-xs font-black text-left transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`flex items-center justify-center p-4 rounded-xl border text-xs font-black text-center transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     rubro === "salud"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-base shrink-0">🩺</span>
                   <span>Salud o Consultorio</span>
                 </button>
 
                 <button
                   onClick={() => setRubro("comercio")}
-                  className={`flex items-center gap-2.5 p-4 rounded-xl border text-xs font-black text-left transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`flex items-center justify-center p-4 rounded-xl border text-xs font-black text-center transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     rubro === "comercio"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-base shrink-0">🛒</span>
                   <span>Comercio o Corralón</span>
                 </button>
 
                 <button
                   onClick={() => setRubro("otro")}
-                  className={`flex items-center gap-2.5 p-4 rounded-xl border text-xs font-black text-left transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`flex items-center justify-center p-4 rounded-xl border text-xs font-black text-center transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     rubro === "otro"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-base shrink-0">✨</span>
                   <span>Otro Rubro o Idea</span>
                 </button>
               </div>
@@ -223,46 +214,43 @@ export function HomeContact() {
             {/* Step 2: Soluciones */}
             <div className="space-y-3">
               <label className="text-[10px] font-black uppercase text-orange-655 dark:text-orange-450 tracking-wider">
-                Paso 2: ¿Qué soluciones te gustaría incorporar?
+                ¿Qué soluciones te gustaría incorporar?
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   onClick={() => setSolucion("vidriera")}
-                  className={`p-4 rounded-xl border text-xs font-black text-center flex flex-col items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`p-4 rounded-xl border text-xs font-black text-center flex flex-col items-center justify-center gap-1 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     solucion === "vidriera"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-lg">🌐</span>
                   <span>Vidriera Web</span>
-                  <span className="text-[8px] font-semibold text-slate-400 uppercase leading-none mt-1">Para Captar Clientes</span>
+                  <span className="text-[8px] font-semibold text-slate-400 dark:text-slate-500 uppercase leading-none mt-1">Para Captar Clientes</span>
                 </button>
 
                 <button
                   onClick={() => setSolucion("gestion")}
-                  className={`p-4 rounded-xl border text-xs font-black text-center flex flex-col items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`p-4 rounded-xl border text-xs font-black text-center flex flex-col items-center justify-center gap-1 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     solucion === "gestion"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-lg">📈</span>
                   <span>Consola Interna</span>
-                  <span className="text-[8px] font-semibold text-slate-400 uppercase leading-none mt-1">Para Control Privado</span>
+                  <span className="text-[8px] font-semibold text-slate-400 dark:text-slate-500 uppercase leading-none mt-1">Para Control Privado</span>
                 </button>
 
                 <button
                   onClick={() => setSolucion("completo")}
-                  className={`p-4 rounded-xl border text-xs font-black text-center flex flex-col items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
+                  className={`p-4 rounded-xl border text-xs font-black text-center flex flex-col items-center justify-center gap-1 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${
                     solucion === "completo"
-                      ? "bg-orange-50/70 dark:bg-orange-950/20 border-orange-550 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm"
-                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850"
+                      ? "bg-orange-50/70 dark:bg-orange-900/40 border-orange-600 dark:border-orange-500 text-orange-655 dark:text-orange-400 shadow-sm dark:shadow-[0_0_12px_rgba(249,115,22,0.15)]"
+                      : "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
-                  <span className="text-lg">🚀</span>
                   <span>Combo Completo</span>
-                  <span className="text-[8px] font-semibold text-slate-400 uppercase leading-none mt-1">Todo Conectado</span>
+                  <span className="text-[8px] font-semibold text-slate-400 dark:text-slate-500 uppercase leading-none mt-1">Todo Conectado</span>
                 </button>
               </div>
             </div>
@@ -273,24 +261,23 @@ export function HomeContact() {
           <div className="lg:col-span-5 flex flex-col gap-6">
             
             {/* The Simulation Ficha Card */}
-            <div className="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-800 relative overflow-hidden flex flex-col justify-between h-full group">
+            <div className="bg-white dark:bg-slate-900/90 text-slate-900 dark:text-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-200/80 dark:border-slate-800 relative overflow-hidden flex flex-col justify-between h-full group transition-colors duration-200">
               
               {/* Decorative peach glow orb */}
-              <div className="absolute -top-12 -right-12 h-36 w-36 rounded-full bg-orange-500/20 blur-2xl opacity-60 pointer-events-none group-hover:scale-110 transition-transform duration-500"></div>
+              <div className="absolute -top-12 -right-12 h-36 w-36 rounded-full bg-orange-500/10 dark:bg-orange-500/20 blur-2xl opacity-80 dark:opacity-60 pointer-events-none group-hover:scale-110 transition-transform duration-500"></div>
               
               <div className="space-y-6 relative z-10">
                 <div className="flex items-center justify-between">
-                  <span className="bg-orange-500/10 border border-orange-500/35 px-3 py-1 rounded-md text-[8px] font-black uppercase text-orange-400 tracking-wider">
+                  <span className="bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/35 px-3 py-1 rounded-md text-[8px] font-black uppercase text-orange-600 dark:text-orange-400 tracking-wider">
                     Solución Sugerida
                   </span>
-                  <span className="text-2xl select-none shrink-0">{recommendation.emoji}</span>
                 </div>
 
                 <div className="space-y-1 select-none">
-                  <span className="text-[9px] font-black uppercase text-slate-450 tracking-wider">
+                  <span className="text-[9px] font-black uppercase text-slate-500 dark:text-slate-450 tracking-wider">
                     {recommendation.rubroText}
                   </span>
-                  <h3 className="text-xl font-black text-white leading-tight">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white leading-tight">
                     {recommendation.title}
                   </h3>
                 </div>
@@ -298,7 +285,7 @@ export function HomeContact() {
                 {/* Benefits List */}
                 <ul className="space-y-3.5 pt-2">
                   {recommendation.benefits.map((benefit, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-xs font-semibold text-slate-300 leading-relaxed">
+                    <li key={idx} className="flex items-start gap-2.5 text-xs font-semibold text-slate-600 dark:text-slate-300 leading-relaxed">
                       <CheckCircle2 className="h-4.5 w-4.5 text-orange-500 shrink-0 mt-0.5" />
                       <span>{benefit}</span>
                     </li>
@@ -325,9 +312,9 @@ export function HomeContact() {
                   href="https://instagram.com" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 px-6 py-4 text-xs font-black text-white active:scale-95 transition-all duration-200 select-none cursor-pointer"
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10 px-6 py-4 text-xs font-black text-slate-800 dark:text-white active:scale-95 transition-all duration-200 select-none cursor-pointer"
                 >
-                  <InstagramIcon className="h-4 w-4 shrink-0 text-rose-450" />
+                  <InstagramIcon className="h-4 w-4 shrink-0 text-rose-500 dark:text-rose-400" />
                   <span>Seguinos en Instagram</span>
                 </a>
               </div>

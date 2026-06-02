@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Dumbbell, CheckCircle2, ArrowLeft, Users } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { PwaInstallBanner } from "@/components/ui/PwaInstallBanner";
 
 interface Exercise {
   name: string;
@@ -485,6 +486,7 @@ export default function GimnasioPage() {
         </footer>
 
       </main>
+      <PwaInstallBanner />
     </div>
   );
 }

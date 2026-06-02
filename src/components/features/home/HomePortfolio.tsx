@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink } from "lucide-react";
+import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink, ChefHat } from "lucide-react";
 
 export function HomePortfolio() {
   const landings = [
@@ -32,6 +32,15 @@ export function HomePortfolio() {
       publicLink: "/demos/ferreteria",
       image: "/images/ferreteria_store.png",
       badge: "FUERZA INDUSTRIAL"
+    },
+    {
+      id: "gastronomia",
+      title: "Rotiserías, Resto-Bars & Cafeterías",
+      niche: "Gastronomía / Restaurantes",
+      description: "Carta digital autogestionable con menú del día y carrito interactivo automatizado para WhatsApp. Ideal para aumentar el ticket promedio y acelerar el despacho.",
+      publicLink: "/demos/gastronomia",
+      image: "/images/gastronomia_store.png",
+      badge: "SABOR TRADICIONAL"
     }
   ];
 
@@ -62,6 +71,15 @@ export function HomePortfolio() {
       adminLink: "/demos/ferreteria/admin",
       icon: <Database className="h-10 w-10 text-blue-500 dark:text-blue-400" />,
       badge: "CONTROL DE STOCK"
+    },
+    {
+      id: "gastronomia-admin",
+      title: "Despacho de Cocina y Caja Diaria",
+      niche: "Gastronomía Admin",
+      description: "Cola de comandas activa, sincronización de stock de la carta digital, control de caja y gestión rápida de platos destacados con alertas visuales de estados.",
+      adminLink: "/demos/gastronomia/admin",
+      icon: <ChefHat className="h-10 w-10 text-amber-500 dark:text-amber-400" />,
+      badge: "COMANDAS EN VIVO"
     }
   ];
 

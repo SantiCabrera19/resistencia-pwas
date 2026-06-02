@@ -1,19 +1,33 @@
 "use client";
 
 import { useState } from "react";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { PageHeader } from "@/components/ui/Admin/PageHeader";
 import { 
-  Plus, ArrowRight, AlertTriangle, X, Check, 
+  Plus, ArrowRight, AlertTriangle, X, Check, Loader2,
   Package, ShoppingBag, Truck, DollarSign, 
-  Sparkles, CheckCircle2, AlertCircle, ShoppingCart 
+  Sparkles, CheckCircle2, AlertCircle, ShoppingCart, RefreshCw
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Pedido, ProductoStock, MOCK_PEDIDOS, MOCK_INVENTARIO } from "@/data/mock-ferreteria-admin";
 
 export default function FerreteriaDashboard() {
   // --- Estados Principales ---
-  const [orders, setOrders] = useState<Pedido[]>(MOCK_PEDIDOS);
-  const [inventory, setInventory] = useState<ProductoStock[]>(MOCK_INVENTARIO);
+  const [orders, setOrders, isOrdersLoaded] = useLocalStorage<Pedido[]>("ferreteria_orders", MOCK_PEDIDOS);
+  const [inventory, setInventory, isInventoryLoaded] = useLocalStorage<ProductoStock[]>("ferreteria_inventory", MOCK_INVENTARIO);
+
+  const handleResetDemo = () => {
+    if (window.confirm("¿Seguro que querés restablecer los datos de esta demo a la configuración inicial? Esto borrará tus pedidos e inventario modificados.")) {
+      localStorage.removeItem("ferreteria_orders");
+      localStorage.removeItem("ferreteria_inventory");
+      window.location.reload();
+    }
+  };
+
+  // Estados de Carga Simulados
+  const [isProcessingOrder, setIsProcessingOrder] = useState(false);
+  const [isCreatingBudget, setIsCreatingBudget] = useState(false);
+  const [isRestocking, setIsRestocking] = useState(false);
 
   // Modales
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -110,12 +124,16 @@ export default function FerreteriaDashboard() {
 
   const handleUpdateOrderStatus = (status: Pedido["estado"]) => {
     if (!selectedOrder) return;
-    setOrders(orders.map(o => 
-      o.id === selectedOrder.id ? { ...o, estado: status } : o
-    ));
-    addToast(`Pedido ${selectedOrder.id} marcado como "${status}".`, "success");
-    setIsOrderModalOpen(false);
-    setSelectedOrder(null);
+    setIsProcessingOrder(true);
+    setTimeout(() => {
+      setOrders(orders.map(o => 
+        o.id === selectedOrder.id ? { ...o, estado: status } : o
+      ));
+      addToast(`Pedido ${selectedOrder.id} marcado como "${status}".`, "success");
+      setIsOrderModalOpen(false);
+      setSelectedOrder(null);
+      setIsProcessingOrder(false);
+    }, 1200);
   };
 
   // --- Acciones de Presupuestos (Crear Venta) ---
@@ -126,38 +144,43 @@ export default function FerreteriaDashboard() {
       return;
     }
 
-    const prod = inventory[selectedProductIndex];
-    const itemPrice = parseCurrency(prod.precio);
-    const orderTotalVal = itemPrice * quantity;
+    setIsCreatingBudget(true);
 
-    const newOrder: Pedido = {
-      id: "P-" + (1000 + orders.length + 1).toString(),
-      cliente: newClient,
-      monto: formatCurrency(orderTotalVal),
-      estado: "Pendiente",
-      origen: newOrigin
-    };
+    setTimeout(() => {
+      const prod = inventory[selectedProductIndex];
+      const itemPrice = parseCurrency(prod.precio);
+      const orderTotalVal = itemPrice * quantity;
 
-    // Agregar pedido y descontar stock del producto de forma simulada
-    setOrders([newOrder, ...orders]);
-    setInventory(inventory.map((item, idx) => 
-      idx === selectedProductIndex 
-        ? { 
-            ...item, 
-            stockActual: Math.max(0, item.stockActual - quantity),
-            estado: (item.stockActual - quantity) <= 0 ? "Sin Stock" : (item.stockActual - quantity) <= item.stockMinimo ? "Crítico" : "Normal"
-          }
-        : item
-    ));
+      const newOrder: Pedido = {
+        id: "P-" + (1000 + orders.length + 1).toString(),
+        cliente: newClient,
+        monto: formatCurrency(orderTotalVal),
+        estado: "Pendiente",
+        origen: newOrigin
+      };
 
-    addToast(`Presupuesto de ${newClient} por ${formatCurrency(orderTotalVal)} confirmado.`, "success");
-    
-    // Reset
-    setNewClient("");
-    setNewOrigin("Mostrador");
-    setSelectedProductIndex(0);
-    setQuantity(1);
-    setIsBudgetModalOpen(false);
+      // Agregar pedido y descontar stock del producto de forma simulada
+      setOrders([newOrder, ...orders]);
+      setInventory(inventory.map((item, idx) => 
+        idx === selectedProductIndex 
+          ? { 
+              ...item, 
+              stockActual: Math.max(0, item.stockActual - quantity),
+              estado: (item.stockActual - quantity) <= 0 ? "Sin Stock" : (item.stockActual - quantity) <= item.stockMinimo ? "Crítico" : "Normal"
+            }
+          : item
+      ));
+
+      addToast(`Presupuesto de ${newClient} por ${formatCurrency(orderTotalVal)} confirmado.`, "success");
+      
+      // Reset
+      setNewClient("");
+      setNewOrigin("Mostrador");
+      setSelectedProductIndex(0);
+      setQuantity(1);
+      setIsCreatingBudget(false);
+      setIsBudgetModalOpen(false);
+    }, 1500);
   };
 
   // --- Acciones de Reabastecimiento de Stock (Comprar) ---
@@ -169,22 +192,31 @@ export default function FerreteriaDashboard() {
 
   const handleRestock = () => {
     if (!selectedProduct) return;
-    const newStock = selectedProduct.stockActual + restockAmount;
-    
-    setInventory(inventory.map(p => 
-      p.id === selectedProduct.id 
-        ? { 
-            ...p, 
-            stockActual: newStock,
-            estado: newStock <= 0 ? "Sin Stock" : newStock <= p.stockMinimo ? "Crítico" : "Normal"
-          }
-        : p
-    ));
+    setIsRestocking(true);
 
-    addToast(`Stock de ${selectedProduct.nombre} aumentado en +${restockAmount} unidades.`, "success");
-    setIsStockModalOpen(false);
-    setSelectedProduct(null);
+    setTimeout(() => {
+      const newStock = selectedProduct.stockActual + restockAmount;
+      
+      setInventory(inventory.map(p => 
+        p.id === selectedProduct.id 
+          ? { 
+              ...p, 
+              stockActual: newStock,
+              estado: newStock <= 0 ? "Sin Stock" : newStock <= p.stockMinimo ? "Crítico" : "Normal"
+            }
+          : p
+      ));
+
+      addToast(`Stock de ${selectedProduct.nombre} aumentado en +${restockAmount} unidades.`, "success");
+      setIsRestocking(false);
+      setIsStockModalOpen(false);
+      setSelectedProduct(null);
+    }, 1200);
   };
+
+  if (!isOrdersLoaded || !isInventoryLoaded) {
+    return <div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-orange-600" /></div>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 relative">
@@ -216,13 +248,22 @@ export default function FerreteriaDashboard() {
         title="Panel de Control" 
         description="Resumen operativo de compras, pedidos del mostrador y alertas de stock de FerreMax."
         action={
-          <button 
-            onClick={() => setIsBudgetModalOpen(true)}
-            className="flex items-center gap-2 bg-orange-600 text-white px-4 py-2.5 rounded-lg font-bold hover:bg-orange-700 transition-all hover:shadow-md active:scale-95 text-sm"
-          >
-            <Plus className="h-4.5 w-4.5" />
-            Nuevo Presupuesto
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleResetDemo}
+              className="flex items-center gap-2 border border-red-500/20 hover:border-red-500 hover:bg-red-500/10 text-red-500 px-4 py-2.5 rounded-lg font-bold transition-all text-sm"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Restablecer Demo
+            </button>
+            <button 
+              onClick={() => setIsBudgetModalOpen(true)}
+              className="flex items-center gap-2 bg-orange-600 text-white px-4 py-2.5 rounded-lg font-bold hover:bg-orange-700 transition-all hover:shadow-md active:scale-95 text-sm"
+            >
+              <Plus className="h-4.5 w-4.5" />
+              Nuevo Presupuesto
+            </button>
+          </div>
         }
       />
 
@@ -406,29 +447,36 @@ export default function FerreteriaDashboard() {
                   {selectedOrder.estado !== "Preparando" && selectedOrder.estado !== "Despachado" && (
                     <button 
                       onClick={() => handleUpdateOrderStatus("Preparando")}
-                      className="bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 text-yellow-800 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 text-center block"
+                      disabled={isProcessingOrder}
+                      className="bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 text-yellow-800 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 text-center flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none"
                     >
-                      🛠️ Preparar Pedido
+                      {isProcessingOrder ? <Loader2 className="h-4 w-4 animate-spin" /> : "🛠️ Preparar Pedido"}
                     </button>
                   )}
                   {selectedOrder.estado !== "Despachado" && (
                     <button 
                       onClick={() => handleUpdateOrderStatus("Despachado")}
-                      className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 text-center block col-span-2 sm:col-span-1"
+                      disabled={isProcessingOrder}
+                      className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 text-center flex items-center justify-center gap-2 col-span-2 sm:col-span-1 disabled:opacity-50 disabled:pointer-events-none"
                     >
-                      🚚 Despachar / Entregar
+                      {isProcessingOrder ? <Loader2 className="h-4 w-4 animate-spin" /> : "🚚 Despachar / Entregar"}
                     </button>
                   )}
                   <button 
                     onClick={() => {
-                      setOrders(orders.filter(o => o.id !== selectedOrder.id));
-                      addToast(`Pedido ${selectedOrder.id} cancelado y borrado.`, "error");
-                      setIsOrderModalOpen(false);
-                      setSelectedOrder(null);
+                      setIsProcessingOrder(true);
+                      setTimeout(() => {
+                        setOrders(orders.filter(o => o.id !== selectedOrder.id));
+                        addToast(`Pedido ${selectedOrder.id} cancelado y borrado.`, "error");
+                        setIsOrderModalOpen(false);
+                        setSelectedOrder(null);
+                        setIsProcessingOrder(false);
+                      }, 800);
                     }}
-                    className="bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 text-center block"
+                    disabled={isProcessingOrder}
+                    className="bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 text-center flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none"
                   >
-                    🗑️ Cancelar Venta
+                    {isProcessingOrder ? <Loader2 className="h-4 w-4 animate-spin" /> : "🗑️ Cancelar Venta"}
                   </button>
                 </div>
               </div>
@@ -522,9 +570,10 @@ export default function FerreteriaDashboard() {
                 </button>
                 <button 
                   type="submit"
-                  className="px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all"
+                  disabled={isCreatingBudget}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Confirmar Venta
+                  {isCreatingBudget ? <Loader2 className="h-4 w-4 animate-spin" /> : "Confirmar Venta"}
                 </button>
               </div>
             </form>
@@ -588,9 +637,10 @@ export default function FerreteriaDashboard() {
                 </button>
                 <button 
                   onClick={handleRestock}
-                  className="px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all"
+                  disabled={isRestocking}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg shadow-sm transition-all disabled:opacity-70 disabled:pointer-events-none"
                 >
-                  Registrar Ingreso
+                  {isRestocking ? <Loader2 className="h-4 w-4 animate-spin" /> : "Registrar Ingreso"}
                 </button>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   Dumbbell, ArrowLeft, Plus, Trash2, Users, AlertTriangle,
-  ArrowRightLeft, RefreshCw, Sparkles, Lock, ShieldCheck, GripVertical
+  ArrowRightLeft, RefreshCw, Sparkles, Lock, ShieldCheck, GripVertical, Loader2
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
@@ -222,9 +222,20 @@ export default function GymAdminPage() {
   const [students, setStudents] = useState<GymStudent[]>(initialStudents);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Form states for adding a new student
+  const handleResetDemo = () => {
+    if (window.confirm("¿Seguro que querés restablecer los datos de esta demo a la configuración inicial? Esto borrará tus rutinas y alumnos personalizados.")) {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("gimnasio_coach_students");
+      localStorage.removeItem("gimnasio_active_variation");
+      window.location.reload();
+    }
+  };
+
   const [newStudentName, setNewStudentName] = useState("");
   const [newStudentTrack, setNewStudentTrack] = useState<GymStudent["track"]>("pierna-v1");
+
+  const [isProcessingStudent, setIsProcessingStudent] = useState(false);
+  const [isProcessingRoutine, setIsProcessingRoutine] = useState(false);
 
   // Check PIN on mount
   useEffect(() => {
@@ -285,17 +296,21 @@ export default function GymAdminPage() {
   };
 
   const addExercise = () => {
-    const next = { ...routinesData };
-    const dayRoutines = [...(next[selectedDay] || [])];
-    const routine = { ...dayRoutines[selectedRoutineIndex] };
-    routine.exercises = [
-      ...routine.exercises,
-      { name: "", muscle: "", sets: "4", reps: "10" },
-    ];
-    dayRoutines[selectedRoutineIndex] = routine;
-    next[selectedDay] = dayRoutines;
-    persistRoutines(next);
-    showToast("➕ Ejercicio agregado");
+    setIsProcessingRoutine(true);
+    setTimeout(() => {
+      const next = { ...routinesData };
+      const dayRoutines = [...(next[selectedDay] || [])];
+      const routine = { ...dayRoutines[selectedRoutineIndex] };
+      routine.exercises = [
+        ...routine.exercises,
+        { name: "", muscle: "", sets: "4", reps: "10" },
+      ];
+      dayRoutines[selectedRoutineIndex] = routine;
+      next[selectedDay] = dayRoutines;
+      persistRoutines(next);
+      showToast("➕ Ejercicio agregado");
+      setIsProcessingRoutine(false);
+    }, 600);
   };
 
   const removeExercise = (exerciseIdx: number) => {
@@ -311,18 +326,22 @@ export default function GymAdminPage() {
   };
 
   const addRoutine = () => {
-    const next = { ...routinesData };
-    const dayRoutines = [...(next[selectedDay] || [])];
-    const newId = `${selectedDay.toLowerCase().slice(0, 3)}-nueva-${Date.now()}`;
-    dayRoutines.push({
-      id: newId,
-      title: `Rutina ${dayRoutines.length + 1}`,
-      exercises: [],
-    });
-    next[selectedDay] = dayRoutines;
-    persistRoutines(next);
-    setSelectedRoutineIndex(dayRoutines.length - 1);
-    showToast("📋 Nueva rutina creada");
+    setIsProcessingRoutine(true);
+    setTimeout(() => {
+      const next = { ...routinesData };
+      const dayRoutines = [...(next[selectedDay] || [])];
+      const newId = `${selectedDay.toLowerCase().slice(0, 3)}-nueva-${Date.now()}`;
+      dayRoutines.push({
+        id: newId,
+        title: `Rutina ${dayRoutines.length + 1}`,
+        exercises: [],
+      });
+      next[selectedDay] = dayRoutines;
+      persistRoutines(next);
+      setSelectedRoutineIndex(dayRoutines.length - 1);
+      showToast("📋 Nueva rutina creada");
+      setIsProcessingRoutine(false);
+    }, 800);
   };
 
   const updateRoutineTitle = (value: string) => {
@@ -356,36 +375,52 @@ export default function GymAdminPage() {
   };
 
   const rerouteStudent = (studentId: string, name: string) => {
-    const next = students.map((s) => (s.id === studentId ? { ...s, track: "pierna-v2" as const } : s));
-    updateStudents(next);
-    localStorage.setItem("gimnasio_active_variation", "pierna-v2");
-    showToast(`💡 ${name} → Pierna V2 (Peso Libre)`);
+    setIsProcessingStudent(true);
+    setTimeout(() => {
+      const next = students.map((s) => (s.id === studentId ? { ...s, track: "pierna-v2" as const } : s));
+      updateStudents(next);
+      localStorage.setItem("gimnasio_active_variation", "pierna-v2");
+      showToast(`💡 ${name} → Pierna V2 (Peso Libre)`);
+      setIsProcessingStudent(false);
+    }, 600);
   };
 
   const resetStudent = (studentId: string, name: string) => {
-    const next = students.map((s) => (s.id === studentId ? { ...s, track: "pierna-v1" as const } : s));
-    updateStudents(next);
-    localStorage.setItem("gimnasio_active_variation", "pierna-v1");
-    showToast(`🔄 ${name} → Pierna V1 (Máquinas)`);
+    setIsProcessingStudent(true);
+    setTimeout(() => {
+      const next = students.map((s) => (s.id === studentId ? { ...s, track: "pierna-v1" as const } : s));
+      updateStudents(next);
+      localStorage.setItem("gimnasio_active_variation", "pierna-v1");
+      showToast(`🔄 ${name} → Pierna V1 (Máquinas)`);
+      setIsProcessingStudent(false);
+    }, 600);
   };
 
   const deleteStudent = (studentId: string, name: string) => {
-    const next = students.filter((s) => s.id !== studentId);
-    updateStudents(next);
-    showToast(`🗑️ Alumno "${name}" removido`);
+    setIsProcessingStudent(true);
+    setTimeout(() => {
+      const next = students.filter((s) => s.id !== studentId);
+      updateStudents(next);
+      showToast(`🗑️ Alumno "${name}" removido`);
+      setIsProcessingStudent(false);
+    }, 600);
   };
 
   const addStudent = (name: string, track: GymStudent["track"]) => {
     if (!name.trim()) return;
-    const newStudent: GymStudent = {
-      id: `student-${Date.now()}`,
-      name: name.trim(),
-      avatar: name.trim().charAt(0).toUpperCase(),
-      track: track,
-    };
-    const next = [...students, newStudent];
-    updateStudents(next);
-    showToast(`👥 "${newStudent.name}" registrado en el gimnasio`);
+    setIsProcessingStudent(true);
+    setTimeout(() => {
+      const newStudent: GymStudent = {
+        id: `student-${Date.now()}`,
+        name: name.trim(),
+        avatar: name.trim().charAt(0).toUpperCase(),
+        track: track,
+      };
+      const next = [...students, newStudent];
+      updateStudents(next);
+      showToast(`👥 "${newStudent.name}" registrado en el gimnasio`);
+      setIsProcessingStudent(false);
+    }, 1200);
   };
 
   const piernaV1 = students.filter((s) => s.track === "pierna-v1");
@@ -432,6 +467,14 @@ export default function GymAdminPage() {
             </span>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={handleResetDemo}
+              title="Restablecer demo"
+              className="p-1.5 hover:bg-red-500/10 hover:text-red-500 text-slate-500 dark:text-slate-400 rounded-lg transition-colors flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span className="hidden xs:inline">Reset</span>
+            </button>
             <div className="flex items-center gap-1 text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider select-none">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Conectado
@@ -508,9 +551,10 @@ export default function GymAdminPage() {
               ))}
               <button
                 onClick={addRoutine}
-                className="flex-shrink-0 px-3 py-1.5 rounded-md border border-dashed border-slate-300 dark:border-slate-700 text-slate-400 dark:text-slate-500 font-black text-[10px] uppercase tracking-wide transition-all hover:border-blue-400 hover:text-blue-500 active:scale-95"
+                disabled={isProcessingRoutine}
+                className="flex-shrink-0 px-3 py-1.5 rounded-md border border-dashed border-slate-300 dark:border-slate-700 text-slate-400 dark:text-slate-500 font-black text-[10px] uppercase tracking-wide transition-all hover:border-blue-400 hover:text-blue-500 active:scale-95 disabled:opacity-50"
               >
-                + Nueva
+                {isProcessingRoutine ? <Loader2 className="h-3 w-3 animate-spin mx-auto" /> : "+ Nueva"}
               </button>
             </div>
 
@@ -595,10 +639,10 @@ export default function GymAdminPage() {
                   {/* Add Exercise Button */}
                   <button
                     onClick={addExercise}
-                    className="w-full py-4 flex items-center justify-center gap-2 text-sm font-black text-blue-600 dark:text-blue-400 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 hover:bg-blue-50 dark:hover:bg-blue-950/10 transition-colors active:scale-[0.99]"
+                    disabled={isProcessingRoutine}
+                    className="w-full py-4 flex items-center justify-center gap-2 text-sm font-black text-blue-600 dark:text-blue-400 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 hover:bg-blue-50 dark:hover:bg-blue-950/10 transition-colors active:scale-[0.99] disabled:opacity-50"
                   >
-                    <Plus className="h-5 w-5" />
-                    Agregar Ejercicio
+                    {isProcessingRoutine ? <Loader2 className="h-5 w-5 animate-spin" /> : <><Plus className="h-5 w-5" /> Agregar Ejercicio</>}
                   </button>
                 </div>
 
@@ -651,9 +695,10 @@ export default function GymAdminPage() {
                         setNewStudentName("");
                       }
                     }}
-                    className="bg-blue-600 text-white px-4 py-2.5 rounded-lg text-xs font-black hover:bg-blue-700 transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-sm shrink-0"
+                    disabled={isProcessingStudent}
+                    className="bg-blue-600 text-white px-4 py-2.5 rounded-lg text-xs font-black hover:bg-blue-700 transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-sm shrink-0 disabled:opacity-50"
                   >
-                    <Plus className="h-4 w-4" /> Registrar
+                    {isProcessingStudent ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Plus className="h-4 w-4" /> Registrar</>}
                   </button>
                 </div>
               </div>
@@ -732,7 +777,8 @@ export default function GymAdminPage() {
                         {col.showReroute && (
                           <button
                             onClick={() => rerouteStudent(student.id, student.name)}
-                            className="p-2 hover:bg-amber-100 dark:hover:bg-amber-950/30 text-amber-600 rounded-lg transition-all active:scale-90 animate-in fade-in"
+                            disabled={isProcessingStudent}
+                            className="p-2 hover:bg-amber-100 dark:hover:bg-amber-950/30 text-amber-600 rounded-lg transition-all active:scale-90 animate-in fade-in disabled:opacity-50"
                             title="Desviar a Peso Libre"
                           >
                             <ArrowRightLeft className="h-4 w-4" />
@@ -741,7 +787,8 @@ export default function GymAdminPage() {
                         {col.showReset && (
                           <button
                             onClick={() => resetStudent(student.id, student.name)}
-                            className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 rounded-lg transition-all active:scale-90 animate-in fade-in"
+                            disabled={isProcessingStudent}
+                            className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 rounded-lg transition-all active:scale-90 animate-in fade-in disabled:opacity-50"
                             title="Regresar a Máquinas"
                           >
                             <RefreshCw className="h-4 w-4" />
@@ -749,7 +796,8 @@ export default function GymAdminPage() {
                         )}
                         <button
                           onClick={() => deleteStudent(student.id, student.name)}
-                          className="p-2 hover:bg-red-100 dark:hover:bg-red-950/30 text-red-500 rounded-lg transition-all active:scale-90"
+                          disabled={isProcessingStudent}
+                          className="p-2 hover:bg-red-100 dark:hover:bg-red-950/30 text-red-500 rounded-lg transition-all active:scale-90 disabled:opacity-50"
                           title="Eliminar Alumno"
                         >
                           <Trash2 className="h-4 w-4" />

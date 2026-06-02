@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FERRETERIA_DATA } from "@/data/ferreteria";
 
 export function Categories() {
@@ -18,20 +17,16 @@ export function Categories() {
           {categorias.map((cat, i) => {
             const Icon = cat.icon;
             return (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="flex min-w-[140px] shrink-0 snap-start flex-col items-center justify-center gap-3 rounded-xl bg-slate-800 p-6 transition-colors hover:bg-slate-700 cursor-pointer border border-slate-700"
+                className="flex min-w-[140px] shrink-0 snap-start flex-col items-center justify-center gap-3 rounded-sm bg-slate-800 p-6 hover:bg-slate-700 cursor-pointer border border-slate-700 hover:border-orange-500 transition-colors"
                 onClick={() => document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" })}
               >
                 <Icon className="h-8 w-8 text-orange-500" />
                 <span className="text-center text-sm font-semibold text-slate-200">
                   {cat.name}
                 </span>
-              </motion.div>
+              </div>
             );
           })}
         </div>

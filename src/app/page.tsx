@@ -15,7 +15,19 @@ export default function HomePage() {
       <div className="flex min-h-screen flex-col bg-white dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-300 transition-colors duration-200" id="top">
         <HomeHeader />
 
-        <main className="flex-1">
+        {/* Marca de agua de la Casa de Gobierno del Chaco en el fondo general */}
+        <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.06] dark:opacity-[0.02] transition-opacity duration-200">
+          <Image
+            src="/images/casadegobierno.jpg"
+            alt="Casa de Gobierno del Chaco"
+            fill
+            sizes="100vw"
+            className="object-cover object-center grayscale contrast-125"
+            priority
+          />
+        </div>
+
+        <main className="flex-1 relative z-10">
           <HomeHero />
           <HomeAbout />
           <HomePortfolio />

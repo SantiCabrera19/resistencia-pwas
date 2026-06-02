@@ -2,6 +2,7 @@
 
 import { FERRETERIA_DATA } from "@/data/ferreteria";
 import { MapPin, Clock } from "lucide-react";
+import { MapWidget } from "@/components/ui/MapWidget";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="currentColor">
@@ -24,7 +25,7 @@ export function Contact() {
           </p>
         </div>
         
-        <div className="flex flex-col gap-6 rounded-3xl bg-white p-6 shadow-sm border border-orange-100 sm:p-10">
+        <div className="flex flex-col gap-6 rounded-3xl bg-white p-6 shadow-sm border border-orange-100 sm:p-10 mb-8">
           <div className="flex items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-100">
               <MapPin className="h-6 w-6 text-orange-600" />
@@ -59,6 +60,15 @@ export function Contact() {
             </a>
           </div>
         </div>
+
+        {/* Interactive Map */}
+        <MapWidget 
+          address={contacto.direccion} 
+          lat={-27.4578}
+          lon={-58.9930}
+          googleMapsUrl={`https://maps.google.com/?q=${encodeURIComponent(contacto.direccion)}`} 
+          theme="orange" 
+        />
       </div>
     </section>
   );
