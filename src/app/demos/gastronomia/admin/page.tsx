@@ -27,7 +27,7 @@ export default function GastronomiaAdminPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setQrUrl(`${window.location.origin}/demos/gastronomia?mesa=4`);
+      setQrUrl(`${window.location.origin}/demos/gastronomia/menu`);
     }
   }, []);
 
@@ -48,7 +48,7 @@ export default function GastronomiaAdminPage() {
   }, []);
 
   // Estados de control de la UI
-  const [activeTab, setActiveTab] = useState<"pedidos" | "menu" | "kpis">("pedidos");
+  const [activeTab, setActiveTab] = useState<"menu" | "kpis">("menu");
   const [searchQuery, setSearchQuery] = useState("");
   
   // Modales
@@ -236,14 +236,6 @@ export default function GastronomiaAdminPage() {
             <div className="h-6 w-px bg-stone-800 hidden sm:block mx-1" />
 
             <button 
-              onClick={() => setActiveTab("pedidos")}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all uppercase ${
-                activeTab === "pedidos" ? "bg-amber-500 text-stone-950" : "bg-stone-950 text-stone-400 hover:text-white"
-              }`}
-            >
-              📋 Pedidos ({orders.filter(o => o.estado !== "Entregado" && o.estado !== "Cancelado").length})
-            </button>
-            <button 
               onClick={() => setActiveTab("menu")}
               className={`px-4 py-2 rounded-lg text-xs font-bold transition-all uppercase ${
                 activeTab === "menu" ? "bg-amber-500 text-stone-950" : "bg-stone-950 text-stone-400 hover:text-white"
@@ -270,7 +262,7 @@ export default function GastronomiaAdminPage() {
           <Search className="h-4 w-4 text-stone-500 shrink-0" />
           <input 
             type="text" 
-            placeholder={activeTab === "pedidos" ? "Buscar pedido por ID o cliente..." : "Buscar plato por nombre..."}
+            placeholder="Buscar plato por nombre..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="w-full bg-transparent border-none text-xs text-white placeholder-stone-600 focus:outline-none focus:ring-0 ml-2"
@@ -282,132 +274,7 @@ export default function GastronomiaAdminPage() {
           )}
         </div>
 
-        {/* TAB PEDIDOS */}
-        {activeTab === "pedidos" && (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-black text-white uppercase tracking-wider">Cola de Pedidos Activos</h2>
-              <span className="text-[10px] bg-stone-900 border border-stone-850 px-2.5 py-1 text-stone-400 rounded font-bold uppercase">
-                Offline Auto-Sync
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4">
-              {filteredOrders.length === 0 ? (
-                <div className="border border-dashed border-stone-850 rounded-2xl py-16 text-center space-y-2">
-                  <div className="text-5xl">🍗</div>
-                  <h5 className="font-bold text-white text-sm">No se encontraron pedidos</h5>
-                  <p className="text-xs text-stone-500">¿Probaste ingresar pedidos desde la landing del cliente?</p>
-                </div>
-              ) : (
-                filteredOrders.map(order => (
-                  <div 
-                    key={order.id} 
-                    className={`bg-stone-900/60 border rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all ${
-                      order.estado === "Pendiente" 
-                        ? "border-amber-500/30 bg-amber-500/[0.01]" 
-                        : "border-stone-850"
-                    }`}
-                  >
-                    <div className="space-y-3 flex-1">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="font-black text-white text-sm">{order.id}</span>
-                        <span className="text-xs font-bold text-stone-400">{order.cliente}</span>
-                        <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase border ${
-                          order.estado === "Pendiente" 
-                            ? "bg-amber-500/10 text-amber-500 border-amber-500/20" 
-                            : order.estado === "En Cocina"
-                            ? "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
-                            : order.estado === "En Camino"
-                            ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20"
-                            : order.estado === "Entregado"
-                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                            : "bg-red-500/10 text-red-400 border-red-500/20"
-                        }`}>
-                          {order.estado}
-                        </span>
-                        <span className="text-[10px] text-stone-500">{order.fecha} · {order.tipo}</span>
-                      </div>
-
-                      {/* Items */}
-                      <div className="bg-stone-950 border border-stone-850/80 rounded-xl p-3.5 space-y-1.5 max-w-2xl">
-                        {order.items.map((item, idx) => (
-                          <div key={idx} className="flex justify-between items-center text-xs">
-                            <span className="text-stone-300 font-medium">
-                              <strong className="text-amber-500">{item.cantidad}x</strong> {item.nombre}
-                            </span>
-                            <span className="text-stone-500">{item.precioUnitario} c/u</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Delivery Address */}
-                      {order.tipo === "Delivery" && order.direccion && (
-                        <p className="text-[10px] text-stone-400 flex items-center gap-1.5 bg-stone-900 border border-stone-850 w-fit px-2.5 py-1 rounded">
-                          📍 {order.direccion}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-3 shrink-0 md:self-center">
-                      <span className="text-xl font-black text-white pr-4 border-r border-stone-800 md:h-8 flex items-center">{order.montoTotal}</span>
-                      
-                      {order.estado === "Pendiente" && (
-                        <button 
-                          onClick={() => handleUpdateOrderStatus(order.id, "En Cocina")}
-                          disabled={isProcessingOrder}
-                          className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-bold text-xs uppercase px-4 py-2.5 rounded-lg flex items-center gap-1.5"
-                        >
-                          🍳 Cocinar
-                        </button>
-                      )}
-                      {order.estado === "En Cocina" && (
-                        <button 
-                          onClick={() => handleUpdateOrderStatus(order.id, "En Camino")}
-                          disabled={isProcessingOrder}
-                          className="bg-yellow-500 hover:bg-yellow-400 disabled:opacity-50 text-stone-950 font-bold text-xs uppercase px-4 py-2.5 rounded-lg flex items-center gap-1.5"
-                        >
-                          🛵 Despachar
-                        </button>
-                      )}
-                      {order.estado === "En Camino" && (
-                        <button 
-                          onClick={() => handleUpdateOrderStatus(order.id, "Entregado")}
-                          disabled={isProcessingOrder}
-                          className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold text-xs uppercase px-4 py-2.5 rounded-lg flex items-center gap-1.5"
-                        >
-                          ✓ Entregar
-                        </button>
-                      )}
-                      
-                      {order.estado !== "Entregado" && order.estado !== "Cancelado" && (
-                        <button 
-                          onClick={() => handleCancelOrder(order.id)}
-                          disabled={isProcessingOrder}
-                          className="p-2.5 bg-red-600/10 hover:bg-red-600/20 text-red-500 rounded-lg transition-colors"
-                          title="Cancelar Pedido"
-                        >
-                          <X className="h-4.5 w-4.5" />
-                        </button>
-                      )}
-
-                      {(order.estado === "Entregado" || order.estado === "Cancelado") && (
-                        <button 
-                          onClick={() => handleDeleteOrder(order.id)}
-                          disabled={isProcessingOrder}
-                          className="p-2.5 bg-stone-950 hover:bg-stone-850 text-stone-500 hover:text-white rounded-lg transition-colors border border-stone-850"
-                          title="Eliminar de historial"
-                        >
-                          <Trash2 className="h-4.5 w-4.5" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        )}
+        {/* TAB PEDIDOS REMOVED FOR REAL-TIME DINING CARTA DIGITAL ONLY */}
 
         {/* TAB MENU */}
         {activeTab === "menu" && (
@@ -636,17 +503,17 @@ export default function GastronomiaAdminPage() {
                 <span className="text-[10px] font-black uppercase tracking-wider">El Campeón</span>
               </div>
               
-              <h4 className="text-xs font-bold text-stone-300 uppercase tracking-widest leading-none">Mesa 4</h4>
+              <h4 className="text-xs font-bold text-stone-300 uppercase tracking-widest leading-none">Stand de Salón</h4>
               
               {/* Divider */}
               <div className="w-10 h-0.5 bg-amber-500/40 my-3" />
               
               {/* Prompt Text */}
               <p className="text-[11px] font-black text-white leading-tight uppercase tracking-wider">
-                ⚡ ¡Escaneá el Menú!
+                ⚡ ¡Escaneá el Menú Digital!
               </p>
               <p className="text-[8px] text-stone-400 font-semibold mt-1 mb-4 leading-normal">
-                Pedí en un segundo desde tu teléfono,<br />sin descargar nada y sin demoras.
+                Mirá la carta en tu teléfono,<br />elegí tu plato y pedile al mozo.
               </p>
 
               {/* QR Container */}
