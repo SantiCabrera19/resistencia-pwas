@@ -350,13 +350,6 @@ export default function GimnasioPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Link 
-              href="/demos/gimnasio/admin" 
-              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-lg transition-all active:scale-95"
-              title="Panel Coach"
-            >
-              <Users className="h-4 w-4" />
-            </Link>
             <ThemeToggle />
           </div>
         </div>

@@ -56,15 +56,9 @@ export default function GastronomiaMenuPage() {
           </div>
           
           <div className="flex items-center gap-2">
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-100 border border-amber-200 text-amber-900 text-[10px] font-black uppercase rounded-lg">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-100 border border-amber-200 text-amber-900 text-[10px] font-black uppercase rounded-lg">
               <ChefHat className="h-3.5 w-3.5" /> Sabores de leña
             </span>
-            <Link 
-              href="/demos/gastronomia/admin" 
-              className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-lg text-xs transition-colors border border-stone-200"
-            >
-              🔐 Admin
-            </Link>
           </div>
         </div>
       </header>

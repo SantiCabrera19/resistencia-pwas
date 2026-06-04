@@ -48,12 +48,6 @@ export default function GastronomiaLandingPage() {
           
           <div className="flex items-center gap-3">
             <Link 
-              href="/demos/gastronomia/admin" 
-              className="hidden sm:inline-flex items-center text-xs font-bold text-stone-400 hover:text-amber-500 transition-colors border border-stone-800 hover:border-amber-500/30 px-3 py-1.5 rounded-lg"
-            >
-              🔐 Admin Panel
-            </Link>
-            <Link 
               href="/demos/gastronomia/menu" 
               className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1.5 shadow-lg shadow-amber-500/10"
             >
@@ -161,10 +155,6 @@ export default function GastronomiaLandingPage() {
           <div className="flex items-center justify-center gap-4">
             <Link href="/" className="font-bold text-amber-500 hover:text-amber-400 transition-colors">
               ← Volver a Santi Soluciones
-            </Link>
-            <span className="text-stone-850">|</span>
-            <Link href="/demos/gastronomia/admin" className="font-bold text-stone-400 hover:text-white transition-colors">
-              🔐 Panel Interno
             </Link>
           </div>
         </div>
