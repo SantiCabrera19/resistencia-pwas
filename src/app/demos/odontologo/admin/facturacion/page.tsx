@@ -6,6 +6,7 @@ import {
   Banknote, TrendingUp, CreditCard, DollarSign, ArrowUpRight, ArrowDownRight, Search, Plus, CheckCircle2, Clock
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { normalizeString } from "@/lib/utils";
 
 const MOCK_INVOICES = [
   { id: "F-1001", patient: "María González", treatment: "Ortodoncia (Cuota 2/12)", amount: 45000, status: "Pagado", date: "27 May 2026" },
@@ -18,8 +19,8 @@ export default function FacturacionPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredInvoices = MOCK_INVOICES.filter(inv => 
-    inv.patient.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    inv.id.toLowerCase().includes(searchTerm.toLowerCase())
+    normalizeString(inv.patient).includes(normalizeString(searchTerm)) || 
+    normalizeString(inv.id).includes(normalizeString(searchTerm))
   );
 
   return (

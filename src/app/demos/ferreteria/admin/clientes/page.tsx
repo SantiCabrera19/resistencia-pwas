@@ -6,6 +6,7 @@ import {
   Users, Search, Plus, Mail, Phone, ExternalLink, AlertCircle
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { normalizeString } from "@/lib/utils";
 
 const MOCK_CLIENTES = [
   { id: "C-001", nombre: "Constructora NEA S.A.", tipo: "Empresa", telefono: "3624-123456", email: "compras@neasa.com.ar", saldo: 450000, limite: 1000000, estado: "Al Día" },
@@ -18,8 +19,8 @@ export default function ClientesPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredClientes = MOCK_CLIENTES.filter(c => 
-    c.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    c.id.toLowerCase().includes(searchTerm.toLowerCase())
+    normalizeString(c.nombre).includes(normalizeString(searchTerm)) || 
+    normalizeString(c.id).includes(normalizeString(searchTerm))
   );
 
   return (

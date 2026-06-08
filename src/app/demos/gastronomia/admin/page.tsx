@@ -10,6 +10,7 @@ import {
   Edit2, Power, ArrowLeft, RefreshCw, QrCode
 } from "lucide-react";
 import { Plato, PedidoGastro, MOCK_MENU, MOCK_PEDIDOS_GASTRO } from "@/data/mock-gastronomia-admin";
+import { normalizeString } from "@/lib/utils";
 
 const PIN_KEY = "gastronomia_admin_pin_verified";
 const ADMIN_PIN = "1234";
@@ -174,13 +175,13 @@ export default function GastronomiaAdminPage() {
 
   // Filtrado de pedidos
   const filteredOrders = orders.filter(o => 
-    o.cliente.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    o.id.toLowerCase().includes(searchQuery.toLowerCase())
+    normalizeString(o.cliente).includes(normalizeString(searchQuery)) ||
+    normalizeString(o.id).includes(normalizeString(searchQuery))
   );
 
   // Filtrado de menú
   const filteredMenu = menu.filter(p => 
-    p.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+    normalizeString(p.nombre).includes(normalizeString(searchQuery))
   );
 
   if (!isOrdersLoaded || !isMenuLoaded) {

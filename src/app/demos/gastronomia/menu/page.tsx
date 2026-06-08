@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { MOCK_MENU, Plato } from "@/data/mock-gastronomia-admin";
 import { PwaInstallBanner } from "@/components/ui/PwaInstallBanner";
+import { normalizeString } from "@/lib/utils";
 
 export default function GastronomiaMenuPage() {
   const [menu, setMenu] = useState<Plato[]>(MOCK_MENU);
@@ -31,8 +32,8 @@ export default function GastronomiaMenuPage() {
   // Filter menu items by active category, search query, and display ONLY available dishes
   const filteredDishes = menu.filter(plato => {
     const matchesCategory = selectedCategory === "Todos" || plato.categoria === selectedCategory;
-    const matchesSearch = plato.nombre.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          plato.descripcion.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = normalizeString(plato.nombre).includes(normalizeString(searchQuery)) || 
+                          normalizeString(plato.descripcion).includes(normalizeString(searchQuery));
     return plato.disponible && matchesCategory && matchesSearch;
   });
 

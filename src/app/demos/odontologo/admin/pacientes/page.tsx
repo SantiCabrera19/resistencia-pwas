@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Paciente, MOCK_PACIENTES } from "@/data/mock-odontologo-admin";
+import { normalizeString } from "@/lib/utils";
 
 export default function PacientesPage() {
   // --- Estados Principales ---
@@ -44,7 +45,7 @@ export default function PacientesPage() {
 
   // --- Filtrado Reactivo ---
   const filteredPacientes = pacientes.filter(p => 
-    p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    normalizeString(p.nombre).includes(normalizeString(searchTerm)) || 
     p.dni.replace(/\./g, "").includes(searchTerm.replace(/\./g, ""))
   );
 

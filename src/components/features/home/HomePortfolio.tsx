@@ -37,7 +37,7 @@ export function HomePortfolio() {
       id: "gastronomia",
       title: "Rotiserías, Resto-Bars & Cafeterías",
       niche: "Gastronomía / Restaurantes",
-      description: "Carta digital autogestionable con menú del día y carrito interactivo automatizado para WhatsApp. Ideal para aumentar el ticket promedio y acelerar el despacho.",
+      description: "Menú digital offline de alto contraste para el salón físico. Carga instantánea, sin fricción de apps ni demoras de señal, diseñado para mostrar tu pedido al mozo.",
       publicLink: "/demos/gastronomia",
       image: "/images/gastronomia_store.png",
       badge: "SABOR TRADICIONAL"
@@ -74,12 +74,12 @@ export function HomePortfolio() {
     },
     {
       id: "gastronomia-admin",
-      title: "Despacho de Cocina y Caja Diaria",
+      title: "Gestor de Carta y Caja Diaria",
       niche: "Gastronomía Admin",
-      description: "Cola de comandas activa, sincronización de stock de la carta digital, control de caja y gestión rápida de platos destacados con alertas visuales de estados.",
+      description: "Consola para modificar precios, pausar disponibilidad al instante y monitorear las métricas de caja diaria, libre de sistemas POS tradicionales.",
       adminLink: "/demos/gastronomia/admin",
       icon: <ChefHat className="h-10 w-10 text-amber-500 dark:text-amber-400" />,
-      badge: "COMANDAS EN VIVO"
+      badge: "CARTA & FINANZAS"
     }
   ];
 

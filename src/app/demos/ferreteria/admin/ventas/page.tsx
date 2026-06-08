@@ -6,6 +6,7 @@ import {
   ShoppingCart, Search, Plus, Minus, X, CreditCard, Banknote, Tag, ScanLine
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { normalizeString } from "@/lib/utils";
 
 // Datos de prueba para el POS
 const MOCK_PRODUCTS = [
@@ -30,8 +31,8 @@ export default function VentasMostradorPage() {
 
   // Filtrado de productos en catálogo rápido
   const filteredProducts = MOCK_PRODUCTS.filter(p => 
-    p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    p.sku.toLowerCase().includes(searchTerm.toLowerCase())
+    normalizeString(p.nombre).includes(normalizeString(searchTerm)) || 
+    normalizeString(p.sku).includes(normalizeString(searchTerm))
   );
 
   // Funciones del carrito

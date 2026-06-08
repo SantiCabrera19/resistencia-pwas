@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Turno, MOCK_TURNOS_HOY } from "@/data/mock-odontologo-admin";
+import { normalizeString } from "@/lib/utils";
 
 export default function OdontologoDashboard() {
   // --- Estados Principales ---
@@ -63,8 +64,8 @@ export default function OdontologoDashboard() {
 
   // --- Cálculos de Métricas en Tiempo Real ---
   const filteredAppts = appointments.filter((appt) => 
-    appt.paciente.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    appt.tratamiento.toLowerCase().includes(searchQuery.toLowerCase())
+    normalizeString(appt.paciente).includes(normalizeString(searchQuery)) ||
+    normalizeString(appt.tratamiento).includes(normalizeString(searchQuery))
   );
 
   const turnosTotales = appointments.length;

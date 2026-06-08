@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProductoStock, MOCK_INVENTARIO } from "@/data/mock-ferreteria-admin";
+import { normalizeString } from "@/lib/utils";
 
 export default function InventarioPage() {
   // --- Estados Principales ---
@@ -48,8 +49,8 @@ export default function InventarioPage() {
 
   // --- Filtrado Reactivo ---
   const filteredInventory = inventory.filter(p => {
-    const matchesSearch = p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          p.sku.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = normalizeString(p.nombre).includes(normalizeString(searchTerm)) || 
+                          normalizeString(p.sku).includes(normalizeString(searchTerm));
     const matchesFilter = filterState === "Todos" ? true : p.estado === filterState;
     return matchesSearch && matchesFilter;
   });
