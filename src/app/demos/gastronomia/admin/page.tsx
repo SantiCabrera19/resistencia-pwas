@@ -7,7 +7,8 @@ import { PageHeader } from "@/components/ui/Admin/PageHeader";
 import { 
   Plus, Check, X, Clock, AlertTriangle, Search, Trash2, Loader2,
   TrendingUp, ShoppingBag, DollarSign, ChefHat, Sparkles, Flame,
-  Edit2, Power, ArrowLeft, RefreshCw, QrCode
+  Edit2, Power, ArrowLeft, RefreshCw, QrCode,
+  Megaphone, MessageCircle, Gift, Lock
 } from "lucide-react";
 import { Plato, PedidoGastro, MOCK_MENU, MOCK_PEDIDOS_GASTRO } from "@/data/mock-gastronomia-admin";
 import { normalizeString } from "@/lib/utils";
@@ -49,7 +50,7 @@ export default function GastronomiaAdminPage() {
   }, []);
 
   // Estados de control de la UI
-  const [activeTab, setActiveTab] = useState<"menu" | "kpis">("menu");
+  const [activeTab, setActiveTab] = useState<"menu" | "kpis" | "marketing">("menu");
   const [searchQuery, setSearchQuery] = useState("");
   
   // Modales
@@ -252,6 +253,14 @@ export default function GastronomiaAdminPage() {
             >
               📈 Finanzas
             </button>
+            <button 
+              onClick={() => setActiveTab("marketing")}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all uppercase ${
+                activeTab === "marketing" ? "bg-indigo-500 text-white" : "bg-stone-950 text-stone-400 hover:text-white"
+              }`}
+            >
+              📢 Crecimiento
+            </button>
           </div>
         </div>
       </div>
@@ -405,6 +414,84 @@ export default function GastronomiaAdminPage() {
                   <h3 className="text-xl font-black text-white tracking-tight leading-tight">{kpis.platoEstrella}</h3>
                   <p className="text-[10px] text-stone-400 font-bold mt-1">El plato chaqueño más vendido</p>
                 </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* TAB MARKETING (UPSELLS) */}
+        {activeTab === "marketing" && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            <div className="flex items-center justify-between pb-2 border-b border-stone-900">
+              <h2 className="text-lg font-black text-white uppercase tracking-wider">Módulos de Crecimiento</h2>
+              <span className="text-[10px] uppercase font-black tracking-widest text-indigo-500 px-2 py-1 bg-indigo-500/10 rounded-md">Portafolio Premium</span>
+            </div>
+            
+            <p className="text-xs text-stone-400 font-medium max-w-2xl">
+              La arquitectura de este sistema está preparada para escalar. Estos módulos te permiten retener clientes y aumentar ventas sin depender de terceros.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              {/* Push Notifications */}
+              <div className="bg-stone-900 border border-stone-850 rounded-2xl p-6 space-y-4 relative overflow-hidden group">
+                <div className="absolute -top-4 -right-4 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <Megaphone className="h-32 w-32 text-white" />
+                </div>
+                <div className="flex items-center gap-2 text-indigo-400">
+                  <Megaphone className="h-5 w-5" />
+                  <span className="text-xs font-black uppercase">Notificaciones Push</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white tracking-tight">Alertas Directas</h3>
+                  <p className="text-xs text-stone-400 mt-2 font-medium leading-relaxed">
+                    Avisale a tus clientes de promociones o platos del día directamente en su celular, sin que abran la app.
+                  </p>
+                </div>
+                <button className="w-full py-2.5 mt-2 bg-stone-950 border border-stone-800 text-stone-500 hover:text-white text-xs font-black uppercase rounded-xl transition-all flex items-center justify-center gap-2">
+                  <Lock className="h-3.5 w-3.5" /> Módulo Inactivo
+                </button>
+              </div>
+
+              {/* CRM / WhatsApp */}
+              <div className="bg-stone-900 border border-stone-850 rounded-2xl p-6 space-y-4 relative overflow-hidden group">
+                <div className="absolute -top-4 -right-4 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <MessageCircle className="h-32 w-32 text-emerald-500" />
+                </div>
+                <div className="flex items-center gap-2 text-emerald-500">
+                  <MessageCircle className="h-5 w-5" />
+                  <span className="text-xs font-black uppercase">CRM & WhatsApp</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white tracking-tight">Base de Clientes</h3>
+                  <p className="text-xs text-stone-400 mt-2 font-medium leading-relaxed">
+                    Conocé quiénes son tus clientes más frecuentes, qué piden y contactalos por WhatsApp con un solo clic.
+                  </p>
+                </div>
+                <button className="w-full py-2.5 mt-2 bg-stone-950 border border-stone-800 text-stone-500 hover:text-white text-xs font-black uppercase rounded-xl transition-all flex items-center justify-center gap-2">
+                  <Lock className="h-3.5 w-3.5" /> Módulo Inactivo
+                </button>
+              </div>
+
+              {/* Loyalty Program */}
+              <div className="bg-stone-900 border border-stone-850 rounded-2xl p-6 space-y-4 relative overflow-hidden group">
+                <div className="absolute -top-4 -right-4 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <Gift className="h-32 w-32 text-rose-500" />
+                </div>
+                <div className="flex items-center gap-2 text-rose-500">
+                  <Gift className="h-5 w-5" />
+                  <span className="text-xs font-black uppercase">Fidelización</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white tracking-tight">Puntos y Premios</h3>
+                  <p className="text-xs text-stone-400 mt-2 font-medium leading-relaxed">
+                    Sistema de puntos automático. Hacé que vuelvan a elegirte a vos en vez de a la competencia premiando su lealtad.
+                  </p>
+                </div>
+                <button className="w-full py-2.5 mt-2 bg-stone-950 border border-stone-800 text-stone-500 hover:text-white text-xs font-black uppercase rounded-xl transition-all flex items-center justify-center gap-2">
+                  <Lock className="h-3.5 w-3.5" /> Módulo Inactivo
+                </button>
               </div>
 
             </div>
