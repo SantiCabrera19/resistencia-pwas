@@ -45,11 +45,11 @@ export function HomePortfolio() {
     {
       id: "noticias",
       title: "Diarios & Portales de Noticias",
-      niche: "Prensa / Blogs",
-      description: "Portal digital de noticias de alto rendimiento y SEO impecable. Diseñado para cargar al instante y ofrecer una experiencia de lectura premium limpia de anuncios molestos.",
+      niche: "Prensa / Radios / Blogs",
+      description: "Portal digital de alto rendimiento con reproducción de radio/streaming en vivo integrado y SEO impecable. Diseñado con PWA instalable para enviar alertas push a tus oyentes y lectores.",
       publicLink: "/demos/noticias",
       image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80",
-      badge: "ALTO RENDIMIENTO"
+      badge: "STREAMING Y PWA"
     }
   ];
 
@@ -92,12 +92,12 @@ export function HomePortfolio() {
     },
     {
       id: "noticias-admin",
-      title: "CMS de Redacción & Moderación",
+      title: "CMS de Redacción y Moderación",
       niche: "Prensa Admin",
-      description: "Panel de control para periodistas y editores. Permite crear/eliminar publicaciones, ver lecturas totales y moderar comentarios en tiempo real.",
+      description: "Panel de control para redactar noticias, ver estadísticas de lecturas en tiempo real y administrar espacios publicitarios estáticos libres de CLS.",
       adminLink: "/demos/noticias/admin",
       icon: <Newspaper className="h-10 w-10 text-emerald-500 dark:text-emerald-400" />,
-      badge: "PORTAL DE NOTICIAS"
+      badge: "CMS MONETIZABLE"
     }
   ];
 

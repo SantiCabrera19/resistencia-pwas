@@ -189,6 +189,19 @@ function NoticiasHomeContent() {
             </article>
           )}
 
+          {/* MOCK AD SPONSOR BANNER (CLS-Free) */}
+          <div className="bg-zinc-100 dark:bg-zinc-900 border border-zinc-250/80 dark:border-zinc-800 p-4 rounded text-center select-none">
+            <span className="text-[9px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 block mb-1">ESPACIO PUBLICITARIO DISPONIBLE</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 md:gap-6">
+              <span className="text-sm font-serif font-black text-zinc-700 dark:text-zinc-300">Ferretería El Sol</span>
+              <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700">•</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">Todo en herramientas y corralón. Av. Alberdi 450, Resistencia.</span>
+              <span className="bg-emerald-600 hover:bg-emerald-700 text-white text-[9px] font-bold py-1 px-2.5 rounded transition-colors cursor-pointer select-none">
+                Consultar
+              </span>
+            </div>
+          </div>
+
           {/* B. BENTO SUB-GRID (Secondary News) */}
           <div className="space-y-6">
             {heroArticle && (
@@ -310,6 +323,25 @@ function NoticiasHomeContent() {
                   );
                 })}
               </ul>
+            </div>
+          </div>
+
+          {/* MOCK AD SPONSOR BANNER (Sidebar Square) */}
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded overflow-hidden shadow-xs select-none">
+            <span className="bg-zinc-100 dark:bg-zinc-850 text-[8px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 block py-1 px-3 text-center border-b border-zinc-200 dark:border-zinc-800">
+              ANUNCIO AUSPICIANTE
+            </span>
+            <div className="p-5 text-center space-y-2">
+              <span className="text-[9px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest block">ODONTOLOGÍA INTEGRAL</span>
+              <p className="text-sm font-serif font-black text-zinc-900 dark:text-white leading-tight">
+                Clínica Dental Resistencia
+              </p>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 leading-normal">
+                Tu sonrisa en las mejores manos. Consultorio premium en el centro de Resistencia.
+              </p>
+              <button className="w-full bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-950 text-white hover:opacity-90 text-[10px] font-bold py-1.5 rounded cursor-pointer transition-all select-none">
+                Reservar Cita
+              </button>
             </div>
           </div>
 

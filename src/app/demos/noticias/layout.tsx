@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X, Newspaper, CloudSun, MapPin } from "lucide-react";
+import { Sun, Moon, Menu, X, Newspaper, CloudSun, MapPin, Play, Pause, Radio } from "lucide-react";
 
 export default function NoticiasLayout({
   children,
@@ -16,6 +16,20 @@ export default function NoticiasLayout({
   const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(() => {
+        // Handle autoplay policy block
+      });
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -211,6 +225,33 @@ export default function NoticiasLayout({
           </div>
         </div>
       </footer>
+
+      {/* 6. FLOATING LIVE RADIO PLAYER */}
+      <div className="fixed bottom-6 right-6 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-full py-2 px-4 flex items-center gap-3 select-none">
+        <audio
+          ref={audioRef}
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          preload="none"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+        <div className="relative flex items-center justify-center">
+          <span className={`absolute inline-flex h-2.5 w-2.5 rounded-full bg-red-500 opacity-75 ${isPlaying ? "animate-ping" : ""}`} />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600" />
+        </div>
+        <div className="flex flex-col text-[10px] font-sans pr-2 text-left">
+          <span className="font-black tracking-wider text-zinc-900 dark:text-white uppercase flex items-center gap-1">
+            <Radio className="w-3 h-3 text-red-500" /> RADIO EN VIVO
+          </span>
+          <span className="text-[9px] text-zinc-500 dark:text-zinc-400">Radio Libertad 99.1 FM</span>
+        </div>
+        <button
+          onClick={togglePlay}
+          className="bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none cursor-pointer transition-colors shadow-sm"
+        >
+          {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
+        </button>
+      </div>
     </div>
   );
 }
