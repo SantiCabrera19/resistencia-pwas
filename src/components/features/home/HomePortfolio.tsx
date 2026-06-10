@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink, ChefHat } from "lucide-react";
+import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink, ChefHat, Newspaper } from "lucide-react";
 
 export function HomePortfolio() {
   const landings = [
@@ -41,6 +41,15 @@ export function HomePortfolio() {
       publicLink: "/demos/gastronomia",
       image: "/images/gastronomia_store.png",
       badge: "SABOR TRADICIONAL"
+    },
+    {
+      id: "noticias",
+      title: "Diarios & Portales de Noticias",
+      niche: "Prensa / Blogs",
+      description: "Portal digital de noticias de alto rendimiento y SEO impecable. Diseñado para cargar al instante y ofrecer una experiencia de lectura premium limpia de anuncios molestos.",
+      publicLink: "/demos/noticias",
+      image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80",
+      badge: "ALTO RENDIMIENTO"
     }
   ];
 
@@ -80,6 +89,15 @@ export function HomePortfolio() {
       adminLink: "/demos/gastronomia/admin",
       icon: <ChefHat className="h-10 w-10 text-amber-500 dark:text-amber-400" />,
       badge: "CARTA & FINANZAS"
+    },
+    {
+      id: "noticias-admin",
+      title: "CMS de Redacción & Moderación",
+      niche: "Prensa Admin",
+      description: "Panel de control para periodistas y editores. Permite crear/eliminar publicaciones, ver lecturas totales y moderar comentarios en tiempo real.",
+      adminLink: "/demos/noticias/admin",
+      icon: <Newspaper className="h-10 w-10 text-emerald-500 dark:text-emerald-400" />,
+      badge: "PORTAL DE NOTICIAS"
     }
   ];
 
