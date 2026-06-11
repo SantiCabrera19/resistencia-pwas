@@ -14,13 +14,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!article) {
     return {
-      title: "Artículo No Encontrado | Santi Noticias",
+      title: "Artículo No Encontrado | SEC Noticias",
       description: "La publicación solicitada no está disponible en este momento.",
     };
   }
 
   return {
-    title: `${article.title} | Santi Noticias`,
+    title: `${article.title} | SEC Noticias`,
     description: article.subtitle,
     openGraph: {
       title: article.title,
@@ -61,7 +61,7 @@ export default async function ArticleDetailPage({ params }: Props) {
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Santi Noticias",
+          "name": "SEC Noticias",
           "logo": {
             "@type": "ImageObject",
             "url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=180&q=80",

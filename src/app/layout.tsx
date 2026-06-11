@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Santi - Soluciones",
+  title: "SECdigital - Soluciones Web de Alto Rendimiento",
   description:
     "Plataforma de plantillas y sistemas de gestión para negocios locales de Resistencia, Chaco.",
 };

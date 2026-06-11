@@ -1,4 +1,4 @@
-# Landing Design – Santi Soluciones
+# Landing Design – SECdigital
 
 ## 1. Propósito de la landing
 
@@ -53,7 +53,7 @@ Orden recomendado para la mayoría de las landings de locales:
 
 7. **Footer con confianza**
    - Datos de contacto (WhatsApp, mail).
-   - Mención breve a Santi Soluciones como agencia madre.
+   - Mención breve a SECdigital como agencia madre.
    - Links mínimos (Términos, Privacidad si aplica).
 
 ---
@@ -97,7 +97,7 @@ Reglas:
 ### 5.1 Hero
 
 Debe contener:
-- Logo del local y/o Santi Soluciones (según estrategia).
+- Logo del local y/o SECdigital (según estrategia).
 - Tagline que combine problema + solución:
   - “Dejá de perder pedidos en papeles sueltos.”
   - “Tu bar, con caja ordenada y pedidos claros.”

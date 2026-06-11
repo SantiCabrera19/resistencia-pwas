@@ -35,7 +35,7 @@ export default function FerreteriaDemoPage() {
               <span>Lun a Sáb · 07:30 a 17 hs</span>
               <span className="text-slate-700">|</span>
               <Link href="/" className="font-medium text-orange-500 hover:text-orange-400 transition-colors">
-                ← Volver a Santi Soluciones
+                ← Volver a SECdigital
               </Link>
             </div>
           </div>

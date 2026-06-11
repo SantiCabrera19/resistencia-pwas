@@ -35,18 +35,18 @@ function NoticiasHomeContent() {
     if (!email.trim()) return;
 
     // Save lead in localStorage for CRM integration demonstration
-    const existingLeads = localStorage.getItem("santi_leads")
-      ? JSON.parse(localStorage.getItem("santi_leads") || "[]")
+    const existingLeads = localStorage.getItem("sec_leads")
+      ? JSON.parse(localStorage.getItem("sec_leads") || "[]")
       : [];
     
     const newLead = {
       id: `lead-${Date.now()}`,
       email: email.trim(),
-      source: "Santi Noticias Newsletter",
+      source: "SEC Noticias Newsletter",
       date: new Date().toISOString(),
     };
 
-    localStorage.setItem("santi_leads", JSON.stringify([...existingLeads, newLead]));
+    localStorage.setItem("sec_leads", JSON.stringify([...existingLeads, newLead]));
     setSubscribed(true);
     setEmail("");
   };
@@ -366,7 +366,7 @@ function NoticiasHomeContent() {
               {subscribed ? (
                 <div className="bg-zinc-800 border border-zinc-700/60 p-4 rounded text-center text-xs space-y-2">
                   <p className="font-bold text-yellow-400">¡Suscripción exitosa!</p>
-                  <p className="text-[10px] text-zinc-400">Te registramos correctamente en el CRM local de Santi Soluciones.</p>
+                  <p className="text-[10px] text-zinc-400">Te registramos correctamente en el CRM local de SECdigital.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="space-y-2">
@@ -389,7 +389,7 @@ function NoticiasHomeContent() {
             </div>
           </div>
 
-          {/* 3. PROPUESTA DE VALOR SANTI SOLUCIONES */}
+          {/* 3. PROPUESTA DE VALOR SECDIGITAL */}
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded p-6 shadow-xs space-y-3">
             <span className="text-[9px] font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase">TECNOLOGÍA</span>
             <h4 className="font-serif font-bold text-base text-zinc-900 dark:text-white">

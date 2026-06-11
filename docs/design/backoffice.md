@@ -1,4 +1,4 @@
-# Backoffice Design – Santi Soluciones
+# Backoffice Design – SECdigital
 
 ## 1. Propósito del backoffice
 
@@ -238,4 +238,4 @@ El "AI Slop" es el diseño inflado, decorativo y sin utilidad real que suelen ge
    - **Ejemplo**: *"Mbaipy Chaqueño"*, *"Chipá calentito"*, *"Av. Alberdi 420"*.
 
 5. **Eliminación de Degradados SaaS**:
-   - Los botones y bordes no deben usar degradados de colores neón o morados que simulen una plataforma cripto. El backoffice de Santi Soluciones respeta los colores limpios de la marca del local sobre fondos off-white.
+   - Los botones y bordes no deben usar degradados de colores neón o morados que simulen una plataforma cripto. El backoffice de SECdigital respeta los colores limpios de la marca del local sobre fondos off-white.

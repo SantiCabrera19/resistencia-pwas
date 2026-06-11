@@ -143,7 +143,7 @@ El director técnico ha logrado consolidar un esquema defensivo sólido, complem
   }
 ];
 
-const DB_KEY = "santi_noticias_db";
+const DB_KEY = "sec_noticias_db";
 
 function getDB(): { articles: Article[]; authors: Author[] } {
   if (typeof window === "undefined") {

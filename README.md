@@ -1,8 +1,8 @@
-# Santi Soluciones - Plataforma Core & Demos B2B
+# SECdigital - Plataforma Core & Demos B2B
 
 ## 🚀 Visión del Proyecto
 
-Este repositorio alberga el núcleo digital de **Santi Soluciones**, una agencia de desarrollo de software enfocada en resolver problemas operativos reales de negocios y PyMEs (especialmente en el mercado local). 
+Este repositorio alberga el núcleo digital de **SECdigital**, una agencia de desarrollo de software enfocada en resolver problemas operativos reales de negocios y PyMEs (especialmente en el mercado local). 
 
 Nuestra visión es transformar la manera en que operan las empresas, ofreciendo sistemas modernos, rápidos y centrados 100% en la Experiencia de Usuario (UX) a través de los principios de diseño Soft UI y Bento Box. No vendemos simples páginas web; vendemos velocidad en mostrador, eliminación de cuellos de botella y control absoluto de la información.
 

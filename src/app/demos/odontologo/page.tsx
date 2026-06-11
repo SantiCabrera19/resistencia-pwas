@@ -32,7 +32,7 @@ export default function OdontologoDemoPage() {
               <span>Lun a Vie · 09 a 18 hs</span>
               <span className="text-slate-300">|</span>
               <Link href="/" className="font-medium text-emerald-600 hover:underline">
-                ← Volver a Santi Soluciones
+                ← Volver a SECdigital
               </Link>
             </div>
           </div>

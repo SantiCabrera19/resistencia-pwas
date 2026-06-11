@@ -114,14 +114,14 @@ export default function NoticiasLayout({
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl font-serif font-black tracking-tighter text-zinc-900 dark:text-white uppercase leading-none">
-              Santi Noticias
+              SEC Noticias
             </h1>
           </Link>
 
           {/* Right Editorial Info */}
           <div className="hidden md:flex flex-col text-right text-[10px] font-sans text-zinc-400 dark:text-zinc-500 border-l border-zinc-200 dark:border-zinc-850 pl-6 min-w-[140px]">
             <span className="font-bold tracking-wider text-zinc-500 dark:text-zinc-400">TECNOLOGÍA & SEO</span>
-            <span>SANTI SOLUCIONES</span>
+            <span>SECDIGITAL</span>
           </div>
 
         </div>
@@ -193,11 +193,11 @@ export default function NoticiasLayout({
             <div className="flex items-center gap-2 mb-3">
               <Newspaper className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />
               <span className="font-serif font-black tracking-tight text-lg text-zinc-900 dark:text-white uppercase">
-                Santi Noticias
+                SEC Noticias
               </span>
             </div>
             <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-              Portal informativo de demostración desarrollado por **Santi Soluciones**. Diseñado para probar velocidad, SEO semántico y experiencia de lectura premium en medios digitales locales.
+              Portal informativo de demostración desarrollado por **SECdigital**. Diseñado para probar velocidad, SEO semántico y experiencia de lectura premium en medios digitales locales.
             </p>
           </div>
           <div>
@@ -214,13 +214,13 @@ export default function NoticiasLayout({
           </div>
           <div>
             <h4 className="font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">
-              Santi Soluciones
+              SECdigital
             </h4>
             <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 mb-2">
               Desarrollamos aplicaciones web progresivas (PWAs), landing pages y sistemas de gestión local en Resistencia, Chaco.
             </p>
             <p className="text-[10px] text-zinc-400 dark:text-zinc-500">
-              © {new Date().getFullYear()} Santi Soluciones. Todos los derechos reservados.
+              © {new Date().getFullYear()} SECdigital. Todos los derechos reservados.
             </p>
           </div>
         </div>

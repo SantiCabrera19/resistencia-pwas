@@ -154,7 +154,7 @@ export default function GastronomiaLandingPage() {
           <p>© {new Date().getFullYear()} Rotisería El Campeón — Sabores Chaqueños a la Leña.</p>
           <div className="flex items-center justify-center gap-4">
             <Link href="/" className="font-bold text-amber-500 hover:text-amber-400 transition-colors">
-              ← Volver a Santi Soluciones
+              ← Volver a SECdigital
             </Link>
           </div>
         </div>

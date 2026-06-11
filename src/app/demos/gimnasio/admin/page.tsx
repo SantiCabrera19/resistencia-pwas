@@ -460,7 +460,7 @@ export default function GymAdminPage() {
             </Link>
             <div className="flex items-center gap-1.5">
               <Dumbbell className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400 shrink-0" />
-              <span className="text-sm font-black tracking-tight uppercase">SantiGym</span>
+              <span className="text-sm font-black tracking-tight uppercase">SECGym</span>
             </div>
             <span className="bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-md leading-none">
               Coach
@@ -818,7 +818,7 @@ export default function GymAdminPage() {
 
         {/* Footer */}
         <footer className="text-center py-4 text-slate-400 dark:text-slate-500 text-[9px] font-black uppercase tracking-wider space-y-1">
-          <p>SantiGym Coach Panel • Gestión desde el Celular.</p>
+          <p>SECGym Coach Panel • Gestión desde el Celular.</p>
           <p>© {new Date().getFullYear()} Resistencia.</p>
         </footer>
       </main>

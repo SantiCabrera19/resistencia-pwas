@@ -131,7 +131,7 @@ export function HomeContact() {
       vidriera: "la Vidriera Web pública (para captar clientes)",
       gestion: "el Sistema de Gestión interno (para control privado)"
     };
-    const mensaje = `¡Hola Santi! Estuve chusmeando en la web y me interesa armar una plantilla para ${rubrosNombres[rubro]} enfocado en ${solucionesNombres[solucion]}. ¿Nos juntamos a tomar unos mates y charlamos del diseño?`;
+    const mensaje = `¡Hola SECdigital! Estuve chusmeando en la web y me interesa armar una plantilla para ${rubrosNombres[rubro]} enfocado en ${solucionesNombres[solucion]}. ¿Nos juntamos a tomar unos mates y charlamos del diseño?`;
     return `${base}?text=${encodeURIComponent(mensaje)}`;
   };
 

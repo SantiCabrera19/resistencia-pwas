@@ -346,7 +346,7 @@ export default function GimnasioPage() {
             </Link>
             <div className="flex items-center gap-1.5">
               <Dumbbell className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400 shrink-0" />
-              <span className="text-sm font-black tracking-tight uppercase">SantiGym</span>
+              <span className="text-sm font-black tracking-tight uppercase">SECGym</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -474,7 +474,7 @@ export default function GimnasioPage() {
 
         {/* Footer ultraliviano */}
         <footer className="text-center py-4 text-slate-400 dark:text-slate-500 text-[9px] font-black uppercase tracking-wider space-y-1">
-          <p>SantiGym Pizarrón • Carga Ultra Veloz.</p>
+          <p>SECGym Pizarrón • Carga Ultra Veloz.</p>
           <p>© {new Date().getFullYear()} Resistencia.</p>
         </footer>
 

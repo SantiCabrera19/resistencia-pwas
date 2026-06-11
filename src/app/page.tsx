@@ -37,14 +37,11 @@ export default function HomePage() {
 
         <footer className="bg-emerald-950 dark:bg-slate-950 dark:border-t dark:border-slate-800 py-12 text-center text-emerald-200/60 dark:text-slate-400 transition-colors duration-200">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="h-6 w-6 relative opacity-70">
-                <Image src="/icons/android-chrome-192x192.png" alt="Logo Santi Mini" fill sizes="24px" />
-              </div>
-              <span className="font-bold text-emerald-400">Santi</span>
+            <div className="flex items-center justify-center gap-2 mb-4 select-none">
+              <span className="font-black text-lg tracking-tight text-white">SECdigital</span>
             </div>
             <p className="text-sm">
-              © {new Date().getFullYear()} Agencia Santi. Hecho con ❤️ en Resistencia, Chaco.
+              © {new Date().getFullYear()} SECdigital. Hecho con ❤️ en Resistencia, Chaco.
             </p>
           </div>
         </footer>

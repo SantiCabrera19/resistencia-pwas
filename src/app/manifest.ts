@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Santi Soluciones",
-    short_name: "Santi",
+    name: "SECdigital",
+    short_name: "SECdigital",
     description:
       "Sistemas + Plantillas para negocios locales de Resistencia, Chaco.",
     start_url: "/",
