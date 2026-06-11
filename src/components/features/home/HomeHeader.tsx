@@ -11,7 +11,14 @@ export function HomeHeader() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-6 py-2 shadow-sm transition-colors duration-200">
       <div className="mx-auto flex max-w-7xl items-center justify-between h-14 sm:h-16">
-        <div className="flex items-center gap-2 cursor-pointer select-none" onClick={() => scrollTo("top")}>
+        <div className="flex items-center gap-2.5 cursor-pointer select-none" onClick={() => scrollTo("top")}>
+          <Image
+            src="/images/microcosmos-badge.png"
+            alt="SECdigital Logo"
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain rounded-full"
+          />
           <span className="text-xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-rose-500 dark:from-orange-400 dark:to-rose-450">
             SECdigital
           </span>
