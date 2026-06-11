@@ -31,12 +31,15 @@ export function HomeHero() {
         
         {/* Hero Title */}
         <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white sm:text-7xl max-w-4xl leading-[1.08] select-none pt-4">
-          Digitalizamos tu negocio con <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-rose-500 to-orange-500 dark:from-orange-400 dark:via-rose-300 dark:to-orange-300">soluciones que vuelan.</span>
+          Web y sistema de gestión para tu negocio.{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-rose-500 to-orange-500 dark:from-orange-400 dark:via-rose-300 dark:to-orange-300">
+            Listo en días, no en meses.
+          </span>
         </h1>
 
         {/* Description Paragraph */}
         <p className="mx-auto max-w-3xl text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-semibold">
-          Diseñamos sitios ultrarrápidos, catálogos interactivos y sistemas a medida para comercios de la zona. Vos proponés la idea que te encanta, y nosotros nos encargamos de hacerla realidad y darte soporte presencial.
+          Para consultorios, gimnasios, rotiserías, ferreterías y medios de Resistencia. Con tu panel propio, soporte presencial y sin dolores de cabeza.
         </p>
 
         {/* CTA Buttons */}
@@ -45,22 +48,22 @@ export function HomeHero() {
             onClick={scrollToPortfolio}
             className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-base font-black text-white shadow-lg shadow-orange-600/10 hover:shadow-orange-600/20 transition-all hover:bg-orange-500 active:scale-95 duration-200 cursor-pointer"
           >
-            Ver Demos & Plantillas
+            Ver ejemplos para tu rubro
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Floating Showcase Cards - A Radical and Human Touch! */}
+        {/* Floating Showcase Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-16 w-full max-w-4xl text-left select-none">
           {/* Card 1 */}
           <div className="group bg-white/60 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/50 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">Cercanía Real</span>
+              <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">Cercanos</span>
             </div>
-            <h3 className="font-black text-sm text-slate-900 dark:text-white">Soporte en Persona</h3>
+            <h3 className="font-black text-sm text-slate-900 dark:text-white">Soporte en Resistencia</h3>
             <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-              Somos de acá, de Resistencia. Nos sentamos a tomar unos mates, charlamos en tu local y resolvemos lo que necesites cara a cara. Jamás te dejamos en banda ni esperando días un soporte frío.
+              Nos juntamos en tu local. Sin llamadas al exterior, sin esperas de días. Resolvemos todo en persona.
             </p>
           </div>
 
@@ -68,11 +71,11 @@ export function HomeHero() {
           <div className="group bg-white/60 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/50 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-orange-500"></span>
-              <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">Co-Creación</span>
+              <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">A tu medida</span>
             </div>
-            <h3 className="font-black text-sm text-slate-900 dark:text-white">Vos Proponés la Estética</h3>
+            <h3 className="font-black text-sm text-slate-900 dark:text-white">Tu página, tu estética</h3>
             <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-              Traenos las ideas, fotos o páginas que te inspiran de internet. Nosotros nos ocupamos de darles vida y armarlas a tu medida. Libertad visual absoluta para tu marca.
+              La construimos con tu identidad y colores. Entrega en días, con panel para que la manejes vos mismo.
             </p>
           </div>
 
@@ -80,11 +83,11 @@ export function HomeHero() {
           <div className="group bg-white/60 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/80 p-5 rounded-2xl shadow-sm hover:border-orange-500/50 transition-all duration-300">
             <div className="flex items-center gap-2 mb-2">
               <span className="h-2 w-2 rounded-full bg-blue-500"></span>
-              <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tranquilidad</span>
+              <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">Sin complicaciones</span>
             </div>
-            <h3 className="font-black text-sm text-slate-900 dark:text-white">Nos Ocupamos de Todo</h3>
+            <h3 className="font-black text-sm text-slate-900 dark:text-white">Funciona en cualquier celular</h3>
             <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-              Nosotros nos hacemos cargo de que todo funcione rápido y seguro en internet. Tu plataforma estará siempre disponible y lista para vender, sin que muevas un dedo.
+              Se instala como una app, carga al instante y funciona aunque la señal sea mala. Tus clientes siempre te encuentran.
             </p>
           </div>
         </div>
