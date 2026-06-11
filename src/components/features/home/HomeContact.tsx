@@ -148,7 +148,7 @@ export function HomeContact() {
           <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl leading-none">
             ¿Tenés un local y querés vender más?
           </h2>
-          <p className="text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             No necesitás lidiar con paneles complejos. Diseñá tu idea en 3 clics y charlémosla en persona con unos mates de por medio.
           </p>
         </div>

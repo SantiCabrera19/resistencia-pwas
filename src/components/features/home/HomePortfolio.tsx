@@ -2,233 +2,246 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink, ChefHat, Newspaper } from "lucide-react";
+import { ArrowRight, Settings, Database, Activity, Dumbbell, ExternalLink, ChefHat, Newspaper, CheckCircle2 } from "lucide-react";
 
 export function HomePortfolio() {
-  const landings = [
+  const verticals = [
     {
-      id: "gimnasio",
-      title: "Gimnasios & Centros Deportivos",
-      niche: "Fitness / Deporte",
-      description: "Plantilla web y pizarrón interactivo de rutinas. Diseñado para que tus alumnos sigan su entrenamiento de forma dinámica desde el celular sin fricción ni demoras.",
-      publicLink: "/demos/gimnasio",
-      image: "/images/gym_blackboard.png",
-      badge: "DISEÑO DEPORTIVO"
+      id: "gastronomia",
+      title: "Gastronomía",
+      subtitle: "Rotiserías, Resto-Bars & Cafeterías",
+      description: "Eliminá las comisiones de plataformas externas y agilizá tus ventas. Un menú digital para que tus clientes pidan directamente en las mesas o para delivery, coordinado con un panel privado donde actualizás precios en el acto.",
+      color: "from-amber-500 to-orange-600",
+      textColor: "text-amber-500",
+      icon: <ChefHat className="h-6 w-6 text-amber-500" />,
+      landing: {
+        title: "Menú Digital para Clientes",
+        description: "Menú digital de carga instantánea. Los clientes escanean el QR, arman su pedido y te lo envían directamente a tu WhatsApp o al mozo, sin demoras de señal.",
+        link: "/demos/gastronomia",
+        image: "/images/gastronomia_store.png",
+      },
+      admin: {
+        title: "Panel de Caja y Carta",
+        description: "Consola privada para pausar platos sin stock al instante, cambiar precios en segundos y controlar la caja diaria de forma simple.",
+        link: "/demos/gastronomia/admin",
+      }
     },
     {
       id: "odontologo",
-      title: "Consultorios & Clínicas de Salud",
-      niche: "Odontología / Salud",
-      description: "Vidriera profesional y turnero digital de alta estética. Transmite absoluta confianza e higiene visual, facilitando la agenda de citas rápidas.",
-      publicLink: "/demos/odontologo",
-      image: "/images/smile.png",
-      badge: "SALUD Y ESTÉTICA"
+      title: "Salud & Clínicas",
+      subtitle: "Consultorios Médicos & Odontológicos",
+      description: "Reducí el ausentismo de tus pacientes y profesionalizá tu atención. Una fachada web impecable que transmite confianza, integrada con un turnero automático y fichas de historial clínico privadas.",
+      color: "from-rose-500 to-pink-650",
+      textColor: "text-rose-500",
+      icon: <Activity className="h-6 w-6 text-rose-500" />,
+      landing: {
+        title: "Vidriera & Turnero Web",
+        description: "Vidriera médica de alta estética visual. Facilita que tus pacientes agenden turnos libres directamente desde su celular en menos de un minuto.",
+        link: "/demos/odontologo",
+        image: "/images/smile.png",
+      },
+      admin: {
+        title: "Gestor de Citas & Fichas",
+        description: "Agenda diaria digital ultra veloz. Controlá turnos confirmados, cancelaciones del día e historial clínico de pacientes de forma centralizada.",
+        link: "/demos/odontologo/admin",
+      }
     },
     {
       id: "ferreteria",
-      title: "Ferreterías, Corralones & Distribuidores",
-      niche: "Ferretería / Corralones",
-      description: "Catálogo interactivo optimizado para pedidos rápidos. Interfaz estructurada para mostrar stock, categorizar herramientas y cotizar envíos al instante.",
-      publicLink: "/demos/ferreteria",
-      image: "/images/ferreteria_store.png",
-      badge: "FUERZA INDUSTRIAL"
+      title: "Ferreterías & Corralones",
+      subtitle: "Locales de Stock, Corralones & Distribuidores",
+      description: "Evitá las ventas sin stock y automatizá tus pedidos mayoristas o minoristas. Un catálogo interactivo para cotizar materiales pesados o herramientas en segundos, conectado a tu control de remitos e inventario.",
+      color: "from-blue-500 to-indigo-650",
+      textColor: "text-blue-500",
+      icon: <Database className="h-6 w-6 text-blue-500" />,
+      landing: {
+        title: "Catálogo de Artículos Web",
+        description: "Catálogo de artículos categorizado y veloz. Tus clientes pueden armar su lista de compras, cotizar y enviarte el pedido detallado para preparar.",
+        link: "/demos/ferreteria",
+        image: "/images/ferreteria_store.png",
+      },
+      admin: {
+        title: "Gestor de Inventario & Pedidos",
+        description: "Panel de inventario con alertas automáticas de stock mínimo crítico, control de pedidos listos para despachar y generación rápida de remitos de entrega.",
+        link: "/demos/ferreteria/admin",
+      }
     },
     {
-      id: "gastronomia",
-      title: "Rotiserías, Resto-Bars & Cafeterías",
-      niche: "Gastronomía / Restaurantes",
-      description: "Menú digital offline de alto contraste para el salón físico. Carga instantánea, sin fricción de apps ni demoras de señal, diseñado para mostrar tu pedido al mozo.",
-      publicLink: "/demos/gastronomia",
-      image: "/images/gastronomia_store.png",
-      badge: "SABOR TRADICIONAL"
+      id: "gimnasio",
+      title: "Gimnasios & Fitness",
+      subtitle: "Centros Deportivos, Boxes & Personal Trainers",
+      description: "Ahorrá tiempo en planillas de papel y controlá los pagos del mes de forma automática. Un pizarrón digital donde tus alumnos siguen sus rutinas diarias, administrado desde tu celular en un panel de control simple.",
+      color: "from-orange-500 to-red-650",
+      textColor: "text-orange-500",
+      icon: <Dumbbell className="h-6 w-6 text-orange-500" />,
+      landing: {
+        title: "Pizarrón Digital de Alumnos",
+        description: "Web interactiva para el salón. Tus alumnos registran su asistencia y siguen su plan de entrenamiento físico asignado desde su propio teléfono.",
+        link: "/demos/gimnasio",
+        image: "/images/gym_blackboard.png",
+      },
+      admin: {
+        title: "Consola de Planificación",
+        description: "Panel del profesor para asignar rutinas personalizadas al instante, registrar asistencias y monitorear cuotas activas o vencidas.",
+        link: "/demos/gimnasio/admin",
+      }
     },
     {
       id: "noticias",
-      title: "Diarios & Portales de Noticias",
-      niche: "Prensa / Radios / Blogs",
-      description: "Portal digital de alto rendimiento con reproducción de radio/streaming en vivo integrado y SEO impecable. Diseñado con PWA instalable para enviar alertas push a tus oyentes y lectores.",
-      publicLink: "/demos/noticias",
-      image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80",
-      badge: "STREAMING Y PWA"
-    }
-  ];
-
-  const sistemas = [
-    {
-      id: "gimnasio-admin",
-      title: "Consola del Entrenador",
-      niche: "Fitness Admin",
-      description: "Panel táctil del entrenador. Permite gestionar alumnos activos, asignar rutinas específicas y controlar la ocupación de la sala en tiempo real.",
-      adminLink: "/demos/gimnasio/admin",
-      icon: <Dumbbell className="h-10 w-10 text-orange-600 dark:text-orange-400" />,
-      badge: "CONEXIÓN EN VIVO"
-    },
-    {
-      id: "odontologo-admin",
-      title: "Turnos y Fichas Odontológicas",
-      niche: "Salud Admin",
-      description: "Gestión de agenda médica diaria, control de citas confirmadas e historial clínico de pacientes con una velocidad de respuesta instantánea.",
-      adminLink: "/demos/odontologo/admin",
-      icon: <Activity className="h-10 w-10 text-rose-500 dark:text-rose-400" />,
-      badge: "AGENDA EN VIVO"
-    },
-    {
-      id: "ferreteria-admin",
-      title: "Gestor de Pedidos, Remitos y Stock",
-      niche: "Industrial CRM",
-      description: "Panel central de inventario mayorista con alertas de stock mínimo crítico e impresión instantánea de remitos de entrega de materiales.",
-      adminLink: "/demos/ferreteria/admin",
-      icon: <Database className="h-10 w-10 text-blue-500 dark:text-blue-400" />,
-      badge: "CONTROL DE STOCK"
-    },
-    {
-      id: "gastronomia-admin",
-      title: "Gestor de Carta y Caja Diaria",
-      niche: "Gastronomía Admin",
-      description: "Consola para modificar precios, pausar disponibilidad al instante y monitorear las métricas de caja diaria, libre de sistemas POS tradicionales.",
-      adminLink: "/demos/gastronomia/admin",
-      icon: <ChefHat className="h-10 w-10 text-amber-500 dark:text-amber-400" />,
-      badge: "CARTA & FINANZAS"
-    },
-    {
-      id: "noticias-admin",
-      title: "CMS de Redacción y Moderación",
-      niche: "Prensa Admin",
-      description: "Panel de control para redactar noticias, ver estadísticas de lecturas en tiempo real y administrar espacios publicitarios estáticos libres de CLS.",
-      adminLink: "/demos/noticias/admin",
-      icon: <Newspaper className="h-10 w-10 text-emerald-500 dark:text-emerald-400" />,
-      badge: "CMS MONETIZABLE"
+      title: "Medios & Portales de Noticias",
+      subtitle: "Radios Locales, Diarios & Portales de Prensa",
+      description: "Multiplicá tus lecturas diarias y fidelizá a tus oyentes de radio. Un portal digital de noticias de carga inmediata, con streaming de radio integrado que no se corta y gestión directa de tus propios banners de publicidad.",
+      color: "from-emerald-500 to-teal-650",
+      textColor: "text-emerald-500",
+      icon: <Newspaper className="h-6 w-6 text-emerald-500" />,
+      landing: {
+        title: "Portal Informativo Web",
+        description: "Diario digital optimizado para cargar noticias al instante, con reproductor de radio en vivo que sigue sonando en segundo plano.",
+        link: "/demos/noticias",
+        image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80",
+      },
+      admin: {
+        title: "Panel de Redacción & Anuncios",
+        description: "Consola de publicación simple para redactores, estadísticas de lecturas en vivo y gestión directa de banners publicitarios sin complicaciones.",
+        link: "/demos/noticias/admin",
+      }
     }
   ];
 
   return (
     <section className="relative px-6 py-24 sm:py-32 overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors" id="portfolio">
       
-      {/* Subtle Background meshes */}
+      {/* Background meshes */}
       <div className="absolute inset-0 z-0 opacity-[0.25] dark:opacity-[0.1] pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"></div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl space-y-24">
+      <div className="relative z-10 mx-auto max-w-6xl space-y-20">
         
         {/* Section Title */}
         <div className="space-y-4 text-center max-w-3xl mx-auto select-none">
-          <span className="text-[10px] font-black uppercase tracking-widest text-orange-655 dark:text-orange-400">Demostraciones</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-orange-600 dark:text-orange-450">Soluciones para tu Rubro</span>
           <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl">
-            Catálogo de Soluciones Activas
+            Sistemas Listos para Trabajar
           </h2>
           <p className="text-sm sm:text-base font-semibold text-slate-500 dark:text-slate-400">
-            Nuestros productos se dividen en dos áreas: la **vidriera pública** para captar clientes, y los **sistemas privados** para gestionar tu negocio como corresponde.
+            Cada rubro cuenta con un sistema completo de dos partes: una **web atractiva** para tus clientes y un **panel privado** para que gestiones todo vos mismo.
           </p>
         </div>
 
-        {/* ─── LANDINGS SECTION ─── */}
-        <div className="space-y-8">
-          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-orange-600 text-[10px] font-black text-white select-none">1</span>
-            Vidrieras Web (Captar Clientes)
-          </h3>
-          
-          <div className="grid gap-8 sm:grid-cols-3">
-            {landings.map((demo) => (
-              <div 
-                key={demo.id}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 shadow-sm transition-all hover:shadow-lg hover:border-orange-500/30 hover:scale-[1.01] duration-300"
-              >
-                {/* Image container */}
-                <div className="h-48 w-full relative bg-slate-100 dark:bg-slate-950 overflow-hidden">
-                  <Image 
-                    src={demo.image} 
-                    alt={`Preview de ${demo.title}`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 33vw, 384px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                  />
-                  <div className="absolute top-3 left-3 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md px-2.5 py-1 rounded-md border border-slate-200/30 text-[8px] font-black uppercase text-slate-700 dark:text-slate-200 tracking-wider">
-                    {demo.badge}
+        {/* ─── VERTICALS LIST ─── */}
+        <div className="space-y-16">
+          {verticals.map((vertical, index) => (
+            <div 
+              key={vertical.id}
+              className="group relative overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 shadow-md p-6 sm:p-10 transition-all hover:border-slate-350 dark:hover:border-slate-700/80 duration-300"
+            >
+              {/* Category Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800/80 pb-6 mb-8 select-none">
+                <div className="flex items-center gap-3.5">
+                  <div className="h-11 w-11 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/60 flex items-center justify-center">
+                    {vertical.icon}
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="flex flex-1 flex-col p-6 space-y-4">
                   <div>
-                    <span className="text-[9px] font-black uppercase tracking-wider text-orange-655 dark:text-orange-450 block">
-                      {demo.niche}
-                    </span>
-                    <h4 className="text-base font-black text-slate-900 dark:text-white mt-1">
-                      {demo.title}
-                    </h4>
-                  </div>
-                  
-                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 flex-1 leading-relaxed">
-                    {demo.description}
-                  </p>
-                  
-                  <Link
-                    href={demo.publicLink}
-                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-4 py-3 text-xs font-black text-white hover:bg-orange-500 active:scale-95 transition-all shadow-sm"
-                  >
-                    Ver Sitio Demo
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── SYSTEMS SECTION ─── */}
-        <div className="space-y-8">
-          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] font-black text-slate-700 dark:text-slate-200 select-none">2</span>
-            Sistemas de Gestión (Control Interno)
-          </h3>
-          
-          <div className="grid gap-8 sm:grid-cols-3">
-            {sistemas.map((sistema) => (
-              <div 
-                key={sistema.id}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 shadow-sm transition-all hover:shadow-lg hover:border-orange-500/30 hover:scale-[1.01] duration-300"
-              >
-                {/* Content */}
-                <div className="flex flex-1 flex-col p-6 space-y-6">
-                  {/* Top Bar with Icon and Badge */}
-                  <div className="flex items-center justify-between">
-                    <div className="h-14 w-14 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/60 flex items-center justify-center">
-                      {sistema.icon}
-                    </div>
-                    <span className="bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-850 px-2 py-0.5 rounded-md text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none">
-                      {sistema.badge}
-                    </span>
-                  </div>
-
-                  {/* Text details */}
-                  <div className="space-y-2 flex-1">
-                    <div>
-                      <span className="text-[9px] font-black uppercase text-slate-400 dark:text-slate-500 tracking-wider">
-                        {sistema.niche}
-                      </span>
-                      <h4 className="text-base font-black text-slate-900 dark:text-white mt-1">
-                        {sistema.title}
-                      </h4>
-                    </div>
-                    <p className="text-xs font-semibold text-slate-550 dark:text-slate-400 leading-relaxed">
-                      {sistema.description}
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white">
+                      Para {vertical.title}
+                    </h3>
+                    <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-0.5">
+                      {vertical.subtitle}
                     </p>
                   </div>
-                  
-                  {/* CTA Link */}
-                  <Link
-                    href={sistema.adminLink}
-                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-3 text-xs font-black text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 active:scale-95 transition-all shadow-xs"
-                  >
-                    <Settings className="h-3.5 w-3.5" />
-                    Probar Consola Admin
-                  </Link>
+                </div>
+                <div className="text-[10px] font-black px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/80 text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none self-start sm:self-auto">
+                  Solución Integral #{index + 1}
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Main Grid: Description + Two Cards */}
+              <div className="grid gap-8 lg:grid-cols-12">
+                
+                {/* Column 1: Rubro Overview (4 cols) */}
+                <div className="lg:col-span-4 flex flex-col justify-between space-y-6 select-none">
+                  <p className="text-sm font-semibold text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {vertical.description}
+                  </p>
+                  
+                  <div className="hidden lg:block space-y-3">
+                    <div className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      Diseño 100% personalizado
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      Listo para usar en celular
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                      Soporte presencial local
+                    </div>
+                  </div>
+                </div>
+
+                {/* Column 2: Public Web (4 cols) */}
+                <div className="lg:col-span-4 flex flex-col overflow-hidden rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 space-y-4">
+                  {/* Image Preview */}
+                  <div className="h-36 w-full relative rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-900 border border-slate-200/20">
+                    <Image 
+                      src={vertical.landing.image} 
+                      alt={vertical.landing.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col justify-between space-y-4">
+                    <div>
+                      <h4 className="text-sm font-black text-slate-900 dark:text-white">
+                        {vertical.landing.title}
+                      </h4>
+                      <p className="text-xs font-medium text-slate-500 dark:text-slate-450 mt-1 leading-relaxed">
+                        {vertical.landing.description}
+                      </p>
+                    </div>
+                    
+                    <Link
+                      href={vertical.landing.link}
+                      className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-4 py-3 text-xs font-black text-white hover:bg-orange-500 active:scale-95 transition-all shadow-sm shadow-orange-600/10 cursor-pointer"
+                    >
+                      Probar Sitio Web
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Column 3: Private Admin (4 cols) */}
+                <div className="lg:col-span-4 flex flex-col justify-between rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-5 space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 flex items-center justify-center">
+                        <Settings className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                      </div>
+                      <h4 className="text-sm font-black text-slate-900 dark:text-white">
+                        {vertical.admin.title}
+                      </h4>
+                    </div>
+                    
+                    <p className="text-xs font-medium text-slate-500 dark:text-slate-450 leading-relaxed">
+                      {vertical.admin.description}
+                    </p>
+                  </div>
+
+                  <Link
+                    href={vertical.admin.link}
+                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 px-4 py-3 text-xs font-black text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-850 active:scale-95 transition-all shadow-xs cursor-pointer"
+                  >
+                    <Settings className="h-3.5 w-3.5" />
+                    Probar Panel de Control
+                  </Link>
+                </div>
+
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

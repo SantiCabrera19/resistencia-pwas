@@ -29,8 +29,20 @@ export function HomeHero() {
       {/* Content Container */}
       <div className="relative z-10 mx-auto max-w-5xl space-y-8 flex flex-col items-center">
         
+        {/* Hero Logo */}
+        <div className="flex justify-center pt-6">
+          <Image
+            src="/images/microcosmo-Desing-cropped.png"
+            alt="SECdigital Logo"
+            width={192}
+            height={192}
+            className="h-48 w-48 object-contain"
+            priority
+          />
+        </div>
+
         {/* Hero Title */}
-        <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white sm:text-7xl max-w-4xl leading-[1.08] select-none pt-4">
+        <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white sm:text-7xl max-w-4xl leading-[1.08] select-none">
           Web y sistema de gestión para tu negocio.{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-rose-500 to-orange-500 dark:from-orange-400 dark:via-rose-300 dark:to-orange-300">
             Listo en días, no en meses.

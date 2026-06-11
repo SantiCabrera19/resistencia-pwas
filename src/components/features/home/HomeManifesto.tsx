@@ -36,7 +36,7 @@ export function HomeManifesto() {
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
             Creemos en las soluciones <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-rose-500 dark:from-orange-450 dark:to-rose-450">cercanas e impecables.</span>
           </h2>
-          <p className="text-sm sm:text-base font-semibold text-slate-650 dark:text-slate-400 leading-relaxed">
+          <p className="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-400 leading-relaxed">
             Resistencia no es solo un nombre, es el lugar donde vivimos y trabajamos. No hacemos páginas al por mayor; creamos soluciones a medida que ayudan a crecer a los comercios de nuestra ciudad de forma real y honesta.
           </p>
         </div>
@@ -46,7 +46,7 @@ export function HomeManifesto() {
           {/* Pillar 1 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Diseño a tu Medida</h3>
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
               Traenos las ideas, capturas de pantalla o páginas que te inspiran de internet y nosotros nos ocupamos de darles vida con un acabado estético premium, adaptado 100% a tu marca.
             </p>
           </div>
@@ -54,7 +54,7 @@ export function HomeManifesto() {
           {/* Pillar 2 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Cercanía y Confianza</h3>
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
               Trabajamos con comercios locales. Creemos que la cercanía humana genera las mejores relaciones de trabajo. Estamos siempre disponibles, cara a cara y en persona.
             </p>
           </div>
@@ -62,7 +62,7 @@ export function HomeManifesto() {
           {/* Pillar 3 */}
           <div className="bg-white/40 dark:bg-slate-900/30 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl shadow-xs transition-all hover:border-orange-500/25">
             <h3 className="font-black text-sm text-slate-800 dark:text-white">Impulso Local</h3>
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
               Digitalizar los negocios de nuestra ciudad nos fortalece a todos. Nos comprometemos a que tu marca tenga una presencia premium única en internet que te enorgullezca mostrar.
             </p>
           </div>

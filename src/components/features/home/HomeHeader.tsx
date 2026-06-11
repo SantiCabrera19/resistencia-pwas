@@ -11,9 +11,9 @@ export function HomeHeader() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-6 py-2 shadow-sm transition-colors duration-200">
       <div className="mx-auto flex max-w-7xl items-center justify-between h-14 sm:h-16">
-        <div className="flex items-center cursor-pointer select-none" onClick={() => scrollTo("top")}>
+        <div className="flex items-center cursor-pointer select-none" onClick={() => typeof window !== "undefined" && window.scrollTo({ top: 0, behavior: "smooth" })}>
           <Image
-            src="/images/microcosmos-logo.png"
+            src="/images/microcosmo-Desing-cropped.png"
             alt="SECdigital Logo"
             width={48}
             height={48}
