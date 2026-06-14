@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X, Newspaper, CloudSun, MapPin, Play, Pause, Radio } from "lucide-react";
+import { Sun, Moon, Menu, X, Newspaper, CloudSun, MapPin, Play, Pause, Radio, Volume2, VolumeX, Minimize2 } from "lucide-react";
 
 export default function NoticiasLayout({
   children,
@@ -17,6 +17,9 @@ export default function NoticiasLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.8);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
   const togglePlay = () => {
@@ -30,6 +33,16 @@ export default function NoticiasLayout({
     }
     setIsPlaying(!isPlaying);
   };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : volume;
+    }
+  }, [volume, isMuted]);
 
   useEffect(() => {
     setMounted(true);
@@ -227,7 +240,7 @@ export default function NoticiasLayout({
       </footer>
 
       {/* 6. FLOATING LIVE RADIO PLAYER */}
-      <div className="fixed bottom-6 right-6 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-full py-2 px-4 flex items-center gap-3 select-none">
+      <div className="fixed bottom-6 right-6 z-50 select-none">
         <audio
           ref={audioRef}
           src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
@@ -235,22 +248,161 @@ export default function NoticiasLayout({
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         />
-        <div className="relative flex items-center justify-center">
-          <span className={`absolute inline-flex h-2.5 w-2.5 rounded-full bg-red-500 opacity-75 ${isPlaying ? "animate-ping" : ""}`} />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600" />
-        </div>
-        <div className="flex flex-col text-[10px] font-sans pr-2 text-left">
-          <span className="font-black tracking-wider text-zinc-900 dark:text-white uppercase flex items-center gap-1">
-            <Radio className="w-3 h-3 text-red-500" /> RADIO EN VIVO
-          </span>
-          <span className="text-[9px] text-zinc-500 dark:text-zinc-400">Radio Libertad 99.1 FM</span>
-        </div>
-        <button
-          onClick={togglePlay}
-          className="bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none cursor-pointer transition-colors shadow-sm"
-        >
-          {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
-        </button>
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes eq-bounce {
+            0%, 100% { transform: scaleY(0.15); }
+            50% { transform: scaleY(1); }
+          }
+          .eq-bar-anim {
+            transform-origin: bottom;
+            animation: eq-bounce 1s ease-in-out infinite;
+          }
+          .eq-bar-anim-1 { animation-delay: 0.1s; animation-duration: 0.8s; }
+          .eq-bar-anim-2 { animation-delay: 0.3s; animation-duration: 1.1s; }
+          .eq-bar-anim-3 { animation-delay: 0.0s; animation-duration: 0.9s; }
+          .eq-bar-anim-4 { animation-delay: 0.4s; animation-duration: 1.2s; }
+        `}} />
+
+        {isMinimized ? (
+          /* Minimized State */
+          <button
+            onClick={() => setIsMinimized(false)}
+            className="flex items-center justify-center w-14 h-14 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white dark:border-zinc-800 relative group"
+            title="Expandir reproductor de radio"
+          >
+            {isPlaying ? (
+              <div className="flex gap-[2px] items-end justify-center w-6 h-4">
+                <span className="w-[3px] h-4 bg-white rounded-full eq-bar-anim eq-bar-anim-1" />
+                <span className="w-[3px] h-4 bg-white rounded-full eq-bar-anim eq-bar-anim-2" />
+                <span className="w-[3px] h-4 bg-white rounded-full eq-bar-anim eq-bar-anim-3" />
+                <span className="w-[3px] h-4 bg-white rounded-full eq-bar-anim eq-bar-anim-4" />
+              </div>
+            ) : (
+              <Radio className="w-6 h-6 animate-pulse" />
+            )}
+            
+            {/* Live Badge indicator */}
+            <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+              <span className={`absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 ${isPlaying ? "animate-ping" : ""}`}></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500 border border-white dark:border-zinc-900"></span>
+            </span>
+          </button>
+        ) : (
+          /* Expanded Premium Player Card */
+          <div className="w-[320px] sm:w-[350px] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-2xl p-4 flex flex-col gap-3 transition-all duration-300 transform hover:translate-y-[-2px] border-l-4 border-l-red-600">
+            {/* Top header line of the card */}
+            <div className="flex items-center justify-between border-b border-zinc-150 dark:border-zinc-800 pb-2">
+              <div className="flex items-center gap-1.5">
+                <div className="relative flex h-2 w-2">
+                  <span className={`absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 ${isPlaying ? "animate-ping" : ""}`} />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                </div>
+                <span className="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">
+                  RADIO EN VIVO
+                </span>
+              </div>
+              <button
+                onClick={() => setIsMinimized(true)}
+                className="text-zinc-450 hover:text-zinc-600 dark:hover:text-zinc-300 p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                title="Minimizar reproductor"
+              >
+                <Minimize2 className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Info and Play button row */}
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3 min-w-0">
+                {/* Vinyl / Cover Disk Mock */}
+                <div className="relative flex items-center justify-center w-12 h-12 bg-zinc-900 text-white rounded-xl shadow-inner flex-shrink-0">
+                  <Radio className={`w-5 h-5 ${isPlaying ? "text-red-550 animate-pulse" : "text-zinc-500"}`} />
+                  {/* Small animated equalizer in cover when playing */}
+                  {isPlaying && (
+                    <div className="absolute inset-0 flex gap-0.5 items-end justify-center pb-2 bg-zinc-900/40 rounded-xl">
+                      <span className="w-[2px] h-3 bg-red-550 rounded-full eq-bar-anim eq-bar-anim-1" />
+                      <span className="w-[2px] h-3 bg-red-550 rounded-full eq-bar-anim eq-bar-anim-2" />
+                      <span className="w-[2px] h-3 bg-red-550 rounded-full eq-bar-anim eq-bar-anim-3" />
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex flex-col min-w-0 text-left">
+                  <span className="font-bold text-sm text-zinc-800 dark:text-zinc-100 truncate leading-snug">
+                    Estación Libertad
+                  </span>
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400 truncate leading-none mt-0.5">
+                    99.1 MHz FM • Señal Digital
+                  </span>
+                </div>
+              </div>
+
+              {/* Huge Play/Pause button */}
+              <button
+                onClick={togglePlay}
+                className="flex items-center justify-center w-12 h-12 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-lg hover:shadow-xl focus:outline-none transition-all duration-200 transform active:scale-95 cursor-pointer flex-shrink-0"
+              >
+                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
+              </button>
+            </div>
+
+            {/* Bottom Controls Row: Equalizer & Volume */}
+            <div className="flex items-center justify-between gap-4 border-t border-zinc-100 dark:border-zinc-800 pt-2 text-xs">
+              {/* Equalizer animation label */}
+              <div className="flex items-center gap-2 text-zinc-500">
+                {isPlaying ? (
+                  <>
+                    <div className="flex gap-[1.5px] items-end h-3">
+                      <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-1" />
+                      <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-2" />
+                      <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-3" />
+                      <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-4" />
+                    </div>
+                    <span className="text-[10px] font-medium text-red-650 dark:text-red-400">Transmitiendo</span>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex gap-[1.5px] items-end h-3">
+                      <span className="w-[2px] h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full" />
+                      <span className="w-[2px] h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full" />
+                      <span className="w-[2px] h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full" />
+                      <span className="w-[2px] h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full" />
+                    </div>
+                    <span className="text-[10px]">Pausado</span>
+                  </>
+                )}
+              </div>
+
+              {/* Volume Slider */}
+              <div className="flex items-center gap-2 group/vol max-w-[130px]">
+                <button
+                  onClick={toggleMute}
+                  className="text-zinc-550 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors p-1"
+                >
+                  {isMuted || volume === 0 ? (
+                    <VolumeX className="w-3.5 h-3.5" />
+                  ) : (
+                    <Volume2 className="w-3.5 h-3.5" />
+                  )}
+                </button>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={isMuted ? 0 : volume}
+                  onChange={(e) => {
+                    setVolume(parseFloat(e.target.value));
+                    if (isMuted) setIsMuted(false);
+                  }}
+                  className="w-16 sm:w-20 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-red-600"
+                  style={{
+                    background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${(isMuted ? 0 : volume) * 100}%, ${theme === "dark" ? "#27272a" : "#e4e4e7"} ${(isMuted ? 0 : volume) * 100}%, ${theme === "dark" ? "#27272a" : "#e4e4e7"} 100%)`
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
