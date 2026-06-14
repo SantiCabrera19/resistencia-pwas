@@ -353,8 +353,8 @@ function NoticiasHomeContent() {
 
             <div className="relative z-10 space-y-4">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-yellow-400" />
-                <span className="text-[10px] font-bold tracking-widest uppercase text-yellow-400">FIDELIZACIÓN DE AUDIENCIA</span>
+                <Mail className="w-4 h-4 text-blue-600" />
+                <span className="text-[10px] font-bold tracking-widest uppercase text-blue-600">FIDELIZACIÓN DE AUDIENCIA</span>
               </div>
               <h3 className="font-serif font-black text-xl leading-tight">
                 Recibí el Reporte Chaqueño
