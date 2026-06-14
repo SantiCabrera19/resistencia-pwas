@@ -76,15 +76,51 @@ export default function NoticiasLayout({
     <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
       <style dangerouslySetInnerHTML={{__html: `
         /* Overrides para Cadena Federal (Colores Magenta #df007d) */
-        .text-blue-600, .dark\\:text-blue-400, .text-blue-800, .dark\\:text-blue-300 { color: #df007d !important; }
-        .bg-blue-600, .dark\\:bg-blue-500, .bg-blue-50, .dark\\:bg-blue-950\\/40 { background-color: #df007d !important; }
-        .bg-blue-100 { background-color: #df007d20 !important; }
-        .border-blue-600, .dark\\:border-blue-400 { border-color: #df007d !important; }
-        .hover\\:text-blue-600:hover, .dark\\:hover\\:text-blue-400:hover { color: #df007d !important; }
-        .group:hover .group-hover\\:text-blue-600 { color: #df007d !important; }
-        .dark\\:group-hover\\:text-blue-400 { color: #df007d !important; }
-        .border-b-2.border-blue-600 { border-color: #df007d !important; }
-        .text-blue-600 { color: #df007d !important; }
+        
+        /* 1. Text accents (small category tags, active navigation text) */
+        .text-blue-650, 
+        .text-blue-800, 
+        .dark\\:text-blue-300 { 
+          color: #df007d !important; 
+        }
+
+        /* Keep main headers clean (default text color) and only color them on hover */
+        .group:hover .group-hover\\:text-blue-600 { 
+          color: #df007d !important; 
+        }
+        .dark .group:hover .dark\\:group-hover\\:text-blue-400 { 
+          color: #df007d !important; 
+        }
+        .hover\\:text-blue-600:hover, 
+        .dark\\:hover\\:text-blue-400:hover { 
+          color: #df007d !important; 
+        }
+
+        /* 2. Background badges and active border accents */
+        .bg-blue-600, 
+        .dark\\:bg-blue-500 { 
+          background-color: #df007d !important; 
+        }
+        
+        /* Translucent background for category circles (prevents hiding numbers) */
+        .bg-blue-50 { 
+          background-color: rgba(223, 0, 125, 0.1) !important; 
+        }
+        .dark\\:bg-blue-950\\/40 { 
+          background-color: rgba(223, 0, 125, 0.15) !important; 
+        }
+        
+        /* Text inside category circles/badges */
+        .text-blue-600, 
+        .dark\\:text-blue-400 { 
+          color: #df007d !important; 
+        }
+        
+        .border-blue-600, 
+        .dark\\:border-blue-400,
+        .border-b-2.border-blue-600 { 
+          border-color: #df007d !important; 
+        }
       `}} />
       {/* 1. TOP BAR */}
       <div className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs py-2 px-4 md:px-8 flex justify-between items-center select-none">
