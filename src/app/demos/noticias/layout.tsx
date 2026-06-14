@@ -74,6 +74,18 @@ export default function NoticiasLayout({
 
   return (
     <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
+      <style dangerouslySetInnerHTML={{__html: `
+        /* Overrides para Cadena Federal (Colores Magenta #df007d) */
+        .text-blue-600, .dark\\:text-blue-400, .text-blue-800, .dark\\:text-blue-300 { color: #df007d !important; }
+        .bg-blue-600, .dark\\:bg-blue-500, .bg-blue-50, .dark\\:bg-blue-950\\/40 { background-color: #df007d !important; }
+        .bg-blue-100 { background-color: #df007d20 !important; }
+        .border-blue-600, .dark\\:border-blue-400 { border-color: #df007d !important; }
+        .hover\\:text-blue-600:hover, .dark\\:hover\\:text-blue-400:hover { color: #df007d !important; }
+        .group:hover .group-hover\\:text-blue-600 { color: #df007d !important; }
+        .dark\\:group-hover\\:text-blue-400 { color: #df007d !important; }
+        .border-b-2.border-blue-600 { border-color: #df007d !important; }
+        .text-blue-600 { color: #df007d !important; }
+      `}} />
       {/* 1. TOP BAR */}
       <div className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs py-2 px-4 md:px-8 flex justify-between items-center select-none">
         <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
@@ -114,8 +126,8 @@ export default function NoticiasLayout({
           
           {/* Left Editorial Info */}
           <div className="hidden md:flex flex-col text-left text-[10px] font-sans text-zinc-400 dark:text-zinc-500 border-r border-zinc-200 dark:border-zinc-850 pr-6 min-w-[140px]">
-            <span className="font-bold tracking-wider text-zinc-500 dark:text-zinc-400">EDICIÓN DIGITAL</span>
-            <span>FUNDADO EN 2026</span>
+            <span className="font-bold tracking-wider text-zinc-500 dark:text-zinc-400">RADIO & PORTAL</span>
+            <span>FM 93.3 / 98.5</span>
           </div>
 
           {/* Center Brand Logo */}
@@ -123,18 +135,18 @@ export default function NoticiasLayout({
             <div className="flex items-center justify-center gap-1.5 mb-1">
               <Newspaper className="w-4 h-4 text-zinc-900 dark:text-zinc-100" />
               <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-550">
-                PORTAL DIGITAL INDEPENDIENTE
+                ESTAMOS DONDE HAY QUE ESTAR
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl font-serif font-black tracking-tighter text-zinc-900 dark:text-white uppercase leading-none">
-              SEC Noticias
+              Cadena Federal
             </h1>
           </Link>
 
           {/* Right Editorial Info */}
           <div className="hidden md:flex flex-col text-right text-[10px] font-sans text-zinc-400 dark:text-zinc-500 border-l border-zinc-200 dark:border-zinc-850 pl-6 min-w-[140px]">
-            <span className="font-bold tracking-wider text-zinc-500 dark:text-zinc-400">TECNOLOGÍA & SEO</span>
-            <span>SECDIGITAL</span>
+            <span className="font-bold tracking-wider text-zinc-500 dark:text-zinc-400">RED DE MEDIOS</span>
+            <span>CHACO</span>
           </div>
 
         </div>
@@ -202,15 +214,16 @@ export default function NoticiasLayout({
       {/* 5. EDITORIAL FOOTER */}
       <footer className="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 py-12 px-4 md:px-8 mt-12 text-zinc-600 dark:text-zinc-400">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Editorial Footer Left Info */}
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Newspaper className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />
               <span className="font-serif font-black tracking-tight text-lg text-zinc-900 dark:text-white uppercase">
-                SEC Noticias
+                Cadena Federal
               </span>
             </div>
             <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-              Portal informativo de demostración desarrollado por **SECdigital**. Diseñado para probar velocidad, SEO semántico y experiencia de lectura premium en medios digitales locales.
+              Portal digital informativo de demostración desarrollado para Cadena Federal. Diseñado para probar velocidad de carga instantánea, SEO y experiencia de lectura premium en medios de comunicación.
             </p>
           </div>
           <div>
@@ -328,10 +341,10 @@ export default function NoticiasLayout({
 
                 <div className="flex flex-col min-w-0 text-left">
                   <span className="font-bold text-sm text-zinc-800 dark:text-zinc-100 truncate leading-snug">
-                    Estación Libertad
+                    Cadena Federal
                   </span>
                   <span className="text-xs text-zinc-500 dark:text-zinc-400 truncate leading-none mt-0.5">
-                    99.1 MHz FM • Señal Digital
+                    FM 93.3 Resistencia / 98.5 SP
                   </span>
                 </div>
               </div>
