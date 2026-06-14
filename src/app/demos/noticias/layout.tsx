@@ -289,7 +289,7 @@ export default function NoticiasLayout({
           </button>
         ) : (
           /* Expanded Premium Player Card */
-          <div className="w-[320px] sm:w-[350px] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-2xl p-4 flex flex-col gap-3 transition-all duration-300 transform hover:translate-y-[-2px] border-l-4 border-l-red-600">
+          <div className="w-[calc(100vw-2rem)] sm:w-[350px] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-2xl p-4 flex flex-col gap-3 transition-all duration-300 transform hover:translate-y-[-2px] border-l-4 border-l-red-600">
             {/* Top header line of the card */}
             <div className="flex items-center justify-between border-b border-zinc-150 dark:border-zinc-800 pb-2">
               <div className="flex items-center gap-1.5">
@@ -303,7 +303,7 @@ export default function NoticiasLayout({
               </div>
               <button
                 onClick={() => setIsMinimized(true)}
-                className="text-zinc-450 hover:text-zinc-600 dark:hover:text-zinc-300 p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="text-zinc-450 hover:text-zinc-650 dark:hover:text-zinc-300 p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 title="Minimizar reproductor"
               >
                 <Minimize2 className="w-3.5 h-3.5" />
@@ -354,10 +354,10 @@ export default function NoticiasLayout({
                     <div className="flex gap-[1.5px] items-end h-3">
                       <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-1" />
                       <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-2" />
-                      <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-3" />
-                      <span className="w-[2px] h-3 bg-red-500 rounded-full eq-bar-anim eq-bar-anim-4" />
+                      <span className="w-[2px] h-3 bg-red-550 rounded-full eq-bar-anim eq-bar-anim-3" />
+                      <span className="w-[2px] h-3 bg-red-550 rounded-full eq-bar-anim eq-bar-anim-4" />
                     </div>
-                    <span className="text-[10px] font-medium text-red-650 dark:text-red-400">Transmitiendo</span>
+                    <span className="text-[10px] font-medium text-red-655 dark:text-red-400">Transmitiendo</span>
                   </>
                 ) : (
                   <>
@@ -395,9 +395,9 @@ export default function NoticiasLayout({
                     if (isMuted) setIsMuted(false);
                   }}
                   className="w-16 sm:w-20 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-red-600"
-                  style={{
+                  style={mounted ? {
                     background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${(isMuted ? 0 : volume) * 100}%, ${theme === "dark" ? "#27272a" : "#e4e4e7"} ${(isMuted ? 0 : volume) * 100}%, ${theme === "dark" ? "#27272a" : "#e4e4e7"} 100%)`
-                  }}
+                  } : undefined}
                 />
               </div>
             </div>
